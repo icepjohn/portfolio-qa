@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jonathan PICQUETTE - QA Automation Engineer</title>
+
+<style>
+:root{
+  --bg:#020617;--bg2:#0f172a;--card:#020617;--border:#1e293b;--txt:#e2e8f0;--muted:#94a3b8;--green:#22c55e;
+}
+body{margin:0;font-family:Inter,Arial;background:linear-gradient(135deg,var(--bg),var(--bg2));color:var(--txt)}
+header{text-align:center;padding:30px}
+h1{color:var(--green)}
+nav{display:flex;justify-content:center;gap:20px;padding:10px;border-bottom:1px solid var(--border)}
+nav a{color:var(--muted);text-decoration:none}
+.section{padding:60px 20px;max-width:1200px;margin:auto}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.hero img{width:200px;border-radius:20px;border:2px solid var(--green)}
+.card{padding:20px;border:1px solid var(--border);border-radius:15px;background:var(--card);margin-bottom:20px}
+.timeline{position:relative}
+.timeline::before{content:"";position:absolute;left:10px;top:0;bottom:0;width:2px;background:var(--border)}
+.item{padding-left:30px;margin:25px 0}
+.item::before{content:"";position:absolute;left:5px;width:10px;height:10px;background:var(--green);border-radius:50%}
+.kpis{display:flex;gap:20px;margin-top:20px}
+.kpi{flex:1;text-align:center;padding:15px;border:1px solid var(--border);border-radius:10px}
+canvas{width:100%;height:300px;border:1px solid var(--border);border-radius:10px;background:#000}
+button{background:var(--green);border:none;padding:10px 15px;border-radius:8px;cursor:pointer}
+
+/* cinematic */
+.fade-in{opacity:0;transform:translateY(40px);transition:all 0.8s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+.card{transition:all 0.3s ease;}
+.card:hover{transform:translateY(-5px) scale(1.01);box-shadow:0 10px 30px rgba(0,0,0,0.5);}
+nav a{position:relative;}
+nav a::after{content:"";position:absolute;bottom:-5px;left:0;width:0%;height:2px;background:var(--green);transition:0.3s;}
+nav a:hover::after{width:100%;}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Jonathan PICQUETTE</h1>
+<p>Senior QA Automation Engineer · 8+ ans</p>
+</header>
+
+<nav>
+<a href="#dashboard">Dashboard</a>
+<a href="#simulator">Live QA Demo</a>
+<a href="#experience">Expérience</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<section class="section hero fade-in">
+<div>
+<h2>QA Automation & Quality Engineering</h2>
+<p>Automatisation E2E, CI/CD et amélioration continue de la qualité produit.</p>
+<a href="cv.pdf" download><button>Télécharger CV</button></a>
+</div>
+<img src="photo.jpg" alt="photo">
+</section>
+
+<section id="dashboard" class="section fade-in">
+<h2>QA Live Dashboard</h2>
+<canvas id="chart"></canvas>
+<div class="kpis">
+<div class="kpi"><div id="tests">1200</div><div>Tests</div></div>
+<div class="kpi"><div id="coverage">80%</div><div>Coverage</div></div>
+<div class="kpi"><div id="bugs">50</div><div>Bugs</div></div>
+</div>
+</section>
+
+<section id="simulator" class="section fade-in">
+<h2>Live QA Demo</h2>
+<div class="card">
+<button onclick="runTests()">▶ Run Tests</button>
+<div style="margin-top:15px;height:20px;background:#111;border-radius:10px;overflow:hidden">
+<div id="progress" style="height:100%;width:0%;background:#22c55e"></div>
+</div>
+<pre id="logs" style="margin-top:15px;background:black;padding:10px;height:200px;overflow:auto;color:#22c55e"></pre>
+</div>
+</section>
+
+<section id="experience" class="section fade-in">
+<h2>Expérience complète</h2>
+<div class="timeline">
+
+<div class="item"><div class="card">
+<h3>Avril 2025 - Mars 2026 — QA Engineer (Décathlon - SPARK)</h3>
+<p>Projet stratégique PLM visant à remplacer SPO et PACE via l’outil Centric.</p>
+<ul>
+<li>✔ Analyse & conception de 1200 cas de tests</li>
+<li>✔ ~100 scénarios E2E</li>
+<li>✔ Analyse des processus métier</li>
+<li>✔ Campagnes de recette</li>
+<li>✔ Tests de non-régression</li>
+<li>✔ Automatisation (~50 tests)</li>
+<li><strong>Stack :</strong> Playwright, Xray, Jira, GitHub, Cucumber, Bruno</li>
+</ul>
+</div></div>
+
+<div class="item"><div class="card">
+<h3>Mars 2024 - Février 2025 — QA Lead Automation (ADEO)</h3>
+<ul>
+<li>✔ Mise en place du Shift Left</li>
+<li>✔ Automatisation TNR transverse (~500 tests)</li>
+<li>✔ Priorisation & stratégie de tests</li>
+<li>✔ Préparation jeux de données</li>
+<li>✔ Reporting qualité produit</li>
+<li><strong>Stack :</strong> Playwright, BDD, Xray, Jira, GitHub, Vault</li>
+</ul>
+</div></div>
+
+<div class="item"><div class="card">
+<h3>Juillet 2021 - Mars 2024 — QA Automation (ADEO - POPS)</h3>
+<ul>
+<li>✔ Automatisation avec Cerberus & Cypress</li>
+<li>✔ Tests UI / API / performance</li>
+<li>✔ Gestion anomalies & non-régression</li>
+<li>✔ Tests E2E & 2A2</li>
+<li>✔ Méthodologie ISTQB</li>
+<li><strong>Stack :</strong> Cypress, Postman, Sonar, Xray</li>
+</ul>
+</div></div>
+
+<div class="item"><div class="card">
+<h3>2020 - 2021 — QA & Support (Proch’Orientation)</h3>
+<ul>
+<li>✔ Gestion tickets bugs & évolutions</li>
+<li>✔ Analyse fonctionnelle</li>
+<li>✔ Recette & validation</li>
+<li><strong>Stack :</strong> VueJS, Java, Selenium, Postman</li>
+</ul>
+</div></div>
+
+<div class="item"><div class="card">
+<h3>2019 - 2020 — QA Tester (Symbol-IT)</h3>
+<ul>
+<li>✔ Tests manuels</li>
+<li>✔ Non-régression</li>
+<li>✔ Suivi anomalies</li>
+<li><strong>Stack :</strong> Selenium, Postman, API REST</li>
+</ul>
+</div></div>
+
+</div>
+</section>
+
+<section id="contact" class="section fade-in">
+<div class="card">
+<p>Email : icepjohn@hotmail.com</p>
+</div>
+</section>
+
+<script>
+// dashboard animation
+let t=0;
+setInterval(()=>{
+ t++;
+ tests.innerText=1200+t;
+ coverage.innerText=(80+Math.min(t/5,15)).toFixed(0)+"%";
+ bugs.innerText=Math.max(50-t,5);
+},1000);
+
+// chart
+const c=document.getElementById('chart');
+const ctx=c.getContext('2d');
+c.width=600; c.height=300;
+c.style.width="100%";
+
+[20,40,60,80,90].forEach((v,i)=>{
+ let x=i*(c.width/4);
+ let y=c.height-(v/100)*c.height;
+ if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+});
+ctx.strokeStyle="#22c55e";
+ctx.stroke();
+
+// pipeline simulator
+function runTests(){
+ const logs=document.getElementById('logs');
+ const bar=document.getElementById('progress');
+ logs.innerHTML='';
+ let progress=0;
+
+ function time(){
+  return new Date().toLocaleTimeString();
+ }
+
+ function log(msg,color='#22c55e'){
+  logs.innerHTML += `[${time()}] <span style="color:${color}">${msg}</span>\n`;
+  logs.scrollTop=logs.scrollHeight;
+ }
+
+ const steps=[
+  "Installing dependencies...",
+  "Building project...",
+  "Running unit tests...",
+  "Running E2E tests...",
+  "Deploying staging..."
+ ];
+
+ let i=0;
+
+ function next(){
+  if(i>=steps.length){
+    log("✔ Pipeline SUCCESS");
+    bar.style.width='100%';
+    return;
+  }
+
+  log(steps[i]);
+
+  setTimeout(()=>{
+    if(Math.random()<0.2){
+      log("✖ Step failed","#ef4444");
+      log("↻ Retrying...","#f59e0b");
+
+      setTimeout(()=>{
+        log("✔ Step passed after retry");
+        progress+=20;
+        bar.style.width=progress+"%";
+        i++; next();
+      },800);
+
+    } else {
+      log("✔ Success");
+      progress+=20;
+      bar.style.width=progress+"%";
+      i++; next();
+    }
+
+  },800);
+ }
+
+ log("🚀 Starting CI pipeline...");
+ next();
+}
+
+// auto demo
+let started=false;
+window.addEventListener('scroll',()=>{
+ const el=document.getElementById('simulator').getBoundingClientRect();
+ if(!started && el.top<window.innerHeight-100){
+  started=true;
+  runTests();
+ }
+});
+
+// cinematic reveal
+const elements=document.querySelectorAll('.fade-in');
+function reveal(){
+ elements.forEach(el=>{
+  if(el.getBoundingClientRect().top<window.innerHeight-100){
+    el.classList.add('visible');
+  }
+ });
+}
+window.addEventListener('scroll',reveal);
+reveal();
+</script>
+
+</body>
+</html>
