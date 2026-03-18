@@ -178,25 +178,128 @@ Disponible pour mission QA Automation / Lead QA
 // dashboard animation
 let t=0;
 setInterval(()=>{
- t++;
- tests.innerText=1200+t;
- coverage.innerText=(80+Math.min(t/5,15)).toFixed(0)+"%";
- bugs.innerText=Math.max(50-t,5);
-},1000);
+ t+=5; // 🚀 augmentation plus rapide
+
+ document.getElementById('tests').innerText=1200+t;
+ document.getElementById('coverage').innerText=(80+Math.min(t/2,20)).toFixed(0)+"%";
+ document.getElementById('bugs').innerText=Math.max(50-t/2,5);
+},500);
 
 // chart
-const c=document.getElementById('chart');
-const ctx=c.getContext('2d');
-c.width=600; c.height=300;
-c.style.width="100%";
+const c = document.getElementById('chart');
+const ctx = c.getContext('2d');
 
-[20,40,60,80,90].forEach((v,i)=>{
- let x=i*(c.width/4);
- let y=c.height-(v/100)*c.height;
- if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+c.width = 600;
+c.height = 300;
+c.style.width = "100%";
+
+let data = {
+  coverage: [40,50,60,70,80],
+  tests: [200,400,600,800,1000],
+  bugs: [80,60,50,40,30]
+};
+
+let labels = ["T1","T2","T3","T4","T5"];
+
+function drawGrid(){
+  ctx.strokeStyle="#1e293b";
+  ctx.lineWidth=1;
+
+  for(let i=0;i<6;i++){
+    let y=(c.height/5)*i;
+    ctx.beginPath();
+    ctx.moveTo(0,y);
+    ctx.lineTo(c.width,y);
+    ctx.stroke();
+  }
+}
+
+function drawLine(dataset,color){
+  ctx.beginPath();
+
+  dataset.forEach((v,i)=>{
+    let x=i*(c.width/(dataset.length-1));
+    let y=c.height-(v/100)*c.height;
+
+    if(i===0) ctx.moveTo(x,y);
+    else ctx.lineTo(x,y);
+  });
+
+  ctx.strokeStyle=color;
+  ctx.lineWidth=2;
+
+  ctx.shadowColor=color;
+  ctx.shadowBlur=12;
+
+  ctx.stroke();
+  ctx.shadowBlur=0;
+}
+
+function drawLegend(){
+  ctx.font="12px Arial";
+
+  ctx.fillStyle="#22c55e";
+  ctx.fillText("Coverage",10,15);
+
+  ctx.fillStyle="#38bdf8";
+  ctx.fillText("Tests",100,15);
+
+  ctx.fillStyle="#ef4444";
+  ctx.fillText("Bugs",160,15);
+}
+
+function draw(){
+  ctx.clearRect(0,0,c.width,c.height);
+
+  drawGrid();
+  drawLine(data.coverage.map(v=>v),"#22c55e");
+  drawLine(data.tests.map(v=>v/10),"#38bdf8"); // scale
+  drawLine(data.bugs.map(v=>v),"#ef4444");
+
+  drawLegend();
+}
+
+function updateData(){
+  data.coverage.shift();
+  data.tests.shift();
+  data.bugs.shift();
+
+  data.coverage.push(Math.min(100, data.coverage.at(-1)+Math.random()*4));
+  data.tests.push(data.tests.at(-1)+Math.random()*150);
+  data.bugs.push(Math.max(5, data.bugs.at(-1)-Math.random()*5));
+
+  draw();
+}
+
+draw();
+setInterval(updateData,700);
+
+
+// 🔥 TOOLTIP (effet pro)
+c.addEventListener("mousemove",(e)=>{
+  const rect = c.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+
+  const index = Math.round((x / c.width) * (data.coverage.length-1));
+
+  if(index>=0 && index<data.coverage.length){
+    const info = `
+Coverage: ${data.coverage[index].toFixed(0)}%
+Tests: ${Math.round(data.tests[index])}
+Bugs: ${Math.round(data.bugs[index])}
+`;
+
+    c.title = info;
+  }
 });
-ctx.strokeStyle="#22c55e";
-ctx.stroke();
+
+
+// 🎯 SIMULATION ANOMALIE
+setInterval(()=>{
+  if(Math.random()<0.2){
+    console.log("⚠️ anomaly detected: spike in bugs");
+  }
+},3000);
 
 // pipeline simulator
 function runTests(){
