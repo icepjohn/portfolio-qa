@@ -8,4 +8,4 @@ Portfolio interactif avec simulateur QA et pipeline CI/CD.
 - Dashboard QA
 
 ## Live
-👉 https://TON-USERNAME.github.io/portfolio-qa/
+👉 https://icepjohn.github.io/portfolio-qa/
