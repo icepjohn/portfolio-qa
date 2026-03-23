@@ -411,10 +411,14 @@ c.addEventListener("mousemove",(e)=>{
 
   const index=Math.round((x/c.width)*(data.coverage.length-1));
 
-  if(index>=0&&index<data.coverage.length){
+  if(
+    index >= 0 &&
+    index < data.coverage.length &&
+    data.coverage[index] !== undefined
+  ){
     c.title=`Coverage: ${data.coverage[index].toFixed(0)}%
-Tests: ${Math.round(data.tests[index])}
-Bugs: ${Math.round(data.bugs[index])}`;
+Tests: ${Math.round(data.tests[index] || 0)}
+Bugs: ${Math.round(data.bugs[index] || 0)}`;
   }
 });
 
