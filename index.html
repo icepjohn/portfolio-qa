@@ -16,7 +16,22 @@ nav{display:flex;justify-content:center;gap:20px;padding:10px;border-bottom:1px 
 nav a{color:var(--muted);text-decoration:none}
 .section{padding:60px 20px;max-width:1200px;margin:auto}
 .hero{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:center}
-.hero img{justify-self:end;transform: translateX(20px);width:200px;border-radius:200px;border:2px solid var(--green)}
+.hero img{
+  justify-self:end;
+  width:200px;
+  background: rgba(255,255,255,0.05);
+  padding:10px;
+  backdrop-filter: blur(8px);
+  border-radius:20px;
+  border:1px solid var(--green);
+  transition: all 0.4s ease;
+}
+.hero img:hover{
+  transform: scale(1.05) translateY(-5px);
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.6),
+    0 0 30px rgba(34,197,94,0.6);
+}
 .card{padding:20px;border:1px solid var(--border);border-radius:15px;background:var(--card);margin-bottom:20px}
 .timeline{position:relative}
 .timeline::before{content:"";position:absolute;left:10px;top:0;bottom:0;width:2px;background:var(--border)}
@@ -30,7 +45,7 @@ button{background:var(--green);border:none;padding:10px 15px;border-radius:8px;c
 .fade-in{opacity:0;transform:translateY(40px);transition:all 0.8s ease;}
 .fade-in.visible{opacity:1;transform:translateY(0);}
 .card{transition:all 0.3s ease;}
-.card:hover{transform:translateY(-5px) scale(1.01);box-shadow:0 10px 30px rgba(0,0,0,0.5);}
+.card:hover{transform:translateY(-5px) scale(1.01);box-shadow:0 10px 30px rgba(34,197,94,0.6);}
 nav a{position:relative;}
 nav a::after{content:"";position:absolute;bottom:-5px;left:0;width:0%;height:2px;background:var(--green);transition:0.3s;}
 nav a:hover::after{width:100%;}
@@ -66,20 +81,21 @@ fiabilisation des pipelines CI/CD à grande échelle.
 
 <section id="dashboard" class="section fade-in">
 <h2>QA Live Dashboard</h2>
-<canvas id="chart"></canvas>
+<canvas class="card" id="chart"></canvas>
 <div class="kpis">
-<div class="kpi"><div id="tests">1200</div><div>Tests</div></div>
-<div class="kpi"><div id="coverage">80%</div><div>Coverage</div></div>
-<div class="kpi"><div id="bugs">50</div><div>Bugs</div></div>
+
+<div class="kpi card"><div id="tests">1200</div><div>Tests</div></div>
+<div class="kpi card"><div id="coverage">80%</div><div>Coverage</div></div>
+<div class="kpi card"><div id="bugs">50</div><div>Bugs</div></div>
 </div>
 </section>
 
 <section id="impact" class="section fade-in">
 <h2>Impact</h2>
 <div class="kpis">
-<div class="kpi"><strong>+500</strong><br>Tests automatisés</div>
-<div class="kpi"><strong>-40%</strong><br>Bugs en prod</div>
-<div class="kpi"><strong>CI/CD</strong><br>Optimisé</div>
+<div class="kpi card"><strong>+500</strong><br>Tests automatisés</div>
+<div class="kpi card"><strong>-40%</strong><br>Bugs en prod</div>
+<div class="kpi card"><strong>CI/CD</strong><br>Optimisé</div>
 </div>
 </section>
 
@@ -166,7 +182,7 @@ fiabilisation des pipelines CI/CD à grande échelle.
 </a>
 </p>
 </div>
-<p style="text-align:center;margin-top:40px;color:#94a3b8">
+<p style="text-align:center;margin-top:40px">
 Disponible pour mission QA Automation / Lead QA
 </p>
 </section>
