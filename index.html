@@ -419,14 +419,6 @@ function runTests(){
  runNextTest();
 }
 
-let started=false;
-window.addEventListener('scroll',()=>{
- const el=document.getElementById('simulator').getBoundingClientRect();
- if(!started && el.top<window.innerHeight-100){
-  started=true; runTests();
- }
-});
-
 const elements=document.querySelectorAll('.fade-in');
 function reveal(){
  elements.forEach(el=>{
