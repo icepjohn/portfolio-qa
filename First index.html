@@ -87,44 +87,6 @@ body.light{
 body{
   transition:background 0.4s,color 0.4s;
 }
-#testList div{
-  padding:10px;
-  border-bottom:1px solid #1e293b;
-  cursor:pointer;
-  font-family:monospace;
-}
-
-#testList div.active{
-  background:rgba(34,197,94,0.2);
-}
-
-#testList div.pass{color:#22c55e;}
-#testList div.fail{color:#ef4444;}
-#testList div.running{color:#38bdf8;}
-
-#screenshotContainer{
-  position:absolute;
-  bottom:10px;
-  right:10px;
-  width:220px;
-  z-index:10;
-}
-
-#screenshot{
-  width:100%;
-  border-radius:10px;
-  border:1px solid #ef4444;
-  box-shadow:0 0 15px rgba(239,68,68,0.6);
-}
-
-#screenshotContainer{
-  opacity:0.85;
-  transition:0.3s;
-}
-#screenshotContainer:hover{
-  opacity:1;
-  transform:scale(1.05);
-}
 </style>
 </head>
 
@@ -156,28 +118,16 @@ fiabilisation des pipelines CI/CD à grande échelle.
 
 <section id="simulator" class="section fade-in">
 <h2>Live QA Demo</h2>
-
-<div class="card" style="display:flex;gap:20px;height:400px ;position:relative;">
-
-  <!-- LEFT PANEL -->
-  <div id="testList" style="width:30%;border-right:1px solid #1e293b;overflow:auto"></div>
-
-  <!-- RIGHT PANEL -->
-  <div style="flex:1;display:flex;flex-direction:column">
-
-    <button onclick="runTests()">▶ Run Tests</button>
-
-    <div style="margin-top:10px;height:15px;background:#111;border-radius:10px;overflow:hidden">
-      <div id="progress" style="height:100%;width:0%;background:#22c55e"></div>
-    </div>
-
-    <pre id="logs" style="flex:1;margin-top:10px;background:black;padding:10px;overflow:auto;color:#22c55e"></pre>
-
-    <div id="screenshotContainer" style="margin-top:10px;display:none;">
-      <img id="screenshot" style="width:100%;border-radius:10px;border:1px solid #ef4444;">
-    </div>
-
-  </div>
+<div class="card">
+<button onclick="runTests()">▶ Run Tests</button>
+<div style="margin-top:15px;height:20px;background:#111;border-radius:10px;overflow:hidden">
+<div id="progress" style="height:100%;width:0%;background:#22c55e"></div>
+</div>
+<pre id="logs" style="margin-top:15px;background:black;padding:10px;height:200px;overflow:auto;color:#22c55e"></pre>
+</div>
+<div id="screenshotContainer" style="margin-top:15px;display:none;">
+  <p style="color:#ef4444;">📸 Failure Screenshot</p>
+  <img id="screenshot" style="width:100%;border-radius:10px;border:1px solid #ef4444;">
 </div>
 </section>
 
@@ -333,59 +283,11 @@ Bugs: ${Math.round(data.bugs[index] || 0)}`;
 });
 
 // =======================
-// 🎭 PLAYWRIGHT UI
-// =======================
-
-const testsUI = [
- "auth.spec.ts › login success",
- "auth.spec.ts › login failure",
- "cart.spec.ts › add product",
- "cart.spec.ts › remove product",
- "checkout.spec.ts › payment success",
- "checkout.spec.ts › payment failure",
- "profile.spec.ts › update user",
- "search.spec.ts › search results"
-];
-
-function renderTestList(){
- const list = document.getElementById('testList');
- if(!list) return;
-
- list.innerHTML='';
- testsUI.forEach((t,i)=>{
-  const div=document.createElement('div');
-  div.innerText=t;
-  div.id="test-"+i;
-  list.appendChild(div);
- });
-}
-
-function setActiveTest(i){
- document.querySelectorAll('#testList div').forEach(el=>el.classList.remove('active'));
- const el=document.getElementById("test-"+i);
- if(el) el.classList.add('active');
-}
-
-function setTestStatus(i,status){
- const el=document.getElementById("test-"+i);
- if(!el) return;
-
- el.classList.remove('pass','fail','running');
-
- if(status==="running") el.classList.add('running');
- if(status==="pass") el.classList.add('pass');
- if(status==="fail") el.classList.add('fail');
-}
-
-// =======================
 // 🧪 PIPELINE (INCHANGÉ)
 // =======================
 
 function runTests(){
-
  document.getElementById('screenshotContainer').style.display = 'none';
- renderTestList();
-
  const logs=document.getElementById('logs');
  const bar=document.getElementById('progress');
 
@@ -394,17 +296,30 @@ function runTests(){
 
  function time(){return new Date().toLocaleTimeString();}
 
- function log(msg){
+ function log(msg,color='#22c55e'){
   logs.innerHTML+=`[${time()}] ${msg}\n`;
   logs.scrollTop=logs.scrollHeight;
  }
 
- function logStep(msg){ log(`▶ ${msg}`); }
- function logOk(msg){ log(`✔ ${msg}`); }
- function logFail(msg){ log(`✖ ${msg}`); }
- function logWarn(msg){ log(`⚠ ${msg}`); }
+ function logStep(msg){ log(`▶ ${msg}`,'#38bdf8'); }
+ function logOk(msg){ log(`✔ ${msg}`,'#22c55e'); }
+ function logFail(msg){ log(`✖ ${msg}`,'#ef4444'); }
+ function logWarn(msg){ log(`⚠ ${msg}`,'#f59e0b'); }
 
- const tests = testsUI;
+ // =====================
+ // TEST SUITE SIMULATION
+ // =====================
+
+ const tests = [
+  "auth.spec.ts › login success",
+  "auth.spec.ts › login failure",
+  "cart.spec.ts › add product",
+  "cart.spec.ts › remove product",
+  "checkout.spec.ts › payment success",
+  "checkout.spec.ts › payment failure",
+  "profile.spec.ts › update user",
+  "search.spec.ts › search results"
+ ];
 
  let passed=0;
  let failed=0;
@@ -415,27 +330,30 @@ function runTests(){
   if(i >= tests.length){
 
     log("");
-    log("📊 TEST SUMMARY");
+    log("📊 TEST SUMMARY","#38bdf8");
     log(`✔ Passed: ${passed}`);
     log(`✖ Failed: ${failed}`);
     log(`🧪 Total: ${tests.length}`);
+
+    if(failed === 0){
+      log("🚀 ALL TESTS PASSED","#22c55e");
+    }else{
+      log("❌ SOME TESTS FAILED","#ef4444");
+    }
 
     bar.style.width='100%';
     return;
   }
 
   const testName = tests[i];
-
-  setActiveTest(i);
-  setTestStatus(i,'running');
   logStep(`Running ${testName}`);
 
   setTimeout(()=>{
 
+    // simulate failure
     if(Math.random() < 0.25){
 
       logFail(`${testName} failed`);
-      setTestStatus(i,'fail');
       showScreenshot(testName);
       logWarn("Retrying...");
 
@@ -443,12 +361,11 @@ function runTests(){
 
         if(Math.random() < 0.5){
           logOk(`${testName} passed after retry`);
-          setTestStatus(i,'pass');
           passed++;
         }else{
           logFail(`${testName} failed again`);
-          setTestStatus(i,'fail');
           log("Error: expect(received).toBeTruthy()");
+          log("Received: undefined");
           failed++;
         }
 
@@ -462,7 +379,6 @@ function runTests(){
     }else{
 
       logOk(`${testName} passed`);
-      setTestStatus(i,'pass');
       passed++;
 
       progress += 100/tests.length;
@@ -474,16 +390,30 @@ function runTests(){
   },500);
  }
 
- log("🚀 Playwright Test Run Started");
+ // =====================
+ // PIPELINE STEPS
+ // =====================
 
- setTimeout(()=> logStep("Installing dependencies"),300);
- setTimeout(()=> logStep("Building project"),800);
- setTimeout(()=> logStep("Launching browser"),1200);
- setTimeout(()=> {
+ log("🚀 Playwright Test Run Started","#22c55e");
+
+ setTimeout(()=>{
+  logStep("Installing dependencies (npm ci)");
+ },300);
+
+ setTimeout(()=>{
+  logStep("Building project");
+ },800);
+
+ setTimeout(()=>{
+  logStep("Launching browser (Chromium)");
+ },1200);
+
+ setTimeout(()=>{
   logStep("Running test suite");
   runNextTest();
  },1800);
 }
+
 // =======================
 // 🎬 AUTO DEMO + REVEAL
 // =======================
