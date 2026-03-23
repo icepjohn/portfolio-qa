@@ -15,8 +15,8 @@ h1{color:var(--green)}
 nav{display:flex;justify-content:center;gap:20px;padding:10px;border-bottom:1px solid var(--border)}
 nav a{color:var(--muted);text-decoration:none}
 .section{padding:60px 20px;max-width:1200px;margin:auto}
-.hero{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-.hero img{width:200px;border-radius:20px;border:2px solid var(--green)}
+.hero{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:center}
+.hero img{justify-self:end;transform: translateX(20px);width:200px;border-radius:200px;border:2px solid var(--green)}
 .card{padding:20px;border:1px solid var(--border);border-radius:15px;background:var(--card);margin-bottom:20px}
 .timeline{position:relative}
 .timeline::before{content:"";position:absolute;left:10px;top:0;bottom:0;width:2px;background:var(--border)}
@@ -27,7 +27,6 @@ nav a{color:var(--muted);text-decoration:none}
 canvas{width:100%;height:300px;border:1px solid var(--border);border-radius:10px;background:#000}
 button{background:var(--green);border:none;padding:10px 15px;border-radius:8px;cursor:pointer}
 
-/* cinematic */
 .fade-in{opacity:0;transform:translateY(40px);transition:all 0.8s ease;}
 .fade-in.visible{opacity:1;transform:translateY(0);}
 .card{transition:all 0.3s ease;}
@@ -60,9 +59,9 @@ nav a:hover::after{width:100%;}
 Spécialisé en automatisation de tests (Playwright, Cypress) et
 fiabilisation des pipelines CI/CD à grande échelle.
 </p>
-<a href="cv.pdf" download><button>Télécharger CV</button></a>
+<a href="JonathanPicquetteCV.pdf" download><button>Télécharger CV</button></a>
 </div>
-<img src="photo.jpg" alt="photo">
+<img src="JonathanPicquette.jpg" alt="photo">
 </section>
 
 <section id="dashboard" class="section fade-in">
@@ -98,7 +97,6 @@ fiabilisation des pipelines CI/CD à grande échelle.
 <section id="experience" class="section fade-in">
 <h2>Expérience complète</h2>
 <div class="timeline">
-
 <div class="item"><div class="card">
 <h3>Avril 2025 - Mars 2026 — QA Engineer (Décathlon - SPARK)</h3>
 <p>Projet stratégique PLM visant à remplacer SPO et PACE via l’outil Centric.</p>
@@ -156,7 +154,6 @@ fiabilisation des pipelines CI/CD à grande échelle.
 <li><strong>Stack :</strong> Selenium, Postman, API REST</li>
 </ul>
 </div></div>
-
 </div>
 </section>
 
@@ -164,9 +161,9 @@ fiabilisation des pipelines CI/CD à grande échelle.
 <div class="card">
 <p>Email : icepjohn@hotmail.com</p>
 <p>
-  <a href="https://www.linkedin.com/in/jonathan-picquette-64656a148" target="_blank">
-    🔗 Voir mon LinkedIn
-  </a>
+<a href="https://www.linkedin.com/in/jonathan-picquette-64656a148" target="_blank">
+🔗 Voir mon LinkedIn
+</a>
 </p>
 </div>
 <p style="text-align:center;margin-top:40px;color:#94a3b8">
@@ -175,23 +172,29 @@ Disponible pour mission QA Automation / Lead QA
 </section>
 
 <script>
-// dashboard animation
-let t=0;
-setInterval(()=>{
- t+=5; // 🚀 augmentation plus rapide
 
- document.getElementById('tests').innerText=1200+t;
- document.getElementById('coverage').innerText=(80+Math.min(t/2,20)).toFixed(0)+"%";
- document.getElementById('bugs').innerText=Math.max(50-t/2,5);
-},500);
+// =======================
+// ✅ SAFE INIT (fix erreur)
+// =======================
 
-// chart
+window.addEventListener("DOMContentLoaded", () => {
+
+// =======================
+// 📊 CANVAS
+// =======================
+
 const c = document.getElementById('chart');
+if(!c) return;
+
 const ctx = c.getContext('2d');
 
 c.width = 600;
 c.height = 300;
 c.style.width = "100%";
+
+// =======================
+// 📊 DATA
+// =======================
 
 let data = {
   coverage: [40,50,60,70,80],
@@ -199,12 +202,33 @@ let data = {
   bugs: [80,60,50,40,30]
 };
 
-let labels = ["T1","T2","T3","T4","T5"];
+let visible = {
+  coverage:true,
+  tests:true,
+  bugs:true
+};
+
+let legendZones=[];
+
+// =======================
+// 🎨 UTILS
+// =======================
+
+function normalize(d){
+  let max=Math.max(...d);
+  return d.map(v=>v/max*100);
+}
+
+function lerp(a,b,t){
+  return a+(b-a)*t;
+}
+
+// =======================
+// 🎨 DRAW
+// =======================
 
 function drawGrid(){
   ctx.strokeStyle="#1e293b";
-  ctx.lineWidth=1;
-
   for(let i=0;i<6;i++){
     let y=(c.height/5)*i;
     ctx.beginPath();
@@ -226,94 +250,173 @@ function drawLine(dataset,color){
   });
 
   ctx.strokeStyle=color;
-  ctx.lineWidth=2;
-
+  ctx.lineWidth=2.5;
   ctx.shadowColor=color;
-  ctx.shadowBlur=12;
-
+  ctx.shadowBlur=15;
   ctx.stroke();
   ctx.shadowBlur=0;
 }
 
 function drawLegend(){
+
+  legendZones=[];
+
+  const items=[
+    {key:"coverage",label:"Coverage",color:"#22c55e"},
+    {key:"tests",label:"Tests",color:"#38bdf8"},
+    {key:"bugs",label:"Bugs",color:"#ef4444"}
+  ];
+
+  const spacing=140;
+  const startX=(c.width/2)-spacing;
+  const y=c.height-10;
+
+  ctx.fillStyle="rgba(15,23,42,0.9)";
+  ctx.fillRect(0,c.height-35,c.width,35);
+
   ctx.font="12px Arial";
 
-  ctx.fillStyle="#22c55e";
-  ctx.fillText("Coverage",10,15);
+  items.forEach((item,i)=>{
+    const x=startX+(i*spacing);
 
-  ctx.fillStyle="#38bdf8";
-  ctx.fillText("Tests",100,15);
+    legendZones.push({
+      key:item.key,x:x,y:y-15,w:100,h:20
+    });
 
-  ctx.fillStyle="#ef4444";
-  ctx.fillText("Bugs",160,15);
+    ctx.beginPath();
+    ctx.arc(x,y-4,5,0,Math.PI*2);
+    ctx.fillStyle=visible[item.key]?item.color:"#334155";
+    ctx.fill();
+
+    ctx.fillStyle=visible[item.key]?"#e2e8f0":"#475569";
+    ctx.fillText(item.label,x+12,y);
+  });
 }
 
-function draw(){
+function draw(dataset=data){
+
   ctx.clearRect(0,0,c.width,c.height);
 
+  ctx.fillStyle="#020617";
+  ctx.fillRect(0,0,c.width,c.height);
+
   drawGrid();
-  drawLine(data.coverage.map(v=>v),"#22c55e");
-  drawLine(data.tests.map(v=>v/10),"#38bdf8"); // scale
-  drawLine(data.bugs.map(v=>v),"#ef4444");
+
+  if(visible.coverage) drawLine(normalize(dataset.coverage),"#22c55e");
+  if(visible.tests) drawLine(normalize(dataset.tests),"#38bdf8");
+  if(visible.bugs) drawLine(normalize(dataset.bugs),"#ef4444");
 
   drawLegend();
 }
 
-function updateData(){
-  data.coverage.shift();
-  data.tests.shift();
-  data.bugs.shift();
+// =======================
+// 🔥 SMOOTH UPDATE
+// =======================
 
-  data.coverage.push(Math.min(100, data.coverage.at(-1)+Math.random()*4));
-  data.tests.push(data.tests.at(-1)+Math.random()*150);
-  data.bugs.push(Math.max(5, data.bugs.at(-1)-Math.random()*5));
+let t=0;
 
-  draw();
+function updateSmooth(){
+
+  t+=2;
+
+  document.getElementById('tests').innerText=1200+t;
+  document.getElementById('coverage').innerText=(80+Math.min(t/4,20)).toFixed(0)+"%";
+  document.getElementById('bugs').innerText=Math.max(50-t/4,5);
+
+  let lastC=data.coverage.at(-1);
+  let lastT=data.tests.at(-1);
+  let lastB=data.bugs.at(-1);
+
+  let targetC=Math.min(100,lastC+Math.random()*2);
+  let targetT=lastT+Math.random()*80;
+  let targetB=Math.max(5,lastB-Math.random()*3);
+
+  let step=0;
+  let steps=15;
+
+  let anim=setInterval(()=>{
+
+    if(step>=steps){
+      clearInterval(anim);
+
+      data.coverage.shift();
+      data.tests.shift();
+      data.bugs.shift();
+
+      data.coverage.push(targetC);
+      data.tests.push(targetT);
+      data.bugs.push(targetB);
+      return;
+    }
+
+    let temp={
+      coverage:[...data.coverage.slice(1),lerp(lastC,targetC,step/steps)],
+      tests:[...data.tests.slice(1),lerp(lastT,targetT,step/steps)],
+      bugs:[...data.bugs.slice(1),lerp(lastB,targetB,step/steps)]
+    };
+
+    draw(temp);
+    step++;
+
+  },50);
 }
 
+// =======================
+// 🖱️ CLICK LEGEND
+// =======================
+
+c.addEventListener("click",(e)=>{
+  const rect=c.getBoundingClientRect();
+  const x=e.clientX-rect.left;
+  const y=e.clientY-rect.top;
+
+  legendZones.forEach(zone=>{
+    if(x>=zone.x&&x<=zone.x+zone.w&&y>=zone.y&&y<=zone.y+zone.h){
+      visible[zone.key]=!visible[zone.key];
+      draw();
+    }
+  });
+});
+
+// =======================
+// 🚀 START
+// =======================
+
 draw();
-setInterval(updateData,700);
+setInterval(updateSmooth,1500);
 
+// =======================
+// 🧠 TOOLTIP
+// =======================
 
-// 🔥 TOOLTIP (effet pro)
 c.addEventListener("mousemove",(e)=>{
-  const rect = c.getBoundingClientRect();
-  const x = e.clientX - rect.left;
+  const rect=c.getBoundingClientRect();
+  const x=e.clientX-rect.left;
 
-  const index = Math.round((x / c.width) * (data.coverage.length-1));
+  const index=Math.round((x/c.width)*(data.coverage.length-1));
 
-  if(index>=0 && index<data.coverage.length){
-    const info = `
-Coverage: ${data.coverage[index].toFixed(0)}%
+  if(index>=0&&index<data.coverage.length){
+    c.title=`Coverage: ${data.coverage[index].toFixed(0)}%
 Tests: ${Math.round(data.tests[index])}
-Bugs: ${Math.round(data.bugs[index])}
-`;
-
-    c.title = info;
+Bugs: ${Math.round(data.bugs[index])}`;
   }
 });
 
+});
 
-// 🎯 SIMULATION ANOMALIE
-setInterval(()=>{
-  if(Math.random()<0.2){
-    console.log("⚠️ anomaly detected: spike in bugs");
-  }
-},3000);
+// =======================
+// 🧪 PIPELINE (INCHANGÉ)
+// =======================
 
-// pipeline simulator
 function runTests(){
  const logs=document.getElementById('logs');
  const bar=document.getElementById('progress');
  logs.innerHTML='';
  let progress=0;
 
- function time(){
-  return new Date().toLocaleTimeString();
- }
-
+ function time(){return new Date().toLocaleTimeString();}
  function log(msg,color='#22c55e'){
-  logs.innerHTML += `[${time()}] <span style="color:${color}">${msg}</span>\n`;
+  logs.innerHTML+=`[${time()}] <span style="color:${color}">${msg}</span>\n`;
   logs.scrollTop=logs.scrollHeight;
  }
 
@@ -362,7 +465,10 @@ function runTests(){
  next();
 }
 
-// auto demo
+// =======================
+// 🎬 AUTO DEMO + REVEAL
+// =======================
+
 let started=false;
 window.addEventListener('scroll',()=>{
  const el=document.getElementById('simulator').getBoundingClientRect();
@@ -372,7 +478,6 @@ window.addEventListener('scroll',()=>{
  }
 });
 
-// cinematic reveal
 const elements=document.querySelectorAll('.fade-in');
 function reveal(){
  elements.forEach(el=>{
@@ -383,6 +488,7 @@ function reveal(){
 }
 window.addEventListener('scroll',reveal);
 reveal();
+
 </script>
 
 </body>
