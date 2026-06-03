@@ -76,8 +76,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--txt);font-size:13p
 .dots{display:flex;gap:6px}
 .dot{width:12px;height:12px;border-radius:50%}
 .dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
-.win-title{flex:1;text-align:center;font-size:11.5px;color:var(--dim)}
+.win-title{flex:1;min-width:0;text-align:center;font-size:11.5px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .win-title b{color:var(--txt)}
+/* sur mobile on ne garde que le nom du fichier actif pour éviter le retour à la ligne */
+@media(max-width:560px){.wt-pre,.wt-suf{display:none}}
 
 /* ══ MENUBAR ══ */
 .menubar{background:var(--bg2);border-bottom:1px solid var(--border);height:30px;display:flex;align-items:center;padding:0 10px;gap:2px;flex-shrink:0}
@@ -260,7 +262,7 @@ body.light .statusbar{background:#005f9e}
 <div class="titlebar">
   <button class="hamburger" id="hamburger" aria-label="Ouvrir le menu des sections" aria-controls="sidebar" aria-expanded="false">☰</button>
   <div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
-  <div class="win-title">Visual Studio Code — <b id="winTitle">about.ts</b> — portfolio-qa</div>
+  <div class="win-title"><span class="wt-pre">Visual Studio Code — </span><b id="winTitle">about.ts</b><span class="wt-suf"> — portfolio-qa</span></div>
 </div>
 
 <!-- MENUBAR -->
@@ -275,6 +277,9 @@ body.light .statusbar{background:#005f9e}
   <div class="tab active" data-panel="about">
     <span class="tdot" style="background:#4ec9b0"></span>about.ts<span class="tcls">✕</span>
   </div>
+  <div class="tab" data-panel="experience">
+    <span class="tdot" style="background:#c586c0"></span>experience.yml<span class="tcls">✕</span>
+  </div>
   <div class="tab" data-panel="skills">
     <span class="tdot" style="background:#dcdcaa"></span>skills.json<span class="tcls">✕</span>
   </div>
@@ -283,9 +288,6 @@ body.light .statusbar{background:#005f9e}
   </div>
   <div class="tab" data-panel="metrics">
     <span class="tdot" style="background:#569cd6"></span>metrics.json<span class="tcls">✕</span>
-  </div>
-  <div class="tab" data-panel="experience">
-    <span class="tdot" style="background:#c586c0"></span>experience.yml<span class="tcls">✕</span>
   </div>
   <div class="tab" data-panel="contact">
     <span class="tdot" style="background:#d7ba7d"></span>contact.json<span class="tcls">✕</span>
@@ -302,10 +304,10 @@ body.light .statusbar{background:#005f9e}
     <div class="ftree">
       <div class="fi"><span class="ficon folder">▾</span>portfolio-qa</div>
       <div class="fi sub active" data-open="about">   <span class="ficon ts">TS</span> about.ts</div>
+      <div class="fi sub"        data-open="experience"><span class="ficon yml">Y</span> experience.yml</div>
       <div class="fi sub"        data-open="skills">  <span class="ficon json">{}</span> skills.json</div>
       <div class="fi sub"        data-open="playwright"><span class="ficon ts">TS</span> playwright.spec.ts</div>
       <div class="fi sub"        data-open="metrics"> <span class="ficon json">{}</span> metrics.json</div>
-      <div class="fi sub"        data-open="experience"><span class="ficon yml">Y</span> experience.yml</div>
       <div class="fi sub"        data-open="contact"> <span class="ficon json">{}</span> contact.json</div>
     </div>
     <div class="sb-git">
