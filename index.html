@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://dummyimage.com; base-uri 'self'; form-action 'self'; object-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Jonathan Picquette – Senior QA Automation Engineer. 8+ ans d'expérience en Playwright, Cypress, CI/CD.">
 <meta name="author" content="Jonathan Picquette">
@@ -57,6 +58,21 @@ body{font-family:var(--font);background:var(--bg);color:var(--txt);font-size:13p
 
 /* ══ TITLEBAR ══ */
 .titlebar{background:var(--titlebar);border-bottom:1px solid #111;height:32px;display:flex;align-items:center;padding:0 16px;gap:10px;flex-shrink:0;user-select:none}
+/* ── HAMBURGER + DRAWER (mobile) ── */
+.hamburger{display:none;background:none;border:none;color:var(--txt);font-size:17px;line-height:1;cursor:pointer;padding:0 6px 0 0;font-family:var(--font)}
+.hamburger:hover{color:var(--hi)}
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:55;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+.scrim.show{opacity:1;visibility:visible}
+.sb-close{display:none;margin-left:auto;background:none;border:none;color:var(--dim);font-size:14px;line-height:1;cursor:pointer;font-family:var(--font);padding:0 2px}
+.sb-close:hover{color:var(--txt)}
+@media(max-width:780px){
+  .hamburger{display:block}
+  .sidebar{display:flex;position:fixed;top:0;left:0;bottom:0;z-index:60;width:80%;max-width:290px;transform:translateX(-100%);transition:transform .26s ease;box-shadow:2px 0 26px rgba(0,0,0,.55)}
+  .sidebar.open{transform:translateX(0)}
+  .sb-hdr{display:flex;align-items:center}
+  .sb-close{display:block}
+}
+@media(min-width:781px){.scrim{display:none}}
 .dots{display:flex;gap:6px}
 .dot{width:12px;height:12px;border-radius:50%}
 .dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
@@ -88,7 +104,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--txt);font-size:13p
 
 /* ══ SIDEBAR ══ */
 .sidebar{width:220px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto}
-@media(max-width:780px){.sidebar{display:none}}
 .sb-hdr{padding:8px 12px 4px;font-size:10px;font-weight:700;color:var(--dim);letter-spacing:.12em;text-transform:uppercase;user-select:none}
 .ftree{padding:4px 0;flex:1}
 .fi{padding:3px 12px 3px 24px;font-size:12px;color:var(--txt);cursor:pointer;display:flex;align-items:center;gap:6px;transition:background .1s;user-select:none}
@@ -228,16 +243,22 @@ body.light .sim-term{background:#1e1e1e}
 @media(max-width:480px){.hint{right:8px;left:8px;bottom:30px;max-width:none}}
 
 /* ══ STATUS BAR ══ */
-.statusbar{background:var(--accent);height:22px;display:flex;align-items:center;padding:0 12px;gap:16px;font-size:11px;color:rgba(255,255,255,.9);flex-shrink:0}
+.statusbar{background:var(--accent);height:22px;display:flex;align-items:center;padding:0 12px;gap:16px;font-size:11px;color:rgba(255,255,255,.9);flex-shrink:0;overflow:hidden}
 body.light .statusbar{background:#005f9e}
 .sbi{white-space:nowrap}
 .sbsep{flex:1}
+/* sur petit écran on réduit l'espacement et on masque les infos secondaires pour ne rien faire dépasser */
+@media(max-width:620px){.statusbar{gap:10px;padding:0 10px}.sbi.opt{display:none}}
 </style>
 </head>
 <body>
 
+<!-- SCRIM (fond du tiroir mobile) -->
+<div class="scrim" id="scrim"></div>
+
 <!-- TITLEBAR -->
 <div class="titlebar">
+  <button class="hamburger" id="hamburger" aria-label="Ouvrir le menu des sections" aria-controls="sidebar" aria-expanded="false">☰</button>
   <div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
   <div class="win-title">Visual Studio Code — <b id="winTitle">about.ts</b> — portfolio-qa</div>
 </div>
@@ -245,28 +266,28 @@ body.light .statusbar{background:#005f9e}
 <!-- MENUBAR -->
 <div class="menubar">
   <div class="msep"></div>
-  <button id="themeBtn" onclick="toggleTheme()">☀ Light</button>
+  <button id="themeBtn">☀ Light</button>
 </div>
 
 <!-- TABBAR -->
 <div class="tabwrap" id="tabwrap">
 <div class="tabbar" id="tabbar" role="tablist" aria-label="Sections du portfolio">
-  <div class="tab active" data-panel="about" onclick="openTab(this)">
+  <div class="tab active" data-panel="about">
     <span class="tdot" style="background:#4ec9b0"></span>about.ts<span class="tcls">✕</span>
   </div>
-  <div class="tab" data-panel="skills" onclick="openTab(this)">
+  <div class="tab" data-panel="skills">
     <span class="tdot" style="background:#dcdcaa"></span>skills.json<span class="tcls">✕</span>
   </div>
-  <div class="tab" data-panel="playwright" onclick="openTab(this)">
+  <div class="tab" data-panel="playwright">
     <span class="tdot" style="background:#ce9178"></span>playwright.spec.ts<span class="tcls">✕</span>
   </div>
-  <div class="tab" data-panel="metrics" onclick="openTab(this)">
+  <div class="tab" data-panel="metrics">
     <span class="tdot" style="background:#569cd6"></span>metrics.json<span class="tcls">✕</span>
   </div>
-  <div class="tab" data-panel="experience" onclick="openTab(this)">
+  <div class="tab" data-panel="experience">
     <span class="tdot" style="background:#c586c0"></span>experience.yml<span class="tcls">✕</span>
   </div>
-  <div class="tab" data-panel="contact" onclick="openTab(this)">
+  <div class="tab" data-panel="contact">
     <span class="tdot" style="background:#d7ba7d"></span>contact.json<span class="tcls">✕</span>
   </div>
 </div>
@@ -276,16 +297,16 @@ body.light .statusbar{background:#005f9e}
 <div class="workspace">
 
   <!-- SIDEBAR -->
-  <div class="sidebar">
-    <div class="sb-hdr">Explorer</div>
+  <div class="sidebar" id="sidebar">
+    <div class="sb-hdr">Explorer<button class="sb-close" aria-label="Fermer le menu">✕</button></div>
     <div class="ftree">
       <div class="fi"><span class="ficon folder">▾</span>portfolio-qa</div>
-      <div class="fi sub active" onclick="openTabById('about')">   <span class="ficon ts">TS</span> about.ts</div>
-      <div class="fi sub"        onclick="openTabById('skills')">  <span class="ficon json">{}</span> skills.json</div>
-      <div class="fi sub"        onclick="openTabById('playwright')"><span class="ficon ts">TS</span> playwright.spec.ts</div>
-      <div class="fi sub"        onclick="openTabById('metrics')"> <span class="ficon json">{}</span> metrics.json</div>
-      <div class="fi sub"        onclick="openTabById('experience')"><span class="ficon yml">Y</span> experience.yml</div>
-      <div class="fi sub"        onclick="openTabById('contact')"> <span class="ficon json">{}</span> contact.json</div>
+      <div class="fi sub active" data-open="about">   <span class="ficon ts">TS</span> about.ts</div>
+      <div class="fi sub"        data-open="skills">  <span class="ficon json">{}</span> skills.json</div>
+      <div class="fi sub"        data-open="playwright"><span class="ficon ts">TS</span> playwright.spec.ts</div>
+      <div class="fi sub"        data-open="metrics"> <span class="ficon json">{}</span> metrics.json</div>
+      <div class="fi sub"        data-open="experience"><span class="ficon yml">Y</span> experience.yml</div>
+      <div class="fi sub"        data-open="contact"> <span class="ficon json">{}</span> contact.json</div>
     </div>
     <div class="sb-git">
       <div class="gb">⎇ main <span class="gbadge">● clean</span></div>
@@ -311,7 +332,7 @@ body.light .statusbar{background:#005f9e}
           <div class="hero-card">
             <div class="hero-photo">
               <img class="avatar" src="JonathanPicquette.jpg" alt="Jonathan Picquette"
-                   onerror="this.style.display='none';document.getElementById('avatar-fallback').style.display='flex'">
+>
               <div id="avatar-fallback" style="display:none;width:110px;height:110px;background:var(--bg3);border:1px solid var(--border2);border-radius:3px;align-items:center;justify-content:center;font-size:2rem;color:var(--dim)">JP</div>
               <div class="hmeta"><strong>8+ ans XP</strong>500+ tests auto</div>
             </div>
@@ -328,7 +349,7 @@ body.light .statusbar{background:#005f9e}
               </div>
               <div class="hbtns">
                 <a href="JonathanPicquetteCV.pdf" download class="btn p">↓ CV PDF</a>
-                <span class="btn" onclick="openTabById('contact')">Contact →</span>
+                <span class="btn" data-open="contact">Contact →</span>
                 <a href="https://github.com/icepjohn" target="_blank" class="btn">GitHub ↗</a>
               </div>
             </div>
@@ -384,7 +405,7 @@ body.light .statusbar{background:#005f9e}
           <div class="sim">
             <div class="sim-tb">
               <span class="sim-tbtitle">TEST EXPLORER — <b>playwright.spec.ts</b></span>
-              <button class="run-btn" id="runBtn" onclick="runTests()">▶ Run All</button>
+              <button class="run-btn" id="runBtn">▶ Run All</button>
             </div>
             <div class="sim-body">
               <div class="sim-exp">
@@ -554,227 +575,21 @@ body.light .statusbar{background:#005f9e}
 <!-- HINT TOAST -->
 <div class="hint" id="hint" role="status">
   <span>👋 <b>Astuce</b> — clique sur les onglets en haut (ou les fichiers de l'explorer à gauche) pour explorer mon profil.</span>
-  <button class="hclose" onclick="closeHint()" aria-label="Fermer l'astuce">✕</button>
+  <button class="hclose" aria-label="Fermer l'astuce">✕</button>
 </div>
 
 <!-- STATUS BAR -->
 <div class="statusbar">
   <div class="sbi">⎇ main</div>
   <div class="sbi">✔ 0 errors</div>
-  <div class="sbi">⚠ 0 warnings</div>
+  <div class="sbi opt">⚠ 0 warnings</div>
   <div class="sbsep"></div>
   <div class="sbi" id="sbLang">TypeScript</div>
-  <div class="sbi">UTF-8</div>
-  <div class="sbi">Ln 1, Col 1</div>
-  <div class="sbi">portfolio-qa</div>
+  <div class="sbi opt">UTF-8</div>
+  <div class="sbi opt">Ln 1, Col 1</div>
+  <div class="sbi opt">portfolio-qa</div>
 </div>
 
-<script>
-/* ── THEME ── */
-function toggleTheme(){
-  const l=document.body.classList.toggle('light');
-  document.getElementById('themeBtn').textContent=l?'☾ Dark':'☀ Light';
-}
-
-/* ── TAB NAVIGATION ── */
-const langMap={about:'TypeScript',skills:'JSON',playwright:'TypeScript',metrics:'JSON',experience:'YAML',contact:'JSON'};
-
-function openTab(el){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.fi.sub').forEach(f=>f.classList.remove('active'));
-  el.classList.add('active');
-  const id=el.dataset.panel;
-  document.getElementById('panel-'+id).classList.add('active');
-  document.getElementById('winTitle').textContent=el.textContent.replace('✕','').trim();
-  document.getElementById('sbLang').textContent=langMap[id]||'Text';
-  // sync sidebar
-  document.querySelectorAll('.fi.sub').forEach(f=>{
-    if(f.getAttribute('onclick')&&f.getAttribute('onclick').includes("'"+id+"'"))f.classList.add('active');
-  });
-  // trigger KPI counter when metrics tab opens
-  if(id==='metrics')triggerKpi();
-}
-
-function openTabById(id){
-  const tab=document.querySelector(`.tab[data-panel="${id}"]`);
-  if(tab)openTab(tab);
-}
-
-/* ── KPI COUNTER ── */
-let kpiDone=false;
-function triggerKpi(){
-  if(kpiDone)return;
-  kpiDone=true;
-  document.querySelectorAll('.kpiv[data-target]').forEach(el=>{
-    const target=+el.dataset.target,suffix=el.dataset.suffix||'';
-    let cur=0;const step=target/(1400/16);
-    const t=setInterval(()=>{cur=Math.min(cur+step,target);el.textContent=Math.round(cur)+suffix;if(cur>=target)clearInterval(t);},16);
-  });
-}
-
-/* ── SIMULATOR ── */
-const tests=[
-  {name:'auth.spec.ts › login success',fail:.10},
-  {name:'auth.spec.ts › login failure',fail:.10},
-  {name:'cart.spec.ts › add product',fail:.15},
-  {name:'cart.spec.ts › remove product',fail:.08},
-  {name:'checkout.spec.ts › payment success',fail:.20},
-  {name:'checkout.spec.ts › payment failure',fail:.10},
-  {name:'checkout.spec.ts › validate order',fail:.12},
-  {name:'profile.spec.ts › update user',fail:.08},
-  {name:'search.spec.ts › search results',fail:.10},
-  {name:'api.spec.ts › GET /products',fail:.08},
-  {name:'api.spec.ts › POST /order',fail:.12},
-  {name:'e2e.spec.ts › full customer journey',fail:.25},
-];
-
-function renderTestList(){
-  const el=document.getElementById('testList');
-  el.innerHTML='';
-  tests.forEach((t,i)=>{
-    const d=document.createElement('div');
-    d.className='stest';d.id='st-'+i;
-    d.innerHTML=`<span class="si" id="si-${i}">○</span><span>${t.name}</span>`;
-    el.appendChild(d);
-  });
-}
-
-function setState(i,s){
-  const item=document.getElementById('st-'+i),ic=document.getElementById('si-'+i);
-  if(!item)return;
-  item.className='stest '+s;
-  ic.textContent={pass:'✔',fail:'✖',running:'◌'}[s]||'○';
-}
-
-function log(txt,c){
-  const logs=document.getElementById('logs');
-  const s=document.createElement('span');
-  s.style.color={pass:'#4ec9b0',fail:'#f44747',info:'#569cd6',warn:'#febc2e',dim:'#6a9955'}[c]||'#abb2bf';
-  s.textContent=txt+'\n';logs.appendChild(s);logs.scrollTop=logs.scrollHeight;
-}
-
-function ts(){return new Date().toLocaleTimeString('fr-FR');}
-let running=false;
-
-function runTests(){
-  if(running)return;
-  running=true;
-  document.getElementById('runBtn').disabled=true;
-  document.getElementById('screenshotBox').style.display='none';
-  document.getElementById('progressFill').style.width='0%';
-  document.getElementById('statPass').textContent='✔ 0';
-  document.getElementById('statFail').textContent='✖ 0';
-  document.getElementById('logs').innerHTML='';
-  renderTestList();
-  let passed=0,failed=0,idx=0;
-  log(`[${ts()}]  Running Playwright v1.44.0`,'info');
-  log(`[${ts()}]  Suite: ${tests.length} tests`,'info');
-  log('','');
-
-  function next(){
-    if(idx>=tests.length){
-      const pct=Math.round(passed/tests.length*100);
-      log('','');log('  ───────────────────────────────────','dim');
-      log(`  ✔ Passed    ${passed}`,'pass');
-      log(`  ✖ Failed    ${failed}`,failed>0?'fail':'pass');
-      log(`  Rate        ${pct}%  ${pct>=80?'(healthy)':'(needs attention)'}`,pct>=80?'pass':'warn');
-      log(`  Duration    ${(tests.length*.35).toFixed(1)}s`,'dim');
-      document.getElementById('runBtn').disabled=false;
-      running=false;return;
-    }
-    const t=tests[idx];
-    setState(idx,'running');
-    log(`[${ts()}]  ▶  ${t.name}`,'info');
-    setTimeout(()=>{
-      if(Math.random()<t.fail){
-        log('             ↻ retry 1/2…','warn');
-        setTimeout(()=>{
-          if(Math.random()<.5){
-            log('             ✔ passed (retry)','pass');setState(idx,'pass');passed++;
-          }else{
-            log('             ✖ FAILED — screenshot captured','fail');setState(idx,'fail');failed++;
-            document.getElementById('screenshotImg').src=`https://dummyimage.com/600x180/0d0d0d/f44747.png&text=FAIL+%7C+${encodeURIComponent(t.name.split(' › ')[1]||t.name)}`;
-            document.getElementById('screenshotMsg').textContent='✖ '+t.name;
-            document.getElementById('screenshotBox').style.display='block';
-          }
-          document.getElementById('statPass').textContent='✔ '+passed;
-          document.getElementById('statFail').textContent='✖ '+failed;
-          document.getElementById('progressFill').style.width=((idx+1)/tests.length*100)+'%';
-          idx++;setTimeout(next,280);
-        },480);
-      }else{
-        log('             ✔ passed','pass');setState(idx,'pass');passed++;
-        document.getElementById('statPass').textContent='✔ '+passed;
-        document.getElementById('progressFill').style.width=((idx+1)/tests.length*100)+'%';
-        idx++;setTimeout(next,260);
-      }
-    },380);
-  }
-  next();
-}
-
-renderTestList();
-
-/* ── INDICE DE SCROLL DES ONGLETS (mobile) ── */
-(function tabScrollHint(){
-  const wrap=document.getElementById('tabwrap'),bar=document.getElementById('tabbar');
-  if(!wrap||!bar)return;
-  const update=()=>{
-    const scrollable=bar.scrollWidth>bar.clientWidth+2;
-    const atEnd=bar.scrollLeft+bar.clientWidth>=bar.scrollWidth-2;
-    wrap.classList.toggle('scrollable',scrollable&&!atEnd);
-  };
-  bar.addEventListener('scroll',update,{passive:true});
-  window.addEventListener('resize',update);
-  update();
-})();
-
-/* ── HINT TOAST ── */
-function closeHint(){
-  const h=document.getElementById('hint');
-  if(!h)return;
-  h.classList.add('hide');
-  try{sessionStorage.setItem('hintSeen','1');}catch(e){}
-  setTimeout(()=>h.remove(),320);
-}
-(function initHint(){
-  let seen=false;
-  try{seen=sessionStorage.getItem('hintSeen')==='1';}catch(e){}
-  if(seen){const h=document.getElementById('hint');if(h)h.remove();return;}
-  setTimeout(closeHint,7000); // auto-masquage
-})();
-
-/* ── ACCESSIBILITÉ CLAVIER (onglets) ── */
-(function enhanceTabsA11y(){
-  const tabs=[...document.querySelectorAll('.tab')];
-  tabs.forEach(tab=>{
-    tab.setAttribute('role','tab');
-    tab.setAttribute('tabindex',tab.classList.contains('active')?'0':'-1');
-    tab.setAttribute('aria-selected',tab.classList.contains('active')?'true':'false');
-    const panel=document.getElementById('panel-'+tab.dataset.panel);
-    if(panel){panel.setAttribute('role','tabpanel');panel.setAttribute('aria-label',tab.textContent.replace('✕','').trim());}
-    tab.addEventListener('keydown',e=>{
-      let target=null;
-      if(e.key==='ArrowRight')target=tabs[(tabs.indexOf(tab)+1)%tabs.length];
-      else if(e.key==='ArrowLeft')target=tabs[(tabs.indexOf(tab)-1+tabs.length)%tabs.length];
-      else if(e.key==='Home')target=tabs[0];
-      else if(e.key==='End')target=tabs[tabs.length-1];
-      else if(e.key==='Enter'||e.key===' '){e.preventDefault();openTab(tab);return;}
-      if(target){e.preventDefault();openTab(target);target.focus();}
-    });
-  });
-  // garde l'état ARIA synchronisé à chaque changement d'onglet
-  const _openTab=window.openTab;
-  window.openTab=function(el){
-    _openTab(el);
-    tabs.forEach(t=>{
-      const on=t.classList.contains('active');
-      t.setAttribute('aria-selected',on?'true':'false');
-      t.setAttribute('tabindex',on?'0':'-1');
-    });
-  };
-})();
-</script>
+<script src="app.js" defer></script>
 </body>
 </html>
