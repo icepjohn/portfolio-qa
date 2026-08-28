@@ -2,596 +2,1444 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://dummyimage.com; base-uri 'self'; form-action 'self'; object-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Jonathan Picquette – Senior QA Automation Engineer. 8+ ans d'expérience en Playwright, Cypress, CI/CD.">
+<meta name="description" content="Jonathan Picquette — Senior QA Automation Engineer. 8 ans d'expérience : Playwright, Cypress, CI/CD, BDD. Le système qui rend vos livraisons prévisibles.">
 <meta name="author" content="Jonathan Picquette">
-<meta name="theme-color" content="#1e1e1e">
+<meta name="theme-color" content="#0A1F1A">
 <link rel="canonical" href="https://icepjohn.github.io/portfolio-qa/">
-<title>Jonathan PICQUETTE — QA Automation Engineer</title>
+<title>Jonathan PICQUETTE — QA Automation System</title>
 
-<!-- Favicon (SVG inline, sans fichier externe) -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231e1e1e'/%3E%3Ctext x='50%25' y='52%25' font-family='monospace' font-size='34' font-weight='700' fill='%234ec9b0' text-anchor='middle' dominant-baseline='middle'%3EJP%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230A1F1A'/%3E%3Ctext x='50%25' y='54%25' font-family='Helvetica,Arial' font-size='30' font-weight='600' fill='%23C3F53C' text-anchor='middle' dominant-baseline='middle'%3EJP%3C/text%3E%3C/svg%3E">
 
-<!-- Open Graph / LinkedIn -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Jonathan PICQUETTE — Senior QA Automation Engineer">
-<meta property="og:description" content="8+ ans d'expérience en QA Automation : Playwright, Cypress, CI/CD, BDD. Disponible pour mission.">
+<meta property="og:description" content="8 ans d'expérience en QA Automation : Playwright, Cypress, CI/CD, BDD. Disponible pour mission.">
 <meta property="og:url" content="https://icepjohn.github.io/portfolio-qa/">
 <meta property="og:image" content="https://icepjohn.github.io/portfolio-qa/JonathanPicquette.jpg">
 <meta property="og:locale" content="fr_FR">
-
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Jonathan PICQUETTE — Senior QA Automation Engineer">
-<meta name="twitter:description" content="8+ ans d'expérience en QA Automation : Playwright, Cypress, CI/CD, BDD. Disponible pour mission.">
+<meta name="twitter:description" content="8 ans d'expérience en QA Automation : Playwright, Cypress, CI/CD, BDD.">
 <meta name="twitter:image" content="https://icepjohn.github.io/portfolio-qa/JonathanPicquette.jpg">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
 <style>
-:root {
-  --bg:#1e1e1e; --bg2:#252526; --bg3:#2d2d30; --titlebar:#3c3c3c;
-  --border:#454545; --border2:#555;
-  --txt:#d4d4d4; --dim:#808080; --hi:#fff;
-  --green:#4ec9b0; --green2:#6a9955;
-  --blue:#569cd6; --blue2:#4fc1ff;
-  --orange:#ce9178; --yellow:#dcdcaa; --yellow2:#d7ba7d;
-  --purple:#c586c0; --red:#f44747; --red2:#d16969;
-  --ln:#858585; --accent:#007acc;
-  --font:'JetBrains Mono',Consolas,'Courier New',monospace;
-}
-body.light {
-  --bg:#fffffe; --bg2:#f3f3f3; --bg3:#e8e8e8; --titlebar:#dddddd;
-  --border:#c8c8c8; --border2:#aaa;
-  --txt:#1e1e1e; --dim:#767676; --hi:#000;
-  --green:#267f99; --green2:#008000;
-  --blue:#0000ff; --blue2:#001080;
-  --orange:#a31515; --yellow:#795e26; --yellow2:#0070c1;
-  --purple:#af00db; --red:#cd3131; --red2:#098658;
-  --ln:#aaa;
+/* ═══════════════════ DESIGN TOKENS ═══════════════════ */
+:root{
+  --ink:#0A1F1A;
+  --ink-2:#0E2B24;
+  --ink-3:#123A31;
+  --paper:#EDEDEC;
+  --paper-2:#E4E4E2;
+  --paper-3:#D7D7D4;
+  --acid:#C3F53C;
+  --acid-dim:#9BC72F;
+  --line-d:rgba(237,237,236,.14);
+  --line-l:rgba(10,31,26,.13);
+  --mute-d:rgba(237,237,236,.45);
+  --mute-l:rgba(10,31,26,.42);
+  --sans:'Inter Tight',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Consolas,monospace;
+  --pad:clamp(20px,5vw,80px);
+  --nav-h:64px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
-body{font-family:var(--font);background:var(--bg);color:var(--txt);font-size:13px;line-height:1.5;display:flex;flex-direction:column;overflow:hidden}
-::-webkit-scrollbar{width:8px;height:8px}
-::-webkit-scrollbar-track{background:var(--bg2)}
-::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
-
-/* ══ TITLEBAR ══ */
-.titlebar{background:var(--titlebar);border-bottom:1px solid #111;height:32px;display:flex;align-items:center;padding:0 16px;gap:10px;flex-shrink:0;user-select:none}
-/* ── HAMBURGER + DRAWER (mobile) ── */
-.hamburger{display:none;background:none;border:none;color:var(--txt);font-size:17px;line-height:1;cursor:pointer;padding:0 6px 0 0;font-family:var(--font)}
-.hamburger:hover{color:var(--hi)}
-.scrim{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:55;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
-.scrim.show{opacity:1;visibility:visible}
-.sb-close{display:none;margin-left:auto;background:none;border:none;color:var(--dim);font-size:14px;line-height:1;cursor:pointer;font-family:var(--font);padding:0 2px}
-.sb-close:hover{color:var(--txt)}
-@media(max-width:780px){
-  .hamburger{display:block}
-  .sidebar{display:flex;position:fixed;top:0;left:0;bottom:0;z-index:60;width:80%;max-width:290px;transform:translateX(-100%);transition:transform .26s ease;box-shadow:2px 0 26px rgba(0,0,0,.55)}
-  .sidebar.open{transform:translateX(0)}
-  .sb-hdr{display:flex;align-items:center}
-  .sb-close{display:block}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);
+  background:var(--paper);
+  color:var(--ink);
+  font-size:16px;line-height:1.45;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
 }
-@media(min-width:781px){.scrim{display:none}}
-.dots{display:flex;gap:6px}
-.dot{width:12px;height:12px;border-radius:50%}
-.dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
-.win-title{flex:1;min-width:0;text-align:center;font-size:11.5px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.win-title b{color:var(--txt)}
-/* sur mobile on ne garde que le nom du fichier actif pour éviter le retour à la ligne */
-@media(max-width:560px){.wt-pre,.wt-suf{display:none}}
+body.lock{overflow:hidden;height:100vh}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+::selection{background:var(--acid);color:var(--ink)}
+::-webkit-scrollbar{width:9px}
+::-webkit-scrollbar-track{background:var(--paper-2)}
+::-webkit-scrollbar-thumb{background:var(--ink);border-radius:9px}
 
-/* ══ MENUBAR ══ */
-.menubar{background:var(--bg2);border-bottom:1px solid var(--border);height:30px;display:flex;align-items:center;padding:0 10px;gap:2px;flex-shrink:0}
-.msep{flex:1}
-#themeBtn{padding:2px 10px;background:none;border:1px solid var(--border);border-radius:2px;font-family:var(--font);font-size:11px;color:var(--dim);cursor:pointer;transition:all .2s}
-#themeBtn:hover{color:var(--txt);border-color:var(--border2)}
+/* ═══════════════════ PRIMITIVES ═══════════════════ */
+.wrap{max-width:1440px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+section{position:relative}
 
-/* ══ TABBAR ══ */
-.tabbar{background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:flex-end;overflow-x:auto;flex-shrink:0;scrollbar-width:none;-webkit-overflow-scrolling:touch;position:relative}
-.tabbar::-webkit-scrollbar{display:none}
-/* indice visuel : un dégradé à droite suggère qu'on peut scroller les onglets sur mobile */
-.tabwrap{position:relative;flex-shrink:0}
-.tabwrap::after{content:"";position:absolute;top:0;right:0;width:24px;height:100%;pointer-events:none;background:linear-gradient(90deg,transparent,var(--bg2));opacity:0;transition:opacity .2s}
-.tabwrap.scrollable::after{opacity:1}
-.tab{padding:7px 14px;font-size:12px;color:var(--dim);border-right:1px solid var(--border);cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:6px;border-top:2px solid transparent;transition:background .12s,color .12s;user-select:none}
-.tab:hover{background:var(--bg3);color:var(--txt)}
-.tab.active{background:var(--bg);color:var(--hi);border-top-color:var(--accent)}
-.tab .tdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.tab .tcls{font-size:10px;color:var(--dim);opacity:0;transition:opacity .12s;margin-left:2px}
-.tab:hover .tcls{opacity:1}
+.eyebrow{
+  font-family:var(--mono);font-size:11px;font-weight:500;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--mute-l);
+}
+[data-tone="dark"] .eyebrow{color:var(--mute-d)}
 
-/* ══ WORKSPACE ══ */
-.workspace{display:flex;flex:1;overflow:hidden;min-height:0}
+h1,h2,h3{font-weight:400;letter-spacing:-.035em;line-height:.98}
+.d1{font-size:clamp(44px,9vw,132px)}
+.d2{font-size:clamp(36px,6.4vw,92px);line-height:1.02}
+.d3{font-size:clamp(26px,3.4vw,50px);line-height:1.06;letter-spacing:-.028em}
+.d4{font-size:clamp(20px,2.1vw,30px);line-height:1.15;letter-spacing:-.02em}
+.lead{font-size:clamp(15px,1.25vw,19px);line-height:1.5;color:rgba(10,31,26,.72);max-width:62ch}
+[data-tone="dark"] .lead{color:rgba(237,237,236,.68)}
+.small{font-size:14px;line-height:1.5;color:var(--mute-l)}
+[data-tone="dark"] .small{color:var(--mute-d)}
 
-/* ══ SIDEBAR ══ */
-.sidebar{width:220px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto}
-.sb-hdr{padding:8px 12px 4px;font-size:10px;font-weight:700;color:var(--dim);letter-spacing:.12em;text-transform:uppercase;user-select:none}
-.ftree{padding:4px 0;flex:1}
-.fi{padding:3px 12px 3px 24px;font-size:12px;color:var(--txt);cursor:pointer;display:flex;align-items:center;gap:6px;transition:background .1s;user-select:none}
-.fi:hover{background:rgba(255,255,255,.05)}
-body.light .fi:hover{background:rgba(0,0,0,.05)}
-.fi.active{background:rgba(0,122,204,.18);color:var(--hi)}
-.fi.sub{padding-left:36px;font-size:11.5px;color:var(--dim)}
-.fi.sub:hover{color:var(--txt)}
-.ficon{font-size:11px;width:15px;text-align:center;flex-shrink:0}
-.ficon.ts{color:var(--blue2)}.ficon.json{color:var(--yellow)}.ficon.yml{color:var(--green)}.ficon.md{color:var(--orange)}.ficon.folder{color:var(--yellow2)}
-.sb-git{border-top:1px solid var(--border);padding:10px 12px}
-.gb{font-size:11px;color:var(--dim);display:flex;align-items:center;gap:6px;margin-bottom:4px}
-.gbadge{font-size:10px;padding:1px 6px;border-radius:10px;background:rgba(78,201,176,.15);color:var(--green);border:1px solid rgba(78,201,176,.3)}
+/* boutons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  padding:14px 22px;border-radius:9px;border:1px solid transparent;
+  transition:transform .35s cubic-bezier(.16,1,.3,1),background .3s,color .3s,border-color .3s;
+  white-space:nowrap;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-acid{background:var(--acid);color:var(--ink)}
+.btn-acid:hover{background:#d3ff54}
+.btn-solid{background:var(--ink);color:var(--paper)}
+.btn-ghost{border-color:var(--line-l);color:var(--ink)}
+.btn-ghost:hover{background:rgba(10,31,26,.06)}
+[data-tone="dark"] .btn-ghost{border-color:var(--line-d);color:var(--paper)}
+[data-tone="dark"] .btn-ghost:hover{background:rgba(237,237,236,.08)}
+.btn-paper{background:var(--paper);color:var(--ink)}
 
-/* ══ PANELS ══ */
-.panels{flex:1;overflow:hidden;position:relative;min-width:0}
-.panel{display:none;height:100%;overflow-y:auto;overflow-x:hidden;background:var(--bg);-webkit-overflow-scrolling:touch}
-.panel.active{display:block}
+/* grille technique + réticules */
+.grid-bg{position:absolute;inset:0;pointer-events:none;opacity:.9}
+.grid-bg::before{
+  content:"";position:absolute;inset:0;
+  background-image:
+    linear-gradient(to right,var(--gl) 1px,transparent 1px),
+    linear-gradient(to bottom,var(--gl) 1px,transparent 1px);
+  background-size:var(--gs,120px) var(--gs,120px);
+  background-position:center;
+  -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 50%,#000 40%,transparent 100%);
+  mask-image:radial-gradient(ellipse 90% 70% at 50% 50%,#000 40%,transparent 100%);
+}
+.grid-bg{--gl:var(--line-l)}
+[data-tone="dark"] .grid-bg{--gl:var(--line-d)}
+.reticles{position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(circle,var(--rc) 1px,transparent 1.4px);
+  background-size:120px 120px;background-position:60px 60px;
+  --rc:rgba(10,31,26,.22);
+}
+[data-tone="dark"] .reticles{--rc:rgba(237,237,236,.2)}
 
-/* ══ CODE LAYOUT ══ */
-.cfile{padding:16px 0 60px}
-.carea{display:table;width:100%;border-collapse:collapse;font-size:13px;line-height:22px}
-.crow{display:table-row}
-.ln{display:table-cell;width:44px;min-width:44px;padding:0 14px 0 0;text-align:right;color:var(--ln);user-select:none;font-size:12px;vertical-align:top;position:sticky;left:0;background:var(--bg)}
-.lc{display:table-cell;padding:0 16px 0 8px;white-space:pre-wrap;word-break:break-word;vertical-align:top}
-@media(max-width:480px){.ln{width:28px;min-width:28px;padding:0 8px 0 0;font-size:10px}.lc{font-size:11px;padding:0 8px 0 6px}}
-/* onglets : cibles tactiles plus confortables sur mobile */
-@media(max-width:580px){.tab{padding:10px 14px}.tab .tcls{display:none}}
+/* carte "onglet dossier" (signature Terminal) */
+.notch{
+  --n:110px;--nd:26px;
+  clip-path:polygon(
+    0 var(--nd), var(--nd) 0,
+    calc(50% - var(--n)) 0,
+    calc(50% - var(--n) + var(--nd)) var(--nd),
+    calc(50% + var(--n) - var(--nd)) var(--nd),
+    calc(50% + var(--n)) 0,
+    calc(100% - var(--nd)) 0, 100% var(--nd),
+    100% 100%, 0 100%
+  );
+}
+.notch-l{
+  --nd:26px;
+  clip-path:polygon(0 var(--nd), var(--nd) 0, calc(100% - var(--nd)) 0, 100% var(--nd), 100% calc(100% - var(--nd)), calc(100% - var(--nd)) 100%, var(--nd) 100%, 0 calc(100% - var(--nd)));
+}
 
-/* ══ SYNTAX ══ */
-.kw{color:var(--blue)}.fn{color:var(--yellow)}.str{color:var(--orange)}.num{color:var(--red2)}.cmt{color:var(--green2);font-style:italic}.cls{color:var(--green)}.var{color:var(--blue2)}.op{color:var(--txt)}.prop{color:var(--yellow2)}.kw2{color:var(--purple)}.pass-c{color:#4ec9b0}.fail-c{color:#f44747}.warn-c{color:#febc2e}
+/* reveal fallback */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
 
-/* ══ EMBED WRAPPER (aligned with code content) ══ */
-.embed{margin:4px 16px 4px 52px}
-@media(max-width:480px){.embed{margin:4px 8px 4px 34px}}
+/* ═══════════════════ PRELOADER ═══════════════════ */
+#loader{
+  position:fixed;inset:0;z-index:999;background:var(--paper);
+  display:flex;align-items:center;justify-content:center;
+  transition:opacity .8s ease,visibility .8s;
+}
+#loader.gone{opacity:0;visibility:hidden}
+.loader-shapes{position:absolute;inset:0;overflow:hidden}
+.ls{position:absolute;border:1px solid var(--line-l);border-radius:44px}
+.ls:nth-child(1){width:46vw;height:34vh;left:-14vw;top:-9vh}
+.ls:nth-child(2){width:38vw;height:26vh;right:-8vw;top:-6vh}
+.ls:nth-child(3){width:30vw;height:30vh;left:-6vw;bottom:-10vh}
+.ls:nth-child(4){width:44vw;height:32vh;right:-12vw;bottom:-12vh}
+.loader-logo{position:relative;display:flex;align-items:center;gap:12px}
+.loader-bar{position:absolute;left:0;bottom:-14px;height:2px;background:var(--ink);width:0}
 
-/* ══ HERO ══ */
-.hero-card{display:grid;grid-template-columns:170px 1fr;background:var(--bg2);border:1px solid var(--border);border-radius:3px;overflow:hidden}
-@media(max-width:580px){.hero-card{grid-template-columns:1fr}}
-.hero-photo{background:var(--bg3);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 14px;border-right:1px solid var(--border);gap:10px}
-@media(max-width:580px){.hero-photo{flex-direction:row;border-right:none;border-bottom:1px solid var(--border);padding:14px}}
-.avatar{width:110px;height:110px;border-radius:3px;object-fit:cover;filter:saturate(.75)contrast(1.05);border:1px solid var(--border2)}
-@media(max-width:480px){.avatar{width:70px;height:70px}}
-.hmeta{text-align:center;font-size:10.5px;color:var(--dim);line-height:17px}
-.hmeta strong{color:var(--green);display:block;font-size:11px}
-.hinfo{padding:14px 16px;display:flex;flex-direction:column;gap:7px;min-width:0}
-.jf{font-size:12.5px;line-height:20px;overflow-wrap:break-word}
-@media(max-width:480px){.jf{font-size:11px}}
-.jk{color:var(--yellow2)}.jco{color:var(--dim)}.jvs{color:var(--orange)}.jvn{color:var(--red2)}.jvb{color:var(--blue)}.jva{color:var(--dim)}.jcm{color:var(--dim)}
-.hbadges{display:flex;flex-wrap:wrap;gap:5px;margin-top:2px}
-.hb{font-size:10px;padding:2px 7px;border-radius:2px;border:1px solid var(--border);color:var(--dim)}
-.hb.ok{background:rgba(78,201,176,.1);border-color:rgba(78,201,176,.35);color:var(--green);display:flex;align-items:center;gap:5px}
-.pulse{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1.4s infinite;display:inline-block;flex-shrink:0}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
-.hbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
-.btn{padding:5px 14px;border:1px solid var(--border2);border-radius:2px;font-family:var(--font);font-size:12px;color:var(--txt);background:var(--bg3);cursor:pointer;text-decoration:none;display:inline-block;transition:all .13s}
-.btn:hover{background:var(--border);color:var(--hi)}
-.btn.p{background:var(--accent);border-color:var(--accent);color:#fff}
-.btn.p:hover{background:#1a8ad4}
+/* logo */
+.logo{display:flex;align-items:center;gap:9px;font-size:21px;font-weight:500;letter-spacing:-.03em}
+.logo-mark{width:26px;height:26px;border-radius:6px;background:var(--ink);position:relative;flex:none}
+.logo-mark::before{content:"";position:absolute;left:6px;top:5px;width:5px;height:16px;background:var(--acid);border-radius:1px}
+.logo-mark::after{content:"";position:absolute;left:13px;top:5px;width:7px;height:8px;background:var(--paper);border-radius:1px}
+[data-tone="dark"] .logo-mark{background:var(--acid)}
+[data-tone="dark"] .logo-mark::before{background:var(--ink)}
+[data-tone="dark"] .logo-mark::after{background:var(--ink);opacity:.55}
 
-/* ══ SKILLS GRID ══ */
-.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:3px;overflow:hidden}
-@media(max-width:480px){.sg{grid-template-columns:1fr 1fr}}
-.sp{background:var(--bg2);padding:14px 15px;transition:background .13s}
-.sp:hover{background:var(--bg3)}
-.sph{display:flex;align-items:center;gap:7px;margin-bottom:8px}
-.spico{font-size:13px}
-.sptitle{font-size:12px;font-weight:700;color:var(--yellow)}
-.sptags{display:flex;flex-wrap:wrap;gap:4px}
-.sptag{font-size:10px;padding:1px 7px;border-radius:2px;background:var(--bg3);border:1px solid var(--border);color:var(--dim);transition:all .13s}
-.sp:hover .sptag{border-color:var(--border2);color:var(--txt)}
+/* ═══════════════════ NAV ═══════════════════ */
+#nav{
+  position:fixed;top:14px;left:50%;transform:translateX(-50%);
+  z-index:200;display:flex;align-items:center;gap:6px;
+  padding:9px 10px 9px 20px;border-radius:16px;
+  background:rgba(140,140,138,.42);
+  -webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4);
+  transition:background .45s ease,color .45s ease,transform .5s cubic-bezier(.16,1,.3,1),opacity .4s;
+  color:var(--paper);max-width:calc(100vw - 24px);
+}
+#nav.on-light{background:rgba(160,160,157,.4);color:var(--ink)}
+#nav.hide{transform:translateX(-50%) translateY(-140%);opacity:0}
+.nav-links{display:flex;align-items:center;gap:2px;margin-left:14px}
+.nav-links a{
+  font-size:14px;padding:7px 11px;border-radius:8px;letter-spacing:-.01em;
+  white-space:nowrap;transition:background .25s;
+}
+.nav-links a:hover{background:rgba(255,255,255,.18)}
+.nav-cta{display:flex;align-items:center;gap:6px;margin-left:14px}
+.nav-cta .btn{padding:11px 15px;font-size:10px}
+#burger{display:none;margin-left:auto;padding:8px 12px;border-radius:9px;background:rgba(255,255,255,.16)}
+#burger span{display:block;width:18px;height:1.5px;background:currentColor;margin:4px 0}
 
-/* ══ SIMULATOR ══ */
-.sim{border:1px solid var(--border);border-radius:3px;overflow:hidden;background:var(--bg2)}
-.sim-tb{background:var(--bg3);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;padding:0 12px;height:34px}
-.sim-tbtitle{font-size:11.5px;color:var(--dim);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.sim-tbtitle b{color:var(--txt)}
-.run-btn{padding:4px 14px;background:var(--accent);border:none;border-radius:2px;font-family:var(--font);font-size:11.5px;color:#fff;cursor:pointer;display:flex;align-items:center;gap:5px;transition:background .13s;white-space:nowrap;flex-shrink:0}
-.run-btn:hover{background:#1a8ad4}
-.run-btn:disabled{opacity:.45;cursor:not-allowed}
-.sim-body{display:grid;grid-template-columns:210px 1fr}
-@media(max-width:580px){.sim-body{grid-template-columns:1fr}}
-.sim-exp{border-right:1px solid var(--border);overflow-y:auto;max-height:360px}
-@media(max-width:580px){.sim-exp{max-height:130px;border-right:none;border-bottom:1px solid var(--border)}}
-.sim-exph{padding:5px 12px;font-size:10px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid var(--border);user-select:none}
-.stest{padding:5px 10px 5px 14px;font-size:11px;color:var(--dim);display:flex;align-items:center;gap:6px;border-bottom:1px solid rgba(255,255,255,.03);transition:background .1s;line-height:1.4}
-.stest:hover{background:rgba(255,255,255,.04)}
-.stest.pass{color:#4ec9b0}.stest.fail{color:#f44747}.stest.running{color:var(--accent)}
-.stest .si{font-size:10px;width:11px;text-align:center;flex-shrink:0}
-.sim-out{display:flex;flex-direction:column}
-.sim-prog{height:3px;background:var(--bg3)}
-.sim-pf{height:100%;width:0;background:var(--accent);transition:width .22s}
-.sim-ctr{padding:5px 12px;display:flex;gap:14px;font-size:11.5px;border-bottom:1px solid var(--border);background:var(--bg3)}
-.sim-term{background:#0d0d0d;padding:10px 14px;font-size:12px;line-height:19px;overflow-y:auto;max-height:240px;color:#abb2bf;white-space:pre-wrap;word-break:break-word}
-body.light .sim-term{background:#1e1e1e}
-.sim-ss{padding:10px 14px;border-top:1px solid var(--border);background:var(--bg2);display:none}
-.sim-ss img{max-width:100%;border:1px solid var(--red);border-radius:2px;display:block}
-.sim-ss p{font-size:11px;color:var(--red);margin-top:4px}
+#drawer{
+  position:fixed;inset:0;z-index:190;background:var(--ink);color:var(--paper);
+  padding:96px var(--pad) 40px;display:flex;flex-direction:column;gap:4px;
+  transform:translateY(-100%);transition:transform .6s cubic-bezier(.76,0,.24,1);
+}
+#drawer.open{transform:none}
+#drawer a{font-size:34px;letter-spacing:-.03em;padding:10px 0;border-bottom:1px solid var(--line-d)}
 
-/* ══ KPI ══ */
-.kpig{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:3px;overflow:hidden}
-@media(max-width:580px){.kpig{grid-template-columns:repeat(2,1fr)}}
-.kpip{background:var(--bg2);padding:20px 14px;text-align:center;transition:background .13s}
-.kpip:hover{background:var(--bg3)}
-.kpilbl{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
-.kpiv{font-size:1.9rem;font-weight:700;color:var(--green);line-height:1}
-@media(max-width:480px){.kpiv{font-size:1.5rem}}
+@media(max-width:1080px){
+  .nav-links,.nav-cta{display:none}
+  #burger{display:block}
+  #nav{padding:9px 10px 9px 16px;width:auto}
+}
 
-/* ══ TIMELINE ══ */
-.tlf{background:var(--bg2);border:1px solid var(--border);border-radius:3px;overflow:hidden;margin-bottom:1px}
-.tlh{background:var(--bg3);padding:7px 12px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border);flex-wrap:wrap}
-.tlfn{color:var(--yellow);font-size:12px}
-.tlco{color:var(--blue2);font-size:11.5px}
-.tldate{color:var(--dim);font-size:11px;margin-left:auto;white-space:nowrap}
-@media(max-width:480px){.tldate{margin-left:0;width:100%;font-size:10px}}
-.tlb{padding:12px 15px}
-.tlcode{font-size:12px;line-height:20px}
-@media(max-width:480px){.tlcode{font-size:11px;line-height:18px}}
+/* ═══════════════════ HERO ═══════════════════ */
+#hero{height:420vh;position:relative;background:var(--ink)}
+#heroPin{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--ink)}
+#heroCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero-copy{
+  position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+  padding:0 var(--pad);pointer-events:none;
+}
+.hero-slide{
+  position:absolute;top:50%;left:var(--pad);right:var(--pad);
+  opacity:0;transform:translateY(calc(-50% + 26px));
+  transition:opacity .55s ease,transform .55s cubic-bezier(.16,1,.3,1);
+}
+.hero-slide.on{opacity:1;transform:translateY(-50%)}
+.hero-slide h1{color:var(--paper)}
+.hero-slide .lead{margin-top:22px}
+.hero-slide-2{text-align:center;left:0;right:0;padding:0 var(--pad)}
+.hero-slide-2 h1{max-width:16ch;margin:0 auto}
+.hero-scroll{
+  position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--mute-d);
+  display:flex;align-items:center;gap:9px;
+}
+.hero-scroll i{display:block;width:1px;height:26px;background:linear-gradient(var(--acid),transparent);animation:drop 1.8s infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.hero-stat{position:absolute;right:var(--pad);bottom:26px;display:flex;gap:26px;color:var(--paper)}
+.hero-stat div span{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--mute-d);margin-bottom:4px}
+.hero-stat div b{font-size:26px;font-weight:400;letter-spacing:-.03em}
+@media(max-width:860px){.hero-stat{display:none}}
 
-/* ══ CONTACT ══ */
-.ctg{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:3px;overflow:hidden}
-@media(max-width:480px){.ctg{grid-template-columns:1fr}}
-.ctc{background:var(--bg2);padding:14px 15px;display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--txt);transition:background .13s}
-.ctc:hover{background:var(--bg3)}
-.cticon{width:32px;height:32px;border-radius:2px;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;color:var(--blue2)}
-.ctlbl{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px}
-.ctval{font-size:12px;color:var(--txt);word-break:break-all}
-.dispo{display:inline-flex;align-items:center;gap:8px;background:rgba(78,201,176,.08);border:1px solid rgba(78,201,176,.25);border-radius:2px;padding:7px 14px;font-size:12px;color:var(--green)}
+/* ═══════════════════ SECTIONS ═══════════════════ */
+.sec{padding:clamp(80px,11vw,170px) 0;position:relative;overflow:hidden}
+[data-tone="dark"]{background:var(--ink);color:var(--paper)}
+[data-tone="paper"]{background:var(--paper);color:var(--ink)}
+.sec-head{position:relative;z-index:2;text-align:center;max-width:1000px;margin:0 auto 64px}
+.sec-head .eyebrow{margin-bottom:20px;display:block}
+.sec-head .lead{margin:26px auto 0;text-align:center}
 
-/* ══ HINT TOAST ══ */
-.hint{position:fixed;right:14px;bottom:34px;max-width:300px;background:var(--bg3);border:1px solid var(--border2);border-left:3px solid var(--accent);border-radius:3px;padding:11px 13px;font-size:11.5px;color:var(--txt);box-shadow:0 6px 22px rgba(0,0,0,.4);z-index:50;display:flex;gap:10px;align-items:flex-start;animation:hintin .35s ease;line-height:1.45}
-.hint.hide{opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s;pointer-events:none}
-.hint b{color:var(--blue2)}
-.hint .hclose{margin-left:auto;color:var(--dim);cursor:pointer;font-size:13px;line-height:1;flex-shrink:0;background:none;border:none;font-family:var(--font);padding:0 2px}
-.hint .hclose:hover{color:var(--txt)}
-@keyframes hintin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:480px){.hint{right:8px;left:8px;bottom:30px;max-width:none}}
+/* fill au scroll, mot par mot */
+.fill .w{color:var(--fill-off,rgba(10,31,26,.2));transition:color .28s ease}
+[data-tone="dark"] .fill{--fill-off:rgba(237,237,236,.18)}
+.fill .w.lit{color:currentColor}
+.fill.acid .w.lit{color:var(--acid)}
 
-/* ══ STATUS BAR ══ */
-.statusbar{background:var(--accent);height:22px;display:flex;align-items:center;padding:0 12px;gap:16px;font-size:11px;color:rgba(255,255,255,.9);flex-shrink:0;overflow:hidden}
-body.light .statusbar{background:#005f9e}
-.sbi{white-space:nowrap}
-.sbsep{flex:1}
-/* sur petit écran on réduit l'espacement et on masque les infos secondaires pour ne rien faire dépasser */
-@media(max-width:620px){.statusbar{gap:10px;padding:0 10px}.sbi.opt{display:none}}
+/* logos clients */
+.clients{position:relative;z-index:2;border-top:1px solid var(--line-l);border-bottom:1px solid var(--line-l);padding:34px 0;margin-top:70px}
+.clients-row{display:flex;flex-wrap:wrap;gap:clamp(28px,5vw,72px);align-items:center;justify-content:center}
+.clients-row span{
+  font-size:clamp(15px,1.7vw,23px);font-weight:600;letter-spacing:.02em;
+  color:rgba(10,31,26,.34);transition:color .3s;
+}
+.clients-row span:hover{color:var(--ink)}
+
+/* trio de cartes */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;position:relative;z-index:2}
+@media(max-width:920px){.trio{grid-template-columns:1fr}}
+.tcard{background:var(--paper-2);border-radius:20px;padding:34px 30px 28px;display:flex;flex-direction:column;gap:18px;transition:transform .5s cubic-bezier(.16,1,.3,1),background .4s}
+.tcard:hover{transform:translateY(-6px);background:var(--paper-3)}
+.tcard h3{font-size:26px;letter-spacing:-.03em}
+.tcard p{font-size:15px;line-height:1.5;color:rgba(10,31,26,.7);flex:1}
+.tcard .viz{height:190px;border-radius:12px;overflow:hidden;background:var(--ink);position:relative}
+.tcard .viz canvas{width:100%;height:100%;display:block}
+.tcard .btn{width:100%}
+
+/* calculateur */
+.calc{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(24px,5vw,80px);align-items:start;position:relative;z-index:2}
+@media(max-width:940px){.calc{grid-template-columns:1fr}}
+.calc-fields{display:grid;grid-template-columns:1fr 1fr;gap:26px 30px;margin-top:34px}
+@media(max-width:520px){.calc-fields{grid-template-columns:1fr}}
+.f label{display:block;font-size:13px;color:var(--mute-l);margin-bottom:5px}
+.f input[type=number]{
+  width:100%;background:none;border:none;border-bottom:1px solid var(--line-l);
+  font-family:var(--sans);font-size:21px;padding:5px 0 8px;color:var(--ink);
+  transition:border-color .3s;
+}
+.f input:focus{outline:none;border-color:var(--ink)}
+.f-full{grid-column:1/-1}
+input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:2px;background:var(--ink);border-radius:2px;margin:16px 0 6px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:var(--ink);cursor:pointer;border:3px solid var(--paper);box-shadow:0 0 0 1px var(--ink)}
+input[type=range]::-moz-range-thumb{width:13px;height:13px;border-radius:50%;background:var(--ink);border:3px solid var(--paper);cursor:pointer}
+.range-legend{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--mute-l)}
+.calc-card{
+  background:linear-gradient(150deg,#0F2E26 0%,#0A1F1A 55%,#0A1F1A 100%);
+  color:var(--paper);padding:clamp(28px,3.4vw,52px);position:relative;overflow:hidden;
+}
+.calc-card::after{content:"";position:absolute;left:-10%;top:-30%;width:70%;height:120%;background:radial-gradient(circle,rgba(195,245,60,.13),transparent 62%);pointer-events:none}
+.calc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;position:relative}
+.calc-top h3{font-size:clamp(24px,2.4vw,36px);letter-spacing:-.03em;line-height:1.05}
+.calc-top h3 em{font-style:normal;color:var(--mute-d)}
+.calc-big{text-align:right}
+.calc-big .v{font-size:clamp(34px,4.6vw,64px);font-weight:300;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.calc-big .s{font-size:13px;color:var(--mute-d);margin-top:8px}
+.calc-big .s b{color:var(--acid);font-weight:500}
+.calc-rows{margin-top:38px;position:relative}
+.calc-rows .r{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:13px 0;border-bottom:1px solid var(--line-d);font-size:15px}
+.calc-rows .r span{color:var(--mute-d)}
+.calc-rows .r b{font-weight:400;font-size:19px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.calc-note{margin-top:26px;padding:20px 22px;border-radius:14px;background:rgba(237,237,236,.06);font-size:13px;color:var(--mute-d);line-height:1.5;position:relative}
+
+/* piliers scrollytelling */
+.pillar{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,90px);align-items:center;min-height:78vh;position:relative;z-index:2}
+@media(max-width:920px){.pillar{grid-template-columns:1fr;min-height:auto;padding:52px 0}}
+.pillar-num{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--mute-d);margin-bottom:26px;display:block}
+.pillar-viz{border-radius:20px;overflow:hidden;background:#061511;aspect-ratio:4/3;position:relative}
+.pillar-viz canvas{width:100%;height:100%;display:block}
+.pillar h3{margin-bottom:20px}
+
+/* onglets + rail */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;position:relative;z-index:2}
+.tab-b{
+  font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  padding:13px 20px;border-radius:10px;border:1px solid var(--line-l);color:var(--mute-l);
+  transition:all .3s;
+}
+.tab-b:hover{color:var(--ink);border-color:var(--ink)}
+.tab-b.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.rail{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:34px 0 12px;margin:0 calc(var(--pad) * -1);padding-left:var(--pad);padding-right:var(--pad);scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.rcard{
+  flex:0 0 min(430px,82vw);scroll-snap-align:start;border-radius:20px;padding:32px 30px;
+  min-height:360px;display:flex;flex-direction:column;justify-content:space-between;
+  background:var(--paper-2);transition:transform .5s cubic-bezier(.16,1,.3,1);
+}
+.rcard:hover{transform:translateY(-5px)}
+.rcard.dark{background:var(--ink);color:var(--paper)}
+.rcard.acid{background:var(--acid);color:var(--ink)}
+.rcard h4{font-size:29px;font-weight:400;letter-spacing:-.03em;line-height:1.05;margin:14px 0 16px}
+.rcard p{font-size:14.5px;line-height:1.5;opacity:.75}
+.rcard ul{list-style:none;margin-top:22px;display:flex;flex-wrap:wrap;gap:6px}
+.rcard li{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px;border-radius:6px;background:rgba(10,31,26,.08)}
+.rcard.dark li{background:rgba(237,237,236,.1)}
+.rcard.acid li{background:rgba(10,31,26,.12)}
+
+/* runner */
+.runner{border-radius:22px;overflow:hidden;border:1px solid var(--line-d);background:#061511;position:relative;z-index:2}
+.runner-bar{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line-d);background:rgba(237,237,236,.03)}
+.runner-bar .dots{display:flex;gap:6px}
+.runner-bar .dots i{width:10px;height:10px;border-radius:50%;background:rgba(237,237,236,.2)}
+.runner-title{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--mute-d);flex:1}
+.runner-title b{color:var(--paper);font-weight:500}
+.runner-body{display:grid;grid-template-columns:300px 1fr;min-height:430px}
+@media(max-width:820px){.runner-body{grid-template-columns:1fr}}
+.rlist{border-right:1px solid var(--line-d);padding:14px 0;overflow-y:auto;max-height:430px}
+.rlist-h{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--mute-d);padding:0 18px 12px}
+.rt{display:flex;align-items:center;gap:10px;padding:8px 18px;font-family:var(--mono);font-size:11.5px;color:var(--mute-d);transition:color .3s,background .3s}
+.rt .ic{width:14px;flex:none;text-align:center}
+.rt.running{color:var(--paper);background:rgba(237,237,236,.05)}
+.rt.pass{color:rgba(195,245,60,.9)}
+.rt.fail{color:#FF6B5E}
+.rout{display:flex;flex-direction:column;padding:16px 18px;gap:12px;min-width:0}
+.rprog{height:3px;background:rgba(237,237,236,.1);border-radius:3px;overflow:hidden}
+.rprog i{display:block;height:100%;width:0;background:var(--acid);transition:width .3s}
+.rstats{display:flex;gap:18px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--mute-d)}
+.rstats .p{color:var(--acid)}
+.rstats .f{color:#FF6B5E}
+.rterm{flex:1;background:#04100D;border-radius:10px;padding:14px;font-family:var(--mono);font-size:11.5px;line-height:1.65;overflow-y:auto;max-height:300px;white-space:pre-wrap;color:#9FB3AC}
+
+/* métriques */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-d);border-top:1px solid var(--line-d);border-bottom:1px solid var(--line-d);position:relative;z-index:2}
+@media(max-width:820px){.kpis{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:var(--ink);padding:44px 26px}
+.kpi .v{font-size:clamp(42px,5.6vw,84px);font-weight:300;letter-spacing:-.045em;line-height:1;font-variant-numeric:tabular-nums}
+.kpi .l{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute-d);margin-top:16px}
+
+/* timeline */
+.tl{position:relative;z-index:2;border-top:1px solid var(--line-l)}
+.job{border-bottom:1px solid var(--line-l);padding:30px 0;display:grid;grid-template-columns:170px 1fr auto;gap:24px;align-items:start;cursor:pointer;transition:padding .4s}
+@media(max-width:800px){.job{grid-template-columns:1fr;gap:8px}}
+.job:hover{padding-left:14px}
+.job-date{font-family:var(--mono);font-size:11px;letter-spacing:.09em;color:var(--mute-l);padding-top:8px}
+.job-t h3{font-size:clamp(24px,3vw,40px);letter-spacing:-.03em}
+.job-t .co{font-size:15px;color:var(--mute-l);margin-top:6px}
+.job-plus{width:34px;height:34px;border-radius:50%;border:1px solid var(--line-l);display:grid;place-items:center;font-size:17px;transition:transform .4s,background .3s;flex:none}
+.job.open .job-plus{transform:rotate(45deg);background:var(--acid);border-color:var(--acid)}
+.job-d{grid-column:2/3;max-height:0;overflow:hidden;transition:max-height .6s cubic-bezier(.16,1,.3,1),opacity .4s;opacity:0}
+@media(max-width:800px){.job-d{grid-column:1/-1}}
+.job.open .job-d{max-height:420px;opacity:1;margin-top:18px}
+.job-d ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.job-d li{font-size:15px;color:rgba(10,31,26,.7);padding-left:18px;position:relative}
+.job-d li::before{content:"—";position:absolute;left:0;color:var(--mute-l)}
+.stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.stack span{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;padding:6px 10px;border-radius:6px;background:rgba(10,31,26,.07)}
+
+/* compétences */
+.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-l);position:relative;z-index:2;border:1px solid var(--line-l);border-radius:20px;overflow:hidden}
+@media(max-width:900px){.skills{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.skills{grid-template-columns:1fr}}
+.sk{background:var(--paper);padding:34px 28px;transition:background .35s}
+.sk:hover{background:var(--paper-2)}
+.sk h4{font-size:20px;font-weight:500;letter-spacing:-.02em;margin-bottom:16px}
+.sk .n{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--mute-l);display:block;margin-bottom:14px}
+.sk ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.sk li{font-size:13px;padding:6px 11px;border-radius:7px;background:rgba(10,31,26,.06)}
+
+/* CTA final */
+#cta{background:var(--ink);color:var(--paper);text-align:center;padding:clamp(90px,13vw,190px) 0 clamp(70px,9vw,120px);position:relative;overflow:hidden}
+#cta h2{position:relative;z-index:2}
+.cta-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:44px;position:relative;z-index:2}
+.dispo{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--acid);margin-bottom:26px;position:relative;z-index:2}
+.pulse{width:7px;height:7px;border-radius:50%;background:var(--acid);animation:pl 1.9s infinite}
+@keyframes pl{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(195,245,60,.5)}50%{opacity:.6;box-shadow:0 0 0 7px rgba(195,245,60,0)}}
+
+/* footer */
+footer{background:var(--ink);color:var(--paper);padding:0 0 34px}
+.f-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:40px;padding:clamp(50px,7vw,90px) 0 60px;border-top:1px solid var(--line-d)}
+@media(max-width:900px){.f-grid{grid-template-columns:1fr 1fr;gap:36px}}
+@media(max-width:520px){.f-grid{grid-template-columns:1fr}}
+.f-col h5{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute-d);margin-bottom:20px;font-weight:500}
+.f-col a,.f-col p{display:block;font-size:16px;padding:5px 0;transition:color .25s;color:rgba(237,237,236,.85)}
+.f-col a:hover{color:var(--acid)}
+.f-bottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--mute-d);padding-top:26px;border-top:1px solid var(--line-d)}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  .rv{opacity:1;transform:none}
+}
 </style>
 </head>
-<body>
+<body class="lock">
 
-<!-- SCRIM (fond du tiroir mobile) -->
-<div class="scrim" id="scrim"></div>
-
-<!-- TITLEBAR -->
-<div class="titlebar">
-  <button class="hamburger" id="hamburger" aria-label="Ouvrir le menu des sections" aria-controls="sidebar" aria-expanded="false">☰</button>
-  <div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
-  <div class="win-title"><span class="wt-pre">Visual Studio Code — </span><b id="winTitle">about.ts</b><span class="wt-suf"> — portfolio-qa</span></div>
-</div>
-
-<!-- MENUBAR -->
-<div class="menubar">
-  <div class="msep"></div>
-  <button id="themeBtn">☀ Light</button>
-</div>
-
-<!-- TABBAR -->
-<div class="tabwrap" id="tabwrap">
-<div class="tabbar" id="tabbar" role="tablist" aria-label="Sections du portfolio">
-  <div class="tab active" data-panel="about">
-    <span class="tdot" style="background:#4ec9b0"></span>about.ts<span class="tcls">✕</span>
-  </div>
-  <div class="tab" data-panel="experience">
-    <span class="tdot" style="background:#c586c0"></span>experience.yml<span class="tcls">✕</span>
-  </div>
-  <div class="tab" data-panel="skills">
-    <span class="tdot" style="background:#dcdcaa"></span>skills.json<span class="tcls">✕</span>
-  </div>
-  <div class="tab" data-panel="playwright">
-    <span class="tdot" style="background:#ce9178"></span>playwright.spec.ts<span class="tcls">✕</span>
-  </div>
-  <div class="tab" data-panel="metrics">
-    <span class="tdot" style="background:#569cd6"></span>metrics.json<span class="tcls">✕</span>
-  </div>
-  <div class="tab" data-panel="contact">
-    <span class="tdot" style="background:#d7ba7d"></span>contact.json<span class="tcls">✕</span>
+<!-- ══════════ PRELOADER ══════════ -->
+<div id="loader">
+  <div class="loader-shapes"><i class="ls"></i><i class="ls"></i><i class="ls"></i><i class="ls"></i></div>
+  <div class="loader-logo">
+    <div class="logo"><span class="logo-mark"></span>Picquette</div>
+    <div class="loader-bar" id="loaderBar"></div>
   </div>
 </div>
-</div><!-- /tabwrap -->
 
-<!-- WORKSPACE -->
-<div class="workspace">
+<!-- ══════════ NAV ══════════ -->
+<nav id="nav">
+  <a href="#hero" class="logo" aria-label="Accueil"><span class="logo-mark"></span>Picquette</a>
+  <div class="nav-links">
+    <a href="#systeme">Le système</a>
+    <a href="#calc">Calculateur</a>
+    <a href="#demo">Démo live</a>
+    <a href="#parcours">Parcours</a>
+    <a href="#expertise">Expertise</a>
+  </div>
+  <div class="nav-cta">
+    <a href="#demo" class="btn btn-acid">Voir la démo</a>
+    <a href="JonathanPicquetteCV.pdf" download class="btn btn-paper">CV PDF</a>
+    <a href="#cta" class="btn btn-ghost">Contact</a>
+  </div>
+  <button id="burger" aria-label="Menu"><span></span><span></span></button>
+</nav>
 
-  <!-- SIDEBAR -->
-  <div class="sidebar" id="sidebar">
-    <div class="sb-hdr">Explorer<button class="sb-close" aria-label="Fermer le menu">✕</button></div>
-    <div class="ftree">
-      <div class="fi"><span class="ficon folder">▾</span>portfolio-qa</div>
-      <div class="fi sub active" data-open="about">   <span class="ficon ts">TS</span> about.ts</div>
-      <div class="fi sub"        data-open="experience"><span class="ficon yml">Y</span> experience.yml</div>
-      <div class="fi sub"        data-open="skills">  <span class="ficon json">{}</span> skills.json</div>
-      <div class="fi sub"        data-open="playwright"><span class="ficon ts">TS</span> playwright.spec.ts</div>
-      <div class="fi sub"        data-open="metrics"> <span class="ficon json">{}</span> metrics.json</div>
-      <div class="fi sub"        data-open="contact"> <span class="ficon json">{}</span> contact.json</div>
+<div id="drawer">
+  <a href="#systeme">Le système</a>
+  <a href="#calc">Calculateur ROI</a>
+  <a href="#demo">Démo live</a>
+  <a href="#parcours">Parcours</a>
+  <a href="#expertise">Expertise</a>
+  <a href="#cta">Contact</a>
+</div>
+
+<!-- ══════════ HERO ══════════ -->
+<section id="hero" data-tone="dark">
+  <div id="heroPin">
+    <canvas id="heroCanvas"></canvas>
+    <div class="hero-copy">
+      <div class="hero-slide on" id="hs1">
+        <span class="eyebrow">Senior QA Automation Engineer · 8 ans</span>
+        <h1 class="d1" style="margin-top:22px">Vos livraisons<br>ne devraient pas<br>être un pari.</h1>
+      </div>
+      <div class="hero-slide hero-slide-2" id="hs2">
+        <h1 class="d1">Chaque test manuel est une dette qui court.</h1>
+      </div>
+      <div class="hero-slide hero-slide-2" id="hs3">
+        <h1 class="d1">Je transforme la recette<br>en <span style="color:var(--acid)">système automatisé.</span></h1>
+        <p class="lead" style="margin:26px auto 0;text-align:center">1 200 cas de tests conçus. 500+ tests automatisés. 40 % de bugs en production en moins.</p>
+      </div>
     </div>
-    <div class="sb-git">
-      <div class="gb">⎇ main <span class="gbadge">● clean</span></div>
-      <div style="font-size:11px;color:var(--dim)">Last commit: <span style="color:var(--txt)">2 days ago</span></div>
+    <div class="hero-scroll"><i></i>SCROLL</div>
+    <div class="hero-stat">
+      <div><span>TESTS AUTO</span><b>500+</b></div>
+      <div><span>CAS DE TESTS</span><b>1 200</b></div>
+      <div><span>BUGS PROD</span><b>−40 %</b></div>
     </div>
   </div>
+</section>
 
-  <!-- PANELS -->
-  <div class="panels">
+<!-- ══════════ CLIENTS + INTRO ══════════ -->
+<section class="sec" data-tone="paper" id="clients">
+  <div class="grid-bg" style="--gs:140px"></div>
+  <div class="reticles"></div>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2 class="d2 fill" data-fill>Je fiabilise les produits que vous utilisez tous les jours</h2>
+    </div>
+    <div class="clients rv">
+      <div class="clients-row">
+        <span>DECATHLON</span><span>ADEO</span><span>LEROY MERLIN</span><span>PROCH'ORIENTATION</span><span>SYMBOL-IT</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- ════ about.ts ════ -->
-    <div class="panel active" id="panel-about">
-      <div class="cfile">
-        <div class="carea">
-          <div class="crow"><div class="ln">1</div><div class="lc"><span class="cmt">// about.ts — Jonathan PICQUETTE · Senior QA Automation Engineer</span></div></div>
-          <div class="crow"><div class="ln">2</div><div class="lc"></div></div>
-          <div class="crow"><div class="ln">3</div><div class="lc"><span class="kw">import</span> <span class="op">{</span> <span class="cls">Engineer</span> <span class="op">}</span> <span class="kw">from</span> <span class="str">'@types/qa-automation'</span><span class="op">;</span></div></div>
-          <div class="crow"><div class="ln">4</div><div class="lc"></div></div>
-          <div class="crow"><div class="ln">5</div><div class="lc"><span class="kw">const</span> <span class="var">profile</span><span class="op">:</span> <span class="cls">Engineer</span> <span class="op">=</span> <span class="op">{</span></div></div>
-        </div>
+<!-- ══════════ TRIO ══════════ -->
+<section class="sec" data-tone="paper" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2 class="d2">Réglez un problème de qualité aujourd'hui.</h2>
+      <p class="lead">Pas besoin d'un chantier de six mois. On commence par le point qui vous fait le plus mal, on prouve la valeur, puis on étend.</p>
+    </div>
+    <div class="trio">
+      <div class="tcard rv">
+        <h3>Automatiser</h3>
+        <p>Les campagnes de non-régression vous coûtent des jours-homme à chaque livraison. On automatise d'abord les parcours critiques — résultat visible en quelques semaines, sans réécrire votre stack.</p>
+        <div class="viz"><canvas data-viz="grid"></canvas></div>
+        <a href="#calc" class="btn btn-solid">Chiffrer le gain</a>
+      </div>
+      <div class="tcard rv">
+        <h3>Fiabiliser</h3>
+        <p>Des tests qui échouent au hasard ne servent à rien. Retry intelligent, données de test isolées, sélecteurs robustes : une suite en laquelle l'équipe a de nouveau confiance.</p>
+        <div class="viz"><canvas data-viz="wave"></canvas></div>
+        <a href="#demo" class="btn btn-solid">Voir la démo</a>
+      </div>
+      <div class="tcard rv">
+        <h3>Industrialiser</h3>
+        <p>Tests branchés sur la CI, reporting Xray/Jira, métriques partagées. La qualité devient une donnée pilotable plutôt qu'un ressenti de fin de sprint.</p>
+        <div class="viz"><canvas data-viz="pipe"></canvas></div>
+        <a href="#systeme" class="btn btn-solid">Le système complet</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <div class="embed">
-          <div class="hero-card">
-            <div class="hero-photo">
-              <img class="avatar" src="JonathanPicquette.jpg" alt="Jonathan Picquette"
->
-              <div id="avatar-fallback" style="display:none;width:110px;height:110px;background:var(--bg3);border:1px solid var(--border2);border-radius:3px;align-items:center;justify-content:center;font-size:2rem;color:var(--dim)">JP</div>
-              <div class="hmeta"><strong>8+ ans XP</strong>500+ tests auto</div>
-            </div>
-            <div class="hinfo">
-              <div class="jf"><span class="jk">  name</span><span class="jco">: </span><span class="jvs">"Jonathan PICQUETTE"</span><span class="jcm">,</span></div>
-              <div class="jf"><span class="jk">  role</span><span class="jco">: </span><span class="jvs">"Senior QA Automation Engineer"</span><span class="jcm">,</span></div>
-              <div class="jf"><span class="jk">  xp</span><span class="jco">: </span><span class="jvn">8</span><span class="jcm">, </span><span class="cmt">// années</span></div>
-              <div class="jf"><span class="jk">  location</span><span class="jco">: </span><span class="jvs">"France 🇫🇷"</span><span class="jcm">,</span></div>
-              <div class="jf"><span class="jk">  stack</span><span class="jco">: </span><span class="jva">["Playwright", "Cypress", "CI/CD", "BDD"]</span><span class="jcm">,</span></div>
-              <div class="jf"><span class="jk">  available</span><span class="jco">: </span><span class="jvb">true</span></div>
-              <div class="hbadges">
-                <span class="hb ok"><span class="pulse"></span>Disponible mission</span>
-                <span class="hb">ISTQB</span><span class="hb">Playwright</span><span class="hb">CI/CD</span>
-              </div>
-              <div class="hbtns">
-                <a href="JonathanPicquetteCV.pdf" download class="btn p">↓ CV PDF</a>
-                <span class="btn" data-open="contact">Contact →</span>
-                <a href="https://github.com/icepjohn" target="_blank" class="btn">GitHub ↗</a>
-              </div>
-            </div>
+<!-- ══════════ CALCULATEUR ══════════ -->
+<section class="sec" data-tone="paper" id="calc">
+  <div class="grid-bg" style="--gs:110px"></div>
+  <div class="wrap">
+    <div class="sec-head rv" style="margin-bottom:56px">
+      <span class="eyebrow">Calculateur</span>
+      <h2 class="d2">Combien vous coûte la recette manuelle&nbsp;?</h2>
+    </div>
+    <div class="calc">
+      <div class="rv">
+        <span class="eyebrow">Parlez-moi de vos campagnes</span>
+        <div class="calc-fields">
+          <div class="f"><label for="cCamp">Campagnes de tests par an</label><input type="number" id="cCamp" value="24" min="1" max="365"></div>
+          <div class="f"><label for="cCas">Cas de tests par campagne</label><input type="number" id="cCas" value="250" min="1" max="10000"></div>
+          <div class="f"><label for="cDur">Durée moyenne d'un cas (min)</label><input type="number" id="cDur" value="6" min="1" max="240"></div>
+          <div class="f"><label for="cTx">Coût horaire chargé (€)</label><input type="number" id="cTx" value="55" min="1" max="500"></div>
+          <div class="f f-full">
+            <label for="cAuto">Part du périmètre automatisable</label>
+            <input type="range" id="cAuto" min="10" max="95" value="70">
+            <div class="range-legend"><span>10 %</span><span id="cAutoV">70 %</span><span>95 %</span></div>
           </div>
         </div>
+        <p class="small" style="margin-top:26px">Hypothèses : un test automatisé s'exécute pour ~3 % du temps manuel, et coûte ~45 min de développement, amorti sur la première année.</p>
+      </div>
 
-        <div class="carea" style="margin-top:4px">
-          <div class="crow"><div class="ln">6</div><div class="lc"><span class="op">};</span></div></div>
-          <div class="crow"><div class="ln">7</div><div class="lc"></div></div>
-          <div class="crow"><div class="ln">8</div><div class="lc"><span class="kw">export default</span> <span class="var">profile</span><span class="op">;</span></div></div>
+      <div class="calc-card notch rv">
+        <div class="calc-top">
+          <h3>Avec l'automatisation<br><em>vous économisez</em></h3>
+          <div class="calc-big">
+            <div class="v" id="rSave">— €</div>
+            <div class="s">Soit <b id="rPct">—</b> du budget recette</div>
+          </div>
+        </div>
+        <div class="calc-rows">
+          <div class="r"><span>Coût actuel de la recette manuelle</span><b id="rNow">—</b></div>
+          <div class="r"><span>Coût après automatisation (build inclus)</span><b id="rAfter">—</b></div>
+          <div class="r"><span>Heures de test libérées par an</span><b id="rHours">—</b></div>
+          <div class="r"><span>Équivalent jours-homme récupérés</span><b id="rDays">—</b></div>
+        </div>
+        <div class="calc-note">
+          Une estimation, pas un devis. Le vrai chiffre dépend de la stabilité de votre appli, de vos jeux de données et de votre CI — c'est exactement ce qu'on regarde ensemble en premier.
+          <div style="margin-top:18px"><a href="#cta" class="btn btn-acid">Affiner avec moi</a></div>
         </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- ════ skills.json ════ -->
-    <div class="panel" id="panel-skills">
-      <div class="cfile">
-        <div class="carea">
-          <div class="crow"><div class="ln">1</div><div class="lc"><span class="cmt">// skills.json — Stack technique</span></div></div>
-          <div class="crow"><div class="ln">2</div><div class="lc"><span class="op">{</span></div></div>
-          <div class="crow"><div class="ln">3</div><div class="lc">  <span class="prop">"competences"</span><span class="op">: [</span></div></div>
+<!-- ══════════ LE SYSTÈME ══════════ -->
+<section class="sec" data-tone="dark" id="systeme">
+  <div class="grid-bg" style="--gs:130px"></div>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Pourquoi ça marche</span>
+      <h2 class="d2" style="margin-top:20px">Un système, pas<br>une pile de scripts</h2>
+      <p class="lead">La plupart des suites de tests meurent au bout de six mois : trop lentes, trop instables, personne ne les regarde. Ce que je mets en place tient dans la durée parce que chaque brique sert une décision.</p>
+    </div>
+
+    <div class="pillar">
+      <div class="rv">
+        <span class="pillar-num">01</span>
+        <h3 class="d3 fill acid" data-fill>Automatisation E2E qui ne casse pas au premier refactor.</h3>
+        <p class="lead">Playwright ou Cypress, Page Objects, sélecteurs stables, données isolées, retry maîtrisé. Sur ADEO, ~500 tests de non-régression transverses tournent sans babysitting.</p>
+      </div>
+      <div class="pillar-viz rv"><canvas data-viz="nodes"></canvas></div>
+    </div>
+
+    <div class="pillar">
+      <div class="rv">
+        <span class="pillar-num">02</span>
+        <h3 class="d3 fill acid" data-fill>Le Shift Left : tester avant que ça coûte cher.</h3>
+        <p class="lead">La QA entre dès le refinement. Critères d'acceptation testables, scénarios BDD écrits avec le métier, anomalies détectées en amont plutôt qu'en recette — c'est là que les 40 % de bugs prod en moins se jouent.</p>
+      </div>
+      <div class="pillar-viz rv"><canvas data-viz="shift"></canvas></div>
+    </div>
+
+    <div class="pillar">
+      <div class="rv">
+        <span class="pillar-num">03</span>
+        <h3 class="d3 fill acid" data-fill>Branché sur la CI, exécuté à chaque commit.</h3>
+        <p class="lead">GitHub Actions, secrets gérés via Vault, rapports Xray remontés dans Jira. Un test qui ne tourne pas automatiquement n'existe pas.</p>
+      </div>
+      <div class="pillar-viz rv"><canvas data-viz="pipeline"></canvas></div>
+    </div>
+
+    <div class="pillar">
+      <div class="rv">
+        <span class="pillar-num">04</span>
+        <h3 class="d3 fill acid" data-fill>Des métriques que le comité de pilotage comprend.</h3>
+        <p class="lead">Couverture réelle, taux de réussite, temps de recette, anomalies par sévérité. La qualité arrête d'être une opinion et devient un chiffre qu'on peut défendre.</p>
+      </div>
+      <div class="pillar-viz rv"><canvas data-viz="chart"></canvas></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ RAIL / MODULES ══════════ -->
+<section class="sec" data-tone="paper" id="modules">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Périmètre</span>
+      <h2 class="d2" style="margin-top:20px"><span style="color:rgba(10,31,26,.28)">Une seule méthode.</span> Quatre terrains.</h2>
+      <p class="lead">On démarre par le module dont vous avez le plus besoin, et on étend au rythme de l'équipe.</p>
+    </div>
+    <div class="tabs" id="railTabs">
+      <button class="tab-b active" data-i="0">E2E &amp; UI</button>
+      <button class="tab-b" data-i="1">API &amp; Contrats</button>
+      <button class="tab-b" data-i="2">CI/CD</button>
+      <button class="tab-b" data-i="3">Pilotage QA</button>
+    </div>
+    <div class="rail" id="rail">
+      <article class="rcard dark">
+        <div><span class="eyebrow">E2E &amp; UI</span><h4>Les parcours critiques, testés en continu</h4><p>Scénarios end-to-end sur les tunnels qui rapportent : authentification, panier, commande, back-office. Écrits pour être lus par le métier, exécutés en parallèle, avec captures et traces sur échec.</p></div>
+        <ul><li>Playwright</li><li>Cypress</li><li>Selenium</li><li>Cerberus</li></ul>
+      </article>
+      <article class="rcard">
+        <div><span class="eyebrow">API &amp; Contrats</span><h4>Attraper les régressions avant l'interface</h4><p>Tests d'API REST et GraphQL, validation des contrats, jeux de données maîtrisés. Dix fois plus rapides que l'UI, et ils localisent la panne au lieu de la constater.</p></div>
+        <ul><li>Postman</li><li>Bruno</li><li>REST</li><li>GraphQL</li></ul>
+      </article>
+      <article class="rcard acid">
+        <div><span class="eyebrow">CI/CD</span><h4>La qualité dans le pipeline, pas à côté</h4><p>Intégration dans GitHub Actions, gestion des secrets, exécution sur chaque merge request, reporting automatique. Le feedback arrive en minutes, pas en fin de sprint.</p></div>
+        <ul><li>GitHub Actions</li><li>Vault</li><li>BDD</li><li>Cucumber</li></ul>
+      </article>
+      <article class="rcard">
+        <div><span class="eyebrow">Pilotage QA</span><h4>Stratégie, priorisation, montée en compétence</h4><p>Plan de test, priorisation par le risque, rituels qualité, formation de l'équipe. Sur SPARK j'ai conçu 1 200 cas de tests et ~100 scénarios E2E à partir des processus métier PLM.</p></div>
+        <ul><li>Xray</li><li>Jira</li><li>ISTQB</li><li>Shift Left</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ DÉMO LIVE ══════════ -->
+<section class="sec" data-tone="dark" id="demo">
+  <div class="grid-bg" style="--gs:120px"></div>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Démo live</span>
+      <h2 class="d2" style="margin-top:20px">Lancez la suite.</h2>
+      <p class="lead">Une simulation d'exécution Playwright — flakiness incluse, retry compris, comme dans la vraie vie.</p>
+    </div>
+    <div class="runner rv">
+      <div class="runner-bar">
+        <div class="dots"><i></i><i></i><i></i></div>
+        <div class="runner-title">TEST EXPLORER — <b>e2e.spec.ts</b></div>
+        <button class="btn btn-acid" id="runBtn">▶ Run all</button>
+      </div>
+      <div class="runner-body">
+        <div class="rlist">
+          <div class="rlist-h">TESTS (12)</div>
+          <div id="testList"></div>
         </div>
-
-        <div class="embed">
-          <div class="sg">
-            <div class="sp"><div class="sph"><span class="spico">⚡</span><span class="sptitle">E2E Automation</span></div><div class="sptags"><span class="sptag">Playwright</span><span class="sptag">Cypress</span><span class="sptag">Selenium</span><span class="sptag">Cerberus</span></div></div>
-            <div class="sp"><div class="sph"><span class="spico">🔁</span><span class="sptitle">CI/CD &amp; DevOps</span></div><div class="sptags"><span class="sptag">GitHub Actions</span><span class="sptag">Vault</span><span class="sptag">BDD</span><span class="sptag">Cucumber</span></div></div>
-            <div class="sp"><div class="sph"><span class="spico">🌐</span><span class="sptitle">API Testing</span></div><div class="sptags"><span class="sptag">Postman</span><span class="sptag">Bruno</span><span class="sptag">REST</span><span class="sptag">GraphQL</span></div></div>
-            <div class="sp"><div class="sph"><span class="spico">📋</span><span class="sptitle">QA Management</span></div><div class="sptags"><span class="sptag">Xray</span><span class="sptag">Jira</span><span class="sptag">ISTQB</span><span class="sptag">Shift Left</span></div></div>
-            <div class="sp"><div class="sph"><span class="spico">📊</span><span class="sptitle">Performance</span></div><div class="sptags"><span class="sptag">Sonar</span><span class="sptag">Reporting</span><span class="sptag">Métriques</span></div></div>
-            <div class="sp"><div class="sph"><span class="spico">🧩</span><span class="sptitle">Frontend</span></div><div class="sptags"><span class="sptag">VueJS</span><span class="sptag">HTML</span><span class="sptag">CSS</span><span class="sptag">JS</span></div></div>
-          </div>
-        </div>
-
-        <div class="carea" style="margin-top:4px">
-          <div class="crow"><div class="ln">4</div><div class="lc">  <span class="op">]</span></div></div>
-          <div class="crow"><div class="ln">5</div><div class="lc"><span class="op">}</span></div></div>
+        <div class="rout">
+          <div class="rprog"><i id="prog"></i></div>
+          <div class="rstats"><span>OUTPUT</span><span class="p" id="sPass">✔ 0</span><span class="f" id="sFail">✖ 0</span><span id="sTime"></span></div>
+          <div class="rterm" id="term">// Prêt. Cliquez sur ▶ Run all pour démarrer.</div>
         </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- ════ playwright.spec.ts ════ -->
-    <div class="panel" id="panel-playwright">
-      <div class="cfile">
-        <div class="carea">
-          <div class="crow"><div class="ln">1</div><div class="lc"><span class="cmt">// playwright.spec.ts — Live QA Demo</span></div></div>
-          <div class="crow"><div class="ln">2</div><div class="lc"><span class="kw">import</span> <span class="op">{</span> <span class="fn">test</span><span class="op">,</span> <span class="fn">expect</span> <span class="op">}</span> <span class="kw">from</span> <span class="str">'@playwright/test'</span><span class="op">;</span></div></div>
-          <div class="crow"><div class="ln">3</div><div class="lc"><span class="cmt">// ▶ Cliquez sur Run All pour exécuter la suite</span></div></div>
-          <div class="crow"><div class="ln">4</div><div class="lc"></div></div>
-        </div>
+<!-- ══════════ MÉTRIQUES ══════════ -->
+<section data-tone="dark" style="padding-bottom:clamp(80px,11vw,170px)">
+  <div class="wrap">
+    <div class="kpis">
+      <div class="kpi"><div class="v" data-count="500" data-suffix="+">0</div><div class="l">Tests automatisés</div></div>
+      <div class="kpi"><div class="v" data-count="1200">0</div><div class="l">Cas de tests conçus</div></div>
+      <div class="kpi"><div class="v" data-count="40" data-prefix="−" data-suffix=" %">0</div><div class="l">Bugs en production</div></div>
+      <div class="kpi"><div class="v" data-count="8">0</div><div class="l">Années d'expérience</div></div>
+    </div>
+  </div>
+</section>
 
-        <div class="embed">
-          <div class="sim">
-            <div class="sim-tb">
-              <span class="sim-tbtitle">TEST EXPLORER — <b>playwright.spec.ts</b></span>
-              <button class="run-btn" id="runBtn">▶ Run All</button>
-            </div>
-            <div class="sim-body">
-              <div class="sim-exp">
-                <div class="sim-exph">Tests (12)</div>
-                <div id="testList"></div>
-              </div>
-              <div class="sim-out">
-                <div class="sim-prog"><div class="sim-pf" id="progressFill"></div></div>
-                <div class="sim-ctr">
-                  <span style="color:var(--dim);font-size:11px">Output</span>
-                  <span class="pass-c" id="statPass">✔ 0</span>
-                  <span class="fail-c" id="statFail">✖ 0</span>
-                </div>
-                <div class="sim-term" id="logs"><span style="color:#6a9955">// Prêt. Cliquez sur ▶ Run All pour démarrer.
-</span></div>
-                <div class="sim-ss" id="screenshotBox">
-                  <img id="screenshotImg" src="" alt="Capture test échoué">
-                  <p id="screenshotMsg"></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+<!-- ══════════ PARCOURS ══════════ -->
+<section class="sec" data-tone="paper" id="parcours">
+  <div class="wrap">
+    <div class="sec-head rv" style="text-align:left;margin-left:0">
+      <span class="eyebrow">Parcours</span>
+      <h2 class="d2" style="margin-top:20px">Huit ans sur le terrain</h2>
+    </div>
+    <div class="tl" id="tl"></div>
+  </div>
+</section>
 
-        <div class="carea" style="margin-top:4px">
-          <div class="crow"><div class="ln">5</div><div class="lc"></div></div>
-        </div>
+<!-- ══════════ EXPERTISE ══════════ -->
+<section class="sec" data-tone="paper" id="expertise" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head rv" style="text-align:left">
+      <span class="eyebrow">Stack</span>
+      <h2 class="d2" style="margin-top:20px">Les outils, au service<br>de la décision</h2>
+    </div>
+    <div class="skills rv">
+      <div class="sk"><span class="n">01</span><h4>Automatisation E2E</h4><ul><li>Playwright</li><li>Cypress</li><li>Selenium</li><li>Cerberus</li></ul></div>
+      <div class="sk"><span class="n">02</span><h4>CI/CD &amp; DevOps</h4><ul><li>GitHub Actions</li><li>Vault</li><li>BDD</li><li>Cucumber</li></ul></div>
+      <div class="sk"><span class="n">03</span><h4>Tests d'API</h4><ul><li>Postman</li><li>Bruno</li><li>REST</li><li>GraphQL</li></ul></div>
+      <div class="sk"><span class="n">04</span><h4>Pilotage QA</h4><ul><li>Xray</li><li>Jira</li><li>ISTQB</li><li>Shift Left</li></ul></div>
+      <div class="sk"><span class="n">05</span><h4>Performance &amp; qualité de code</h4><ul><li>Sonar</li><li>Reporting</li><li>Métriques</li></ul></div>
+      <div class="sk"><span class="n">06</span><h4>Front-end</h4><ul><li>VueJS</li><li>HTML</li><li>CSS</li><li>JavaScript</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CTA ══════════ -->
+<section id="cta" data-tone="dark">
+  <div class="grid-bg" style="--gs:150px"></div>
+  <div class="wrap">
+    <div class="dispo"><span class="pulse"></span>Disponible pour mission QA Automation / Lead QA</div>
+    <h2 class="d1 fill" data-fill>Parlons de votre prochaine livraison.</h2>
+    <div class="cta-actions">
+      <a href="mailto:icepjohn@hotmail.com" class="btn btn-acid">icepjohn@hotmail.com</a>
+      <a href="JonathanPicquetteCV.pdf" download class="btn btn-paper">Télécharger le CV</a>
+      <a href="https://www.linkedin.com/in/jonathan-picquette-64656a148" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer data-tone="dark">
+  <div class="wrap">
+    <div class="f-grid">
+      <div class="f-col">
+        <div class="logo" style="font-size:26px"><span class="logo-mark"></span>Picquette</div>
+        <p style="margin-top:20px;max-width:34ch;color:var(--mute-d);font-size:15px">Senior QA Automation Engineer. Hauts-de-France, missions à distance ou sur site.</p>
+      </div>
+      <div class="f-col">
+        <h5>Le système</h5>
+        <a href="#systeme">Méthode</a>
+        <a href="#modules">Périmètre</a>
+        <a href="#demo">Démo live</a>
+        <a href="#calc">Calculateur ROI</a>
+      </div>
+      <div class="f-col">
+        <h5>Profil</h5>
+        <a href="#parcours">Parcours</a>
+        <a href="#expertise">Stack</a>
+        <a href="JonathanPicquetteCV.pdf" download>CV PDF</a>
+        <a href="https://github.com/icepjohn" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+      <div class="f-col">
+        <h5>Me joindre</h5>
+        <p style="color:var(--mute-d)">Une livraison qui vous inquiète&nbsp;?</p>
+        <a href="mailto:icepjohn@hotmail.com">icepjohn@hotmail.com</a>
+        <a href="https://www.linkedin.com/in/jonathan-picquette-64656a148" target="_blank" rel="noopener">LinkedIn ↗</a>
       </div>
     </div>
-
-    <!-- ════ metrics.json ════ -->
-    <div class="panel" id="panel-metrics">
-      <div class="cfile">
-        <div class="carea">
-          <div class="crow"><div class="ln">1</div><div class="lc"><span class="cmt">// metrics.json — Résultats mesurables</span></div></div>
-          <div class="crow"><div class="ln">2</div><div class="lc"><span class="op">{</span></div></div>
-        </div>
-
-        <div class="embed">
-          <div class="kpig" id="kpiGrid">
-            <div class="kpip"><div class="kpilbl">tests automatisés</div><div class="kpiv" data-target="500">0</div></div>
-            <div class="kpip"><div class="kpilbl">cas de tests</div><div class="kpiv" data-target="1200">0</div></div>
-            <div class="kpip"><div class="kpilbl">bugs prod réduits</div><div class="kpiv" data-target="40" data-suffix="%">0</div></div>
-            <div class="kpip"><div class="kpilbl">années d'expérience</div><div class="kpiv" data-target="8">0</div></div>
-          </div>
-        </div>
-
-        <div class="carea" style="margin-top:4px">
-          <div class="crow"><div class="ln">3</div><div class="lc"><span class="op">}</span></div></div>
-        </div>
-      </div>
+    <div class="f-bottom">
+      <span>© <span id="yr"></span> JONATHAN PICQUETTE — TOUS DROITS RÉSERVÉS</span>
+      <span>BUILD 2.0 — HTML / CSS / JS</span>
     </div>
+  </div>
+</footer>
 
-    <!-- ════ experience.yml ════ -->
-    <div class="panel" id="panel-experience">
-      <div class="cfile">
-        <div class="carea">
-          <div class="crow"><div class="ln">1</div><div class="lc"><span class="cmt"># experience.yml — Parcours professionnel</span></div></div>
-          <div class="crow"><div class="ln">2</div><div class="lc"><span class="kw">experience</span><span class="op">:</span></div></div>
-          <div class="crow"><div class="ln">3</div><div class="lc"></div></div>
-        </div>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script>
+(function(){
+'use strict';
+const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const HAS_GSAP = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
+if (HAS_GSAP) gsap.registerPlugin(ScrollTrigger);
+const $  = (s,c)=> (c||document).querySelector(s);
+const $$ = (s,c)=> Array.from((c||document).querySelectorAll(s));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
+const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
 
-        <div class="embed">
+/* ───────── SMOOTH SCROLL ───────── */
+let lenis=null;
+if (typeof window.Lenis !== 'undefined' && !RM){
+  lenis = new Lenis({duration:1.15, easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)), smoothWheel:true});
+  if (HAS_GSAP){
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t=>lenis.raf(t*1000));
+    gsap.ticker.lagSmoothing(0);
+  } else {
+    const raf=t=>{lenis.raf(t);requestAnimationFrame(raf);};requestAnimationFrame(raf);
+  }
+}
+$$('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(!t) return;
+    e.preventDefault();
+    closeDrawer();
+    if(lenis) lenis.scrollTo(t,{offset:-20});
+    else t.scrollIntoView({behavior:'smooth'});
+  });
+});
 
-          <div class="tlf">
-            <div class="tlh"><span class="ficon ts" style="font-size:11px">TS</span><span class="tlfn">QA Engineer</span><span class="tlco">Décathlon – SPARK (PLM)</span><span class="tldate">Avr 2025 – Mar 2026</span></div>
-            <div class="tlb"><div class="tlcode">
-              <div><span class="kw">  - </span><span class="str">Analyse &amp; conception de 1 200 cas de tests</span></div>
-              <div><span class="kw">  - </span><span class="str">Rédaction de ~100 scénarios E2E</span></div>
-              <div><span class="kw">  - </span><span class="str">Analyse processus métier PLM (Centric vs SPO/PACE)</span></div>
-              <div><span class="kw">  - </span><span class="str">Campagnes de recette &amp; non-régression</span></div>
-              <div><span class="kw">  - </span><span class="str">Automatisation de ~50 tests</span></div>
-              <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px"><span class="sptag">Playwright</span><span class="sptag">Xray</span><span class="sptag">Jira</span><span class="sptag">GitHub</span><span class="sptag">Cucumber</span><span class="sptag">Bruno</span></div>
-            </div></div>
-          </div>
+/* ───────── PRELOADER ───────── */
+const loader=$('#loader'), lbar=$('#loaderBar');
+let lp=0;
+const lint=setInterval(()=>{lp=Math.min(100,lp+Math.random()*18+6);lbar.style.width=lp+'%';},110);
+function bootDone(){
+  clearInterval(lint); lbar.style.width='100%';
+  setTimeout(()=>{
+    loader.classList.add('gone');
+    document.body.classList.remove('lock');
+    if(HAS_GSAP) ScrollTrigger.refresh();
+  },420);
+}
+window.addEventListener('load',()=>setTimeout(bootDone,520));
+setTimeout(bootDone,4200); // filet de sécurité
 
-          <div class="tlf">
-            <div class="tlh"><span class="ficon ts" style="font-size:11px">TS</span><span class="tlfn">QA Lead Automation</span><span class="tlco">ADEO</span><span class="tldate">Mar 2024 – Fév 2025</span></div>
-            <div class="tlb"><div class="tlcode">
-              <div><span class="kw">  - </span><span class="str">Mise en place du Shift Left testing</span></div>
-              <div><span class="kw">  - </span><span class="str">Automatisation TNR transverse (~500 tests)</span></div>
-              <div><span class="kw">  - </span><span class="str">Priorisation &amp; stratégie de tests</span></div>
-              <div><span class="kw">  - </span><span class="str">Préparation des jeux de données</span></div>
-              <div><span class="kw">  - </span><span class="str">Reporting qualité produit</span></div>
-              <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px"><span class="sptag">Playwright</span><span class="sptag">BDD</span><span class="sptag">Xray</span><span class="sptag">Jira</span><span class="sptag">GitHub</span><span class="sptag">Vault</span></div>
-            </div></div>
-          </div>
+/* ───────── NAV ───────── */
+const nav=$('#nav'), drawer=$('#drawer'), burger=$('#burger');
+function closeDrawer(){drawer.classList.remove('open');document.body.classList.remove('lock');}
+burger.addEventListener('click',()=>{
+  const o=drawer.classList.toggle('open');
+  document.body.classList.toggle('lock',o);
+});
+let lastY=0;
+const toneEls=$$('[data-tone]');
+function navUpdate(){
+  const y=window.scrollY;
+  nav.classList.toggle('hide', y>lastY+8 && y>420 && !drawer.classList.contains('open'));
+  if(Math.abs(y-lastY)>4) lastY=y;
+  // tonalité de la section située sous la nav
+  let tone='dark';
+  for(const s of toneEls){
+    const r=s.getBoundingClientRect();
+    if(r.top<=52 && r.bottom>52){ tone=s.dataset.tone; break; }
+  }
+  nav.classList.toggle('on-light', tone==='paper');
+}
+window.addEventListener('scroll',navUpdate,{passive:true});
+navUpdate();
 
-          <div class="tlf">
-            <div class="tlh"><span class="ficon ts" style="font-size:11px">TS</span><span class="tlfn">QA Automation Engineer</span><span class="tlco">ADEO – POPS</span><span class="tldate">Juil 2021 – Mar 2024</span></div>
-            <div class="tlb"><div class="tlcode">
-              <div><span class="kw">  - </span><span class="str">Automatisation avec Cerberus &amp; Cypress</span></div>
-              <div><span class="kw">  - </span><span class="str">Tests UI / API / performance</span></div>
-              <div><span class="kw">  - </span><span class="str">Gestion anomalies &amp; non-régression</span></div>
-              <div><span class="kw">  - </span><span class="str">Tests E2E &amp; 2A2 · Méthodologie ISTQB</span></div>
-              <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px"><span class="sptag">Cypress</span><span class="sptag">Postman</span><span class="sptag">Sonar</span><span class="sptag">Xray</span></div>
-            </div></div>
-          </div>
+/* ───────── REVEALS ───────── */
+if(HAS_GSAP && !RM){
+  $$('.rv').forEach(el=>{
+    gsap.fromTo(el,{opacity:0,y:34},{opacity:1,y:0,duration:1,ease:'power3.out',
+      scrollTrigger:{trigger:el,start:'top 88%',once:true}});
+  });
+} else {
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+  $$('.rv').forEach(el=>io.observe(el));
+}
 
-          <div class="tlf">
-            <div class="tlh"><span class="ficon yml" style="font-size:11px">Y</span><span class="tlfn">QA &amp; Support</span><span class="tlco">Proch'Orientation</span><span class="tldate">2020 – 2021</span></div>
-            <div class="tlb"><div class="tlcode">
-              <div><span class="kw">  - </span><span class="str">Gestion tickets bugs &amp; évolutions</span></div>
-              <div><span class="kw">  - </span><span class="str">Analyse fonctionnelle &amp; recette</span></div>
-              <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px"><span class="sptag">VueJS</span><span class="sptag">Java</span><span class="sptag">Selenium</span><span class="sptag">Postman</span></div>
-            </div></div>
-          </div>
+/* ───────── TITRES QUI SE REMPLISSENT MOT PAR MOT ───────── */
+$$('[data-fill]').forEach(h=>{
+  const walk=node=>{
+    Array.from(node.childNodes).forEach(n=>{
+      if(n.nodeType===3){
+        const frag=document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(part=>{
+          if(!part.trim()){frag.appendChild(document.createTextNode(part));return;}
+          const s=document.createElement('span'); s.className='w'; s.textContent=part; frag.appendChild(s);
+        });
+        n.replaceWith(frag);
+      } else if(n.nodeType===1 && !n.classList.contains('w')) walk(n);
+    });
+  };
+  walk(h);
+  const words=$$('.w',h);
+  if(!words.length) return;
+  if(RM){words.forEach(w=>w.classList.add('lit'));return;}
+  if(HAS_GSAP){
+    ScrollTrigger.create({
+      trigger:h, start:'top 82%', end:'bottom 46%', scrub:true,
+      onUpdate:st=>{
+        const k=Math.round(st.progress*words.length);
+        words.forEach((w,i)=>w.classList.toggle('lit',i<k));
+      }
+    });
+  } else {
+    new IntersectionObserver(es=>es.forEach(e=>{
+      if(e.isIntersecting) words.forEach((w,i)=>setTimeout(()=>w.classList.add('lit'),i*45));
+    }),{threshold:.4}).observe(h);
+  }
+});
 
-          <div class="tlf">
-            <div class="tlh"><span class="ficon yml" style="font-size:11px">Y</span><span class="tlfn">QA Tester</span><span class="tlco">Symbol-IT</span><span class="tldate">2019 – 2020</span></div>
-            <div class="tlb"><div class="tlcode">
-              <div><span class="kw">  - </span><span class="str">Tests manuels &amp; non-régression</span></div>
-              <div><span class="kw">  - </span><span class="str">Suivi des anomalies</span></div>
-              <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px"><span class="sptag">Selenium</span><span class="sptag">Postman</span><span class="sptag">API REST</span></div>
-            </div></div>
-          </div>
+/* ═════════════════════════════════════════════
+   HERO — animation cinématique scrubée au scroll
+   ═════════════════════════════════════════════ */
+(function heroScene(){
+  const cv=$('#heroCanvas'); if(!cv) return;
+  const ctx=cv.getContext('2d');
+  let W=0,H=0,dpr=1;
+  function resize(){
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    W=cv.clientWidth; H=cv.clientHeight;
+    cv.width=W*dpr; cv.height=H*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  window.addEventListener('resize',()=>{resize();draw(P);});
 
-        </div>
+  // grille de "cas de tests"
+  const COLS=16, ROWS=11, cells=[];
+  for(let r=0;r<ROWS;r++) for(let c=0;c<COLS;c++){
+    cells.push({c,r,d:(r*0.55+c*0.35)/((ROWS+COLS)*0.6)+Math.random()*0.18, fail:Math.random()<0.055});
+  }
+  let P=0;
 
-        <div class="carea" style="margin-top:4px">
-          <div class="crow"><div class="ln">4</div><div class="lc"></div></div>
-        </div>
-      </div>
-    </div>
+  function bg(p){
+    const g=ctx.createLinearGradient(0,0,0,H);
+    if(p<0.34){
+      const k=p/0.34;
+      g.addColorStop(0, mix('#1A2A2E','#0A1F1A',k));
+      g.addColorStop(0.55, mix('#C98A4B','#0E2B24',k));
+      g.addColorStop(1, mix('#EAB877','#0A1F1A',k));
+    } else {
+      g.addColorStop(0,'#0A1F1A'); g.addColorStop(1,'#050F0C');
+    }
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+  }
+  function mix(a,b,t){
+    const pa=[1,3,5].map(i=>parseInt(a.substr(i,2),16));
+    const pb=[1,3,5].map(i=>parseInt(b.substr(i,2),16));
+    return '#'+pa.map((v,i)=>Math.round(lerp(v,pb[i],clamp(t,0,1))).toString(16).padStart(2,'0')).join('');
+  }
 
-    <!-- ════ contact.json ════ -->
-    <div class="panel" id="panel-contact">
-      <div class="cfile">
-        <div class="carea">
-          <div class="crow"><div class="ln">1</div><div class="lc"><span class="cmt">// contact.json — Prenons contact</span></div></div>
-          <div class="crow"><div class="ln">2</div><div class="lc"><span class="op">{</span></div></div>
-        </div>
+  // phase 1 : "convoi" — une longue barre de livraison qui traverse
+  function convoy(p){
+    const k=clamp(p/0.30,0,1);
+    const x=lerp(W*1.25,-W*0.55,ease(k));
+    const y=H*0.62, hh=Math.min(H*0.26,170), ww=Math.min(W*0.62,760);
+    ctx.save();
+    ctx.globalAlpha=clamp(1-(p-0.24)/0.10,0,1);
+    // sol
+    ctx.fillStyle='rgba(4,10,8,.92)'; ctx.fillRect(0,y+hh*0.5,W,H);
+    // remorque
+    ctx.fillStyle='rgba(6,14,11,.96)';
+    ctx.strokeStyle='rgba(237,237,236,.30)'; ctx.lineWidth=1;
+    rr(x,y-hh*0.5,ww,hh,6); ctx.fill(); ctx.stroke();
+    // cabine
+    rr(x+ww+10,y-hh*0.34,hh*1.15,hh*0.84,10); ctx.fill(); ctx.stroke();
+    // roues
+    ctx.fillStyle='rgba(3,8,6,1)';
+    [x+ww*0.12,x+ww*0.24,x+ww*0.86,x+ww*0.97,x+ww+hh*0.85].forEach(wx=>{
+      ctx.beginPath(); ctx.arc(wx,y+hh*0.5,hh*0.15,0,7); ctx.fill();
+    });
+    // liseré acide qui progresse : "la livraison est validée"
+    ctx.strokeStyle='rgba(195,245,60,'+(k*0.85)+')'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(x,y-hh*0.5); ctx.lineTo(x+ww*k,y-hh*0.5); ctx.stroke();
+    ctx.restore();
+  }
+  function rr(x,y,w,h,r){
+    ctx.beginPath();
+    ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r);
+    ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();
+  }
 
-        <div class="embed">
-          <div class="ctg">
-            <a href="mailto:icepjohn@hotmail.com" class="ctc">
-              <div class="cticon">✉</div>
-              <div><div class="ctlbl">Email</div><div class="ctval">icepjohn@hotmail.com</div></div>
-            </a>
-            <a href="https://www.linkedin.com/in/jonathan-picquette-64656a148" target="_blank" class="ctc">
-              <div class="cticon" style="color:var(--blue)">in</div>
-              <div><div class="ctlbl">LinkedIn</div><div class="ctval">jonathan-picquette</div></div>
-            </a>
-            <a href="https://github.com/icepjohn" target="_blank" class="ctc">
-              <div class="cticon" style="color:var(--yellow)">⌥</div>
-              <div><div class="ctlbl">GitHub</div><div class="ctval">github.com/icepjohn</div></div>
-            </a>
-            <a href="JonathanPicquetteCV.pdf" download class="ctc">
-              <div class="cticon" style="color:var(--purple)">↓</div>
-              <div><div class="ctlbl">CV</div><div class="ctval">Télécharger PDF</div></div>
-            </a>
-          </div>
-          <div style="margin-top:8px">
-            <div class="dispo"><span class="pulse"></span>Disponible pour mission QA Automation / Lead QA</div>
-          </div>
-        </div>
+  // phases 2-4 : la grille isométrique de tests
+  function yard(p){
+    const k=clamp((p-0.22)/0.78,0,1);
+    const appear=clamp((p-0.22)/0.14,0,1);
+    if(appear<=0) return;
+    const s=lerp(26,64,ease(k));
+    const ox=W/2, oy=H*(0.60-0.10*ease(k));
+    const runK=clamp((p-0.46)/0.34,0,1);   // exécution
+    const scanY=lerp(-0.2,1.25,clamp((p-0.44)/0.42,0,1));
+    ctx.save();
+    ctx.globalAlpha=appear;
+    cells.forEach(cell=>{
+      const gx=cell.c-(COLS-1)/2, gy=cell.r-(ROWS-1)/2;
+      const px=ox+(gx-gy)*s*1.06;
+      const py=oy+(gx+gy)*s*0.50;
+      if(px<-140||px>W+140||py<-90||py>H+90) return;
+      const w=s*0.92, h=s*0.44;
+      const done = runK > cell.d;
+      const prog = clamp((runK-cell.d)*7,0,1);
+      ctx.beginPath();
+      ctx.moveTo(px,py-h/2); ctx.lineTo(px+w/2,py); ctx.lineTo(px,py+h/2); ctx.lineTo(px-w/2,py); ctx.closePath();
+      if(done && !cell.fail){
+        ctx.fillStyle='rgba(195,245,60,'+(0.10+0.36*prog)+')';
+        ctx.strokeStyle='rgba(195,245,60,'+(0.28+0.55*prog)+')';
+      } else if(done && cell.fail){
+        ctx.fillStyle='rgba(255,107,94,'+(0.14+0.3*prog)+')';
+        ctx.strokeStyle='rgba(255,107,94,.75)';
+      } else {
+        ctx.fillStyle='rgba(237,237,236,.025)';
+        ctx.strokeStyle='rgba(237,237,236,.16)';
+      }
+      ctx.lineWidth=1; ctx.fill(); ctx.stroke();
+      // élévation "conteneur" pour les cellules déjà passées
+      if(done && prog>0.4){
+        const e=lerp(0,s*0.42,(prog-0.4)/0.6);
+        ctx.globalAlpha=appear*0.55;
+        ctx.beginPath();
+        ctx.moveTo(px-w/2,py); ctx.lineTo(px,py+h/2); ctx.lineTo(px,py+h/2-e); ctx.lineTo(px-w/2,py-e); ctx.closePath();
+        ctx.fillStyle=cell.fail?'rgba(120,40,34,.75)':'rgba(24,58,44,.85)'; ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(px+w/2,py); ctx.lineTo(px,py+h/2); ctx.lineTo(px,py+h/2-e); ctx.lineTo(px+w/2,py-e); ctx.closePath();
+        ctx.fillStyle=cell.fail?'rgba(90,28,24,.75)':'rgba(16,42,32,.85)'; ctx.fill();
+        ctx.globalAlpha=appear;
+      }
+    });
+    // ligne de scan
+    if(p>0.44 && p<0.90){
+      const sy=scanY*H;
+      const g=ctx.createLinearGradient(0,sy-70,0,sy+8);
+      g.addColorStop(0,'rgba(195,245,60,0)'); g.addColorStop(1,'rgba(195,245,60,.30)');
+      ctx.fillStyle=g; ctx.fillRect(0,sy-70,W,78);
+      ctx.fillStyle='rgba(195,245,60,.65)'; ctx.fillRect(0,sy,W,1);
+    }
+    ctx.restore();
+  }
 
-        <div class="carea" style="margin-top:4px">
-          <div class="crow"><div class="ln">3</div><div class="lc"><span class="op">}</span></div></div>
-        </div>
-      </div>
-    </div>
+  // vignette + poussière
+  const dust=Array.from({length:70},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.6+.3,s:Math.random()*.4+.1}));
+  function overlay(p){
+    ctx.save();
+    ctx.globalAlpha=clamp((p-0.18)/0.2,0,1)*0.5;
+    dust.forEach(d=>{
+      const y=(d.y+p*d.s)%1;
+      ctx.fillStyle='rgba(237,237,236,.5)';
+      ctx.beginPath(); ctx.arc(d.x*W,y*H,d.r,0,7); ctx.fill();
+    });
+    ctx.restore();
+    const v=ctx.createRadialGradient(W/2,H/2,H*0.25,W/2,H/2,H*0.95);
+    v.addColorStop(0,'rgba(0,0,0,0)'); v.addColorStop(1,'rgba(0,0,0,.62)');
+    ctx.fillStyle=v; ctx.fillRect(0,0,W,H);
+  }
 
-  </div><!-- /panels -->
-</div><!-- /workspace -->
+  function draw(p){
+    P=p;
+    if(!W) return;
+    bg(p); convoy(p); yard(p); overlay(p);
+  }
 
-<!-- HINT TOAST -->
-<div class="hint" id="hint" role="status">
-  <span>👋 <b>Astuce</b> — clique sur les onglets en haut (ou les fichiers de l'explorer à gauche) pour explorer mon profil.</span>
-  <button class="hclose" aria-label="Fermer l'astuce">✕</button>
-</div>
+  // slides de texte
+  const slides=[$('#hs1'),$('#hs2'),$('#hs3')];
+  function slidesUpdate(p){
+    let idx = p<0.30?0 : p<0.62?1 : 2;
+    slides.forEach((s,i)=>s.classList.toggle('on',i===idx));
+  }
 
-<!-- STATUS BAR -->
-<div class="statusbar">
-  <div class="sbi">⎇ main</div>
-  <div class="sbi">✔ 0 errors</div>
-  <div class="sbi opt">⚠ 0 warnings</div>
-  <div class="sbsep"></div>
-  <div class="sbi" id="sbLang">TypeScript</div>
-  <div class="sbi opt">UTF-8</div>
-  <div class="sbi opt">Ln 1, Col 1</div>
-  <div class="sbi opt">portfolio-qa</div>
-</div>
+  resize();
+  draw(0); slidesUpdate(0);
 
-<script src="app.js" defer></script>
+  if(HAS_GSAP && !RM){
+    ScrollTrigger.create({
+      trigger:'#hero', start:'top top', end:'bottom bottom', scrub:0.6,
+      onUpdate:st=>{draw(st.progress);slidesUpdate(st.progress);},
+      onRefresh:()=>{resize();draw(P);}
+    });
+  } else {
+    const hero=$('#hero');
+    const upd=()=>{
+      const r=hero.getBoundingClientRect();
+      const p=clamp(-r.top/(hero.offsetHeight-window.innerHeight),0,1);
+      draw(p); slidesUpdate(p);
+    };
+    window.addEventListener('scroll',upd,{passive:true}); upd();
+  }
+})();
+
+/* ═════════════════════════════════════════════
+   VISUELS GÉNÉRÉS (cartes + piliers)
+   ═════════════════════════════════════════════ */
+(function vizEngine(){
+  const canvases=$$('canvas[data-viz]');
+  const states=canvases.map(cv=>{
+    const ctx=cv.getContext('2d');
+    return {cv,ctx,t:Math.random()*100,vis:false,kind:cv.dataset.viz,seed:Math.random()*1000};
+  });
+  function fit(s){
+    const dpr=Math.min(window.devicePixelRatio||1,2);
+    const w=s.cv.clientWidth||300, h=s.cv.clientHeight||200;
+    s.cv.width=w*dpr; s.cv.height=h*dpr; s.ctx.setTransform(dpr,0,0,dpr,0,0);
+    s.w=w; s.h=h;
+  }
+  states.forEach(fit);
+  window.addEventListener('resize',()=>states.forEach(fit));
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    const s=states.find(x=>x.cv===e.target); if(s){s.vis=e.isIntersecting; if(e.isIntersecting) fit(s);}
+  }),{threshold:.05});
+  states.forEach(s=>io.observe(s.cv));
+
+  const AC='rgba(195,245,60,', LN='rgba(237,237,236,';
+
+  function render(s,dt){
+    const {ctx,w,h}=s; s.t+=dt;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle='#061511'; ctx.fillRect(0,0,w,h);
+    const t=s.t;
+    switch(s.kind){
+      case 'grid':{ // grille de tests qui passent au vert
+        const cols=9, rows=6, gap=4;
+        const cw=(w-gap*(cols+1))/cols, ch=(h-gap*(rows+1))/rows;
+        for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
+          const i=r*cols+c, ph=(t*0.5+i*0.06)%2;
+          const on=ph<1.1;
+          ctx.fillStyle= on? AC+(0.14+0.5*Math.max(0,1-Math.abs(ph-0.4)*1.6))+')' : LN+'.06)';
+          ctx.fillRect(gap+c*(cw+gap), gap+r*(ch+gap), cw, ch);
+        }
+        break;
+      }
+      case 'wave':{ // stabilité : bruit qui se calme
+        ctx.strokeStyle=LN+'.10)'; ctx.lineWidth=1;
+        for(let i=1;i<4;i++){ctx.beginPath();ctx.moveTo(0,h*i/4);ctx.lineTo(w,h*i/4);ctx.stroke();}
+        ctx.beginPath(); ctx.lineWidth=2; ctx.strokeStyle=AC+'.85)';
+        for(let x=0;x<=w;x+=3){
+          const k=x/w;
+          const amp=lerp(h*0.30,h*0.03,k);
+          const y=h/2+Math.sin(x*0.09+t*2)*amp*Math.sin(x*0.31+t)*0.9;
+          x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+        }
+        ctx.stroke();
+        break;
+      }
+      case 'pipe':{ // pipeline CI
+        const stages=5, pad=26, sw=(w-pad*2)/(stages-1);
+        ctx.strokeStyle=LN+'.16)'; ctx.lineWidth=2;
+        ctx.beginPath(); ctx.moveTo(pad,h/2); ctx.lineTo(w-pad,h/2); ctx.stroke();
+        const prog=(t*0.28)%1.3;
+        ctx.strokeStyle=AC+'.9)'; ctx.beginPath();
+        ctx.moveTo(pad,h/2); ctx.lineTo(pad+(w-pad*2)*clamp(prog,0,1),h/2); ctx.stroke();
+        for(let i=0;i<stages;i++){
+          const x=pad+sw*i, done=prog>i/(stages-1);
+          ctx.beginPath(); ctx.arc(x,h/2,done?9:6,0,7);
+          ctx.fillStyle=done?AC+'1)':'#0B241D'; ctx.fill();
+          ctx.strokeStyle=done?AC+'1)':LN+'.28)'; ctx.lineWidth=1.5; ctx.stroke();
+        }
+        break;
+      }
+      case 'nodes':{ // réseau de tests
+        const N=26; ctx.save();
+        const pts=[];
+        for(let i=0;i<N;i++){
+          const a=i*2.399+t*0.12, rad=(0.16+0.36*((i*37%100)/100))*Math.min(w,h);
+          pts.push([w/2+Math.cos(a)*rad*1.5, h/2+Math.sin(a)*rad]);
+        }
+        ctx.lineWidth=1;
+        pts.forEach((p,i)=>pts.forEach((q,j)=>{
+          if(j<=i) return;
+          const d=Math.hypot(p[0]-q[0],p[1]-q[1]);
+          if(d<w*0.20){ctx.strokeStyle=LN+(0.16*(1-d/(w*0.20)))+')';ctx.beginPath();ctx.moveTo(p[0],p[1]);ctx.lineTo(q[0],q[1]);ctx.stroke();}
+        }));
+        pts.forEach((p,i)=>{
+          const on=((t*0.6+i*0.4)%4)<1.4;
+          ctx.beginPath(); ctx.arc(p[0],p[1],on?4:2.4,0,7);
+          ctx.fillStyle=on?AC+'.95)':LN+'.34)'; ctx.fill();
+        });
+        ctx.restore();
+        break;
+      }
+      case 'shift':{ // coût du bug selon la phase
+        const bars=6, pad=30, bw=(w-pad*2)/bars*0.6, gap=(w-pad*2)/bars;
+        for(let i=0;i<bars;i++){
+          const target=Math.pow(1.72,i)/Math.pow(1.72,bars-1);
+          const k=clamp((t*0.5)%4-i*0.16,0,1);
+          const bh=(h-70)*target*ease(k);
+          const x=pad+gap*i+(gap-bw)/2;
+          ctx.fillStyle= i<2? AC+'.85)' : LN+(0.14+i*0.03)+')';
+          ctx.fillRect(x,h-40-bh,bw,bh);
+        }
+        ctx.strokeStyle=LN+'.2)'; ctx.beginPath(); ctx.moveTo(pad*0.6,h-40); ctx.lineTo(w-pad*0.6,h-40); ctx.stroke();
+        ctx.fillStyle=LN+'.4)'; ctx.font='9px "JetBrains Mono",monospace';
+        ctx.fillText('REFINEMENT',pad-4,h-24); ctx.fillText('PROD',w-pad-24,h-24);
+        break;
+      }
+      case 'pipeline':{ // commits -> jobs
+        const rows=5, pad=18, rh=(h-pad*2)/rows;
+        for(let r=0;r<rows;r++){
+          const y=pad+rh*r+rh/2;
+          ctx.strokeStyle=LN+'.10)'; ctx.lineWidth=1;
+          ctx.beginPath(); ctx.moveTo(pad,y); ctx.lineTo(w-pad,y); ctx.stroke();
+          const seg=((t*0.35+r*0.19)%1.35);
+          const x0=pad, len=(w-pad*2)*clamp(seg,0,1);
+          ctx.strokeStyle=AC+(seg>1?Math.max(0,(1.35-seg)/0.35):1)+')'; ctx.lineWidth=2.5;
+          ctx.beginPath(); ctx.moveTo(x0,y); ctx.lineTo(x0+len,y); ctx.stroke();
+          if(seg<1){ctx.fillStyle=AC+'1)';ctx.beginPath();ctx.arc(x0+len,y,3.4,0,7);ctx.fill();}
+        }
+        break;
+      }
+      case 'chart':{ // courbe de qualité
+        const pad=26, n=34;
+        ctx.strokeStyle=LN+'.09)';
+        for(let i=1;i<4;i++){ctx.beginPath();ctx.moveTo(pad,pad+(h-pad*2)*i/4);ctx.lineTo(w-pad,pad+(h-pad*2)*i/4);ctx.stroke();}
+        const val=i=>{const k=i/(n-1);return 0.72-0.5*k+0.07*Math.sin(k*11+t*0.6)+0.04*Math.sin(k*23);};
+        ctx.beginPath();
+        for(let i=0;i<n;i++){
+          const x=pad+(w-pad*2)*i/(n-1), y=pad+(h-pad*2)*clamp(val(i),0,1);
+          i?ctx.lineTo(x,y):ctx.moveTo(x,y);
+        }
+        ctx.lineTo(w-pad,h-pad); ctx.lineTo(pad,h-pad); ctx.closePath();
+        const g=ctx.createLinearGradient(0,0,0,h);
+        g.addColorStop(0,AC+'.28)'); g.addColorStop(1,AC+'0)');
+        ctx.fillStyle=g; ctx.fill();
+        ctx.beginPath();
+        for(let i=0;i<n;i++){
+          const x=pad+(w-pad*2)*i/(n-1), y=pad+(h-pad*2)*clamp(val(i),0,1);
+          i?ctx.lineTo(x,y):ctx.moveTo(x,y);
+        }
+        ctx.strokeStyle=AC+'.95)'; ctx.lineWidth=2; ctx.stroke();
+        break;
+      }
+    }
+    // liseré de grille
+    ctx.strokeStyle=LN+'.07)'; ctx.lineWidth=1;
+    for(let x=0;x<w;x+=34){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
+  }
+
+  let last=performance.now();
+  function loop(now){
+    const dt=Math.min((now-last)/1000,0.05); last=now;
+    states.forEach(s=>{if(s.vis && !RM) render(s,dt); else if(s.vis && RM && !s.done){render(s,0);s.done=true;}});
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
+
+/* ═════════════════════════════════════════════
+   CALCULATEUR ROI
+   ═════════════════════════════════════════════ */
+(function calc(){
+  const ids=['cCamp','cCas','cDur','cTx','cAuto'];
+  const el={}; ids.forEach(i=>el[i]=document.getElementById(i));
+  const eur=n=>new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(n);
+  const num=n=>new Intl.NumberFormat('fr-FR',{maximumFractionDigits:0}).format(n);
+  function run(){
+    const camp=+el.cCamp.value||0, cas=+el.cCas.value||0, dur=+el.cDur.value||0, tx=+el.cTx.value||0;
+    const auto=(+el.cAuto.value||0)/100;
+    document.getElementById('cAutoV').textContent=Math.round(auto*100)+' %';
+    const hManual = camp*cas*dur/60;
+    const costNow = hManual*tx;
+    const hAfter  = camp*(cas*(1-auto)*dur/60 + cas*auto*dur/60*0.03);
+    const buildH  = cas*auto*0.75;               // ~45 min de dev par test, amorti sur 1 an
+    const costAfter = (hAfter+buildH)*tx;
+    const save = costNow-costAfter;
+    const pct = costNow>0 ? save/costNow*100 : 0;
+    document.getElementById('rSave').textContent   = eur(Math.max(0,save));
+    document.getElementById('rPct').textContent    = Math.max(0,Math.round(pct))+' %';
+    document.getElementById('rNow').textContent    = eur(costNow);
+    document.getElementById('rAfter').textContent  = eur(costAfter);
+    document.getElementById('rHours').textContent  = num(Math.max(0,hManual-hAfter-buildH))+' h';
+    document.getElementById('rDays').textContent   = num(Math.max(0,(hManual-hAfter-buildH)/7))+' j';
+  }
+  ids.forEach(i=>{el[i].addEventListener('input',run);});
+  run();
+})();
+
+/* ═════════════════════════════════════════════
+   RAIL À ONGLETS
+   ═════════════════════════════════════════════ */
+(function rail(){
+  const rail=document.getElementById('rail');
+  const tabs=$$('#railTabs .tab-b');
+  const cards=$$('.rcard',rail);
+  tabs.forEach(b=>b.addEventListener('click',()=>{
+    tabs.forEach(x=>x.classList.remove('active')); b.classList.add('active');
+    const c=cards[+b.dataset.i]; if(c) rail.scrollTo({left:c.offsetLeft-rail.offsetLeft,behavior:'smooth'});
+  }));
+  rail.addEventListener('scroll',()=>{
+    let best=0,bd=1e9;
+    cards.forEach((c,i)=>{const d=Math.abs(c.offsetLeft-rail.offsetLeft-rail.scrollLeft);if(d<bd){bd=d;best=i;}});
+    tabs.forEach((x,i)=>x.classList.toggle('active',i===best));
+  },{passive:true});
+})();
+
+/* ═════════════════════════════════════════════
+   COMPTEURS
+   ═════════════════════════════════════════════ */
+(function counters(){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(!e.isIntersecting) return; io.unobserve(e.target);
+    const el=e.target, target=+el.dataset.count, pre=el.dataset.prefix||'', suf=el.dataset.suffix||'';
+    const dur=1500, t0=performance.now();
+    const fmt=n=>new Intl.NumberFormat('fr-FR').format(n);
+    (function step(now){
+      const k=clamp((now-t0)/dur,0,1);
+      el.textContent=pre+fmt(Math.round(target*(1-Math.pow(1-k,3))))+suf;
+      if(k<1) requestAnimationFrame(step);
+    })(t0);
+  }),{threshold:.4});
+  $$('[data-count]').forEach(el=>io.observe(el));
+})();
+
+/* ═════════════════════════════════════════════
+   PARCOURS
+   ═════════════════════════════════════════════ */
+(function timeline(){
+  const jobs=[
+    {d:'Avr 2025 – Mar 2026', t:'QA Engineer', co:'Decathlon — SPARK (PLM)',
+     li:['Analyse & conception de 1 200 cas de tests','Rédaction d\'environ 100 scénarios E2E','Analyse des processus métier PLM (Centric vs SPO/PACE)','Campagnes de recette & de non-régression','Automatisation d\'environ 50 tests'],
+     s:['Playwright','Xray','Jira','GitHub','Cucumber','Bruno']},
+    {d:'Mar 2024 – Fév 2025', t:'QA Lead Automation', co:'ADEO',
+     li:['Mise en place du Shift Left testing','Automatisation TNR transverse (~500 tests)','Priorisation & stratégie de tests','Préparation des jeux de données','Reporting qualité produit'],
+     s:['Playwright','BDD','Xray','Jira','GitHub','Vault']},
+    {d:'Juil 2021 – Mar 2024', t:'QA Automation Engineer', co:'ADEO — POPS',
+     li:['Automatisation avec Cerberus & Cypress','Tests UI / API / performance','Gestion des anomalies & non-régression','Tests E2E & 2A2, méthodologie ISTQB'],
+     s:['Cypress','Postman','Sonar','Xray']},
+    {d:'2020 – 2021', t:'QA & Support', co:'Proch\'Orientation',
+     li:['Gestion des tickets de bugs & évolutions','Analyse fonctionnelle & recette'],
+     s:['VueJS','Java','Selenium','Postman']},
+    {d:'2019 – 2020', t:'QA Tester', co:'Symbol-IT',
+     li:['Tests manuels & non-régression','Suivi des anomalies'],
+     s:['Selenium','Postman','API REST']}
+  ];
+  const box=document.getElementById('tl');
+  jobs.forEach((j,i)=>{
+    const d=document.createElement('div');
+    d.className='job rv'+(i===0?' open':'');
+    d.innerHTML=`
+      <div class="job-date">${j.d}</div>
+      <div class="job-t"><h3>${j.t}</h3><div class="co">${j.co}</div></div>
+      <div class="job-plus">+</div>
+      <div class="job-d">
+        <ul>${j.li.map(x=>`<li>${x}</li>`).join('')}</ul>
+        <div class="stack">${j.s.map(x=>`<span>${x}</span>`).join('')}</div>
+      </div>`;
+    d.addEventListener('click',()=>{d.classList.toggle('open');if(HAS_GSAP)setTimeout(()=>ScrollTrigger.refresh(),650);});
+    box.appendChild(d);
+  });
+  if(HAS_GSAP && !RM){
+    $$('.job',box).forEach(el=>gsap.fromTo(el,{opacity:0,y:26},{opacity:1,y:0,duration:.8,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 90%',once:true}}));
+  } else {
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.1});
+    $$('.job',box).forEach(el=>io.observe(el));
+  }
+})();
+
+/* ═════════════════════════════════════════════
+   RUNNER PLAYWRIGHT (simulation)
+   ═════════════════════════════════════════════ */
+(function runner(){
+  const tests=[
+    {n:'auth.spec.ts › login success',f:.10},
+    {n:'auth.spec.ts › login failure',f:.10},
+    {n:'cart.spec.ts › add product',f:.15},
+    {n:'cart.spec.ts › remove product',f:.08},
+    {n:'checkout.spec.ts › payment success',f:.20},
+    {n:'checkout.spec.ts › payment failure',f:.10},
+    {n:'checkout.spec.ts › validate order',f:.12},
+    {n:'profile.spec.ts › update user',f:.08},
+    {n:'search.spec.ts › search results',f:.10},
+    {n:'api.spec.ts › GET /products',f:.08},
+    {n:'api.spec.ts › POST /order',f:.12},
+    {n:'e2e.spec.ts › full customer journey',f:.25}
+  ];
+  const list=document.getElementById('testList'), term=document.getElementById('term');
+  const prog=document.getElementById('prog'), sP=document.getElementById('sPass'), sF=document.getElementById('sFail'), sT=document.getElementById('sTime');
+  const btn=document.getElementById('runBtn');
+  let busy=false;
+  function paint(){
+    list.innerHTML=tests.map((t,i)=>`<div class="rt" id="rt${i}"><span class="ic">○</span><span>${t.n}</span></div>`).join('');
+  }
+  function state(i,s){
+    const el=document.getElementById('rt'+i); if(!el) return;
+    el.className='rt '+s;
+    el.querySelector('.ic').textContent={pass:'✔',fail:'✖',running:'◌'}[s]||'○';
+  }
+  const COL={pass:'#C3F53C',fail:'#FF6B5E',info:'#7FA9C9',warn:'#E9C46A',dim:'#5C7A6F'};
+  function log(txt,c){
+    const s=document.createElement('span');
+    s.style.color=COL[c]||'#9FB3AC'; s.textContent=txt+'\n';
+    term.appendChild(s); term.scrollTop=term.scrollHeight;
+  }
+  const now=()=>new Date().toLocaleTimeString('fr-FR');
+  paint();
+  btn.addEventListener('click',()=>{
+    if(busy) return; busy=true; btn.style.opacity=.5;
+    paint(); term.textContent=''; prog.style.width='0%';
+    sP.textContent='✔ 0'; sF.textContent='✖ 0'; sT.textContent='';
+    let pass=0,fail=0,i=0;
+    const t0=performance.now();
+    log('['+now()+']  Running Playwright v1.44.0 — chromium','info');
+    log('['+now()+']  Suite: '+tests.length+' tests, 4 workers','info');
+    log('','');
+    (function next(){
+      if(i>=tests.length){
+        const pct=Math.round(pass/tests.length*100);
+        log(''); log('  ─────────────────────────────','dim');
+        log('  ✔ Passed    '+pass,'pass');
+        log('  ✖ Failed    '+fail, fail?'fail':'pass');
+        log('  Rate        '+pct+' %  '+(pct>=80?'(healthy)':'(needs attention)'), pct>=80?'pass':'warn');
+        log('  Duration    '+((performance.now()-t0)/1000).toFixed(1)+'s','dim');
+        sT.textContent=((performance.now()-t0)/1000).toFixed(1)+'s';
+        btn.style.opacity=1; busy=false; return;
+      }
+      const t=tests[i];
+      state(i,'running');
+      log('['+now()+']  ▶  '+t.n,'info');
+      setTimeout(()=>{
+        const flaky=Math.random()<t.f;
+        const finish=(ok,msg,col)=>{
+          log(msg,col);
+          state(i,ok?'pass':'fail');
+          ok?pass++:fail++;
+          sP.textContent='✔ '+pass; sF.textContent='✖ '+fail;
+          i++; prog.style.width=(i/tests.length*100)+'%';
+          setTimeout(next,90);
+        };
+        if(flaky){
+          log('             ↻ retry 1/2…','warn');
+          setTimeout(()=>{
+            Math.random()<.55
+              ? finish(true,'             ✔ passed (retry)','pass')
+              : finish(false,'             ✖ FAILED — trace + screenshot capturés','fail');
+          },420);
+        } else {
+          finish(true,'             ✔ passed ('+(120+Math.random()*680|0)+'ms)','pass');
+        }
+      },240+Math.random()*180);
+    })();
+  });
+})();
+
+document.getElementById('yr').textContent=new Date().getFullYear();
+})();
+</script>
 </body>
 </html>

@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Jonathan Picquette – Senior QA Automation Engineer. 8+ ans d'expérience en Playwright, Cypress, CI/CD.">
+<meta name="author" content="Jonathan Picquette">
+<meta name="theme-color" content="#1e1e1e">
+<link rel="canonical" href="https://icepjohn.github.io/portfolio-qa/">
+<title>Jonathan PICQUETTE — QA Automation Engineer</title>
+
+<!-- Favicon (SVG inline, sans fichier externe) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231e1e1e'/%3E%3Ctext x='50%25' y='52%25' font-family='monospace' font-size='34' font-weight='700' fill='%234ec9b0' text-anchor='middle' dominant-baseline='middle'%3EJP%3C/text%3E%3C/svg%3E">
+
+<!-- Open Graph / LinkedIn -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jonathan PICQUETTE — Senior QA Automation Engineer">
+<meta property="og:description" content="8+ ans d'expérience en QA Automation : Playwright, Cypress, CI/CD, BDD. Disponible pour mission.">
+<meta property="og:url" content="https://icepjohn.github.io/portfolio-qa/">
+<meta property="og:image" content="https://icepjohn.github.io/portfolio-qa/JonathanPicquette.jpg">
+<meta property="og:locale" content="fr_FR">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Jonathan PICQUETTE — Senior QA Automation Engineer">
+<meta name="twitter:description" content="8+ ans d'expérience en QA Automation : Playwright, Cypress, CI/CD, BDD. Disponible pour mission.">
+<meta name="twitter:image" content="https://icepjohn.github.io/portfolio-qa/JonathanPicquette.jpg">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#1e1e1e; --bg2:#252526; --bg3:#2d2d30; --titlebar:#3c3c3c;
+  --border:#454545; --border2:#555;
+  --txt:#d4d4d4; --dim:#808080; --hi:#fff;
+  --green:#4ec9b0; --green2:#6a9955;
+  --blue:#569cd6; --blue2:#4fc1ff;
+  --orange:#ce9178; --yellow:#dcdcaa; --yellow2:#d7ba7d;
+  --purple:#c586c0; --red:#f44747; --red2:#d16969;
+  --ln:#858585; --accent:#007acc;
+  --font:'JetBrains Mono',Consolas,'Courier New',monospace;
+}
+body.light {
+  --bg:#fffffe; --bg2:#f3f3f3; --bg3:#e8e8e8; --titlebar:#dddddd;
+  --border:#c8c8c8; --border2:#aaa;
+  --txt:#1e1e1e; --dim:#767676; --hi:#000;
+  --green:#267f99; --green2:#008000;
+  --blue:#0000ff; --blue2:#001080;
+  --orange:#a31515; --yellow:#795e26; --yellow2:#0070c1;
+  --purple:#af00db; --red:#cd3131; --red2:#098658;
+  --ln:#aaa;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:var(--font);background:var(--bg);color:var(--txt);font-size:13px;line-height:1.5;display:flex;flex-direction:column;overflow:hidden}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+
+/* ══ TITLEBAR ══ */
+.titlebar{background:var(--titlebar);border-bottom:1px solid #111;height:32px;display:flex;align-items:center;padding:0 16px;gap:10px;flex-shrink:0;user-select:none}
+.dots{display:flex;gap:6px}
+.dot{width:12px;height:12px;border-radius:50%}
+.dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
+.win-title{flex:1;text-align:center;font-size:11.5px;color:var(--dim)}
+.win-title b{color:var(--txt)}
+
+/* ══ MENUBAR ══ */
+.menubar{background:var(--bg2);border-bottom:1px solid var(--border);height:30px;display:flex;align-items:center;padding:0 10px;gap:2px;flex-shrink:0}
+.msep{flex:1}
+#themeBtn{padding:2px 10px;background:none;border:1px solid var(--border);border-radius:2px;font-family:var(--font);font-size:11px;color:var(--dim);cursor:pointer;transition:all .2s}
+#themeBtn:hover{color:var(--txt);border-color:var(--border2)}
+
+/* ══ TABBAR ══ */
+.tabbar{background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:flex-end;overflow-x:auto;flex-shrink:0;scrollbar-width:none;-webkit-overflow-scrolling:touch;position:relative}
+.tabbar::-webkit-scrollbar{display:none}
+/* indice visuel : un dégradé à droite suggère qu'on peut scroller les onglets sur mobile */
+.tabwrap{position:relative;flex-shrink:0}
+.tabwrap::after{content:"";position:absolute;top:0;right:0;width:24px;height:100%;pointer-events:none;background:linear-gradient(90deg,transparent,var(--bg2));opacity:0;transition:opacity .2s}
+.tabwrap.scrollable::after{opacity:1}
+.tab{padding:7px 14px;font-size:12px;color:var(--dim);border-right:1px solid var(--border);cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:6px;border-top:2px solid transparent;transition:background .12s,color .12s;user-select:none}
+.tab:hover{background:var(--bg3);color:var(--txt)}
+.tab.active{background:var(--bg);color:var(--hi);border-top-color:var(--accent)}
+.tab .tdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.tab .tcls{font-size:10px;color:var(--dim);opacity:0;transition:opacity .12s;margin-left:2px}
+.tab:hover .tcls{opacity:1}
+
+/* ══ WORKSPACE ══ */
+.workspace{display:flex;flex:1;overflow:hidden;min-height:0}
+
+/* ══ SIDEBAR ══ */
+.sidebar{width:220px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto}
+@media(max-width:780px){.sidebar{display:none}}
+.sb-hdr{padding:8px 12px 4px;font-size:10px;font-weight:700;color:var(--dim);letter-spacing:.12em;text-transform:uppercase;user-select:none}
+.ftree{padding:4px 0;flex:1}
+.fi{padding:3px 12px 3px 24px;font-size:12px;color:var(--txt);cursor:pointer;display:flex;align-items:center;gap:6px;transition:background .1s;user-select:none}
+.fi:hover{background:rgba(255,255,255,.05)}
+body.light .fi:hover{background:rgba(0,0,0,.05)}
+.fi.active{background:rgba(0,122,204,.18);color:var(--hi)}
+.fi.sub{padding-left:36px;font-size:11.5px;color:var(--dim)}
+.fi.sub:hover{color:var(--txt)}
+.ficon{font-size:11px;width:15px;text-align:center;flex-shrink:0}
+.ficon.ts{color:var(--blue2)}.ficon.json{color:var(--yellow)}.ficon.yml{color:var(--green)}.ficon.md{color:var(--orange)}.ficon.folder{color:var(--yellow2)}
+.sb-git{border-top:1px solid var(--border);padding:10px 12px}
+.gb{font-size:11px;color:var(--dim);display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.gbadge{font-size:10px;padding:1px 6px;border-radius:10px;background:rgba(78,201,176,.15);color:var(--green);border:1px solid rgba(78,201,176,.3)}
+
+/* ══ PANELS ══ */
+.panels{flex:1;overflow:hidden;position:relative;min-width:0}
+.panel{display:none;height:100%;overflow-y:auto;overflow-x:hidden;background:var(--bg);-webkit-overflow-scrolling:touch}
+.panel.active{display:block}
+
+/* ══ CODE LAYOUT ══ */
+.cfile{padding:16px 0 60px}
+.carea{display:table;width:100%;border-collapse:collapse;font-size:13px;line-height:22px}
+.crow{display:table-row}
+.ln{display:table-cell;width:44px;min-width:44px;padding:0 14px 0 0;text-align:right;color:var(--ln);user-select:none;font-size:12px;vertical-align:top;position:sticky;left:0;background:var(--bg)}
+.lc{display:table-cell;padding:0 16px 0 8px;white-space:pre-wrap;word-break:break-word;vertical-align:top}
+@media(max-width:480px){.ln{width:28px;min-width:28px;padding:0 8px 0 0;font-size:10px}.lc{font-size:11px;padding:0 8px 0 6px}}
+/* onglets : cibles tactiles plus confortables sur mobile */
+@media(max-width:580px){.tab{padding:10px 14px}.tab .tcls{display:none}}
+
+/* ══ SYNTAX ══ */
+.kw{color:var(--blue)}.fn{color:var(--yellow)}.str{color:var(--orange)}.num{color:var(--red2)}.cmt{color:var(--green2);font-style:italic}.cls{color:var(--green)}.var{color:var(--blue2)}.op{color:var(--txt)}.prop{color:var(--yellow2)}.kw2{color:var(--purple)}.pass-c{color:#4ec9b0}.fail-c{color:#f44747}.warn-c{color:#febc2e}
+
+/* ══ EMBED WRAPPER (aligned with code content) ══ */
+.embed{margin:4px 16px 4px 52px}
+@media(max-width:480px){.embed{margin:4px 8px 4px 34px}}
+
+/* ══ HERO ══ */
+.hero-card{display:grid;grid-template-columns:170px 1fr;background:var(--bg2);border:1px solid var(--border);border-radius:3px;overflow:hidden}
+@media(max-width:580px){.hero-card{grid-template-columns:1fr}}
+.hero-photo{background:var(--bg3);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 14px;border-right:1px solid var(--border);gap:10px}
+@media(max-width:580px){.hero-photo{flex-direction:row;border-right:none;border-bottom:1px solid var(--border);padding:14px}}
+.avatar{width:110px;height:110px;border-radius:3px;object-fit:cover;filter:saturate(.75)contrast(1.05);border:1px solid var(--border2)}
+@media(max-width:480px){.avatar{width:70px;height:70px}}
+.hmeta{text-align:center;font-size:10.5px;color:var(--dim);line-height:17px}
+.hmeta strong{color:var(--green);display:block;font-size:11px}
+.hinfo{padding:14px 16px;display:flex;flex-direction:column;gap:7px;min-width:0}
+.jf{font-size:12.5px;line-height:20px;overflow-wrap:break-word}
+@media(max-width:480px){.jf{font-size:11px}}
+.jk{color:var(--yellow2)}.jco{color:var(--dim)}.jvs{color:var(--orange)}.jvn{color:var(--red2)}.jvb{color:var(--blue)}.jva{color:var(--dim)}.jcm{color:var(--dim)}
+.hbadges{display:flex;flex-wrap:wrap;gap:5px;margin-top:2px}
+.hb{font-size:10px;padding:2px 7px;border-radius:2px;border:1px solid var(--border);color:var(--dim)}
+.hb.ok{background:rgba(78,201,176,.1);border-color:rgba(78,201,176,.35);color:var(--green);display:flex;align-items:center;gap:5px}
+.pulse{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1.4s infinite;display:inline-block;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.hbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.btn{padding:5px 14px;border:1px solid var(--border2);border-radius:2px;font-family:var(--font);font-size:12px;color:var(--txt);background:var(--bg3);cursor:pointer;text-decoration:none;display:inline-block;transition:all .13s}
+.btn:hover{background:var(--border);color:var(--hi)}
+.btn.p{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.p:hover{background:#1a8ad4}
+
+/* ══ SKILLS GRID ══ */
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:3px;overflow:hidden}
+@media(max-width:480px){.sg{grid-template-columns:1fr 1fr}}
+.sp{background:var(--bg2);padding:14px 15px;transition:background .13s}
+.sp:hover{background:var(--bg3)}
+.sph{display:flex;align-items:center;gap:7px;margin-bottom:8px}
+.spico{font-size:13px}
+.sptitle{font-size:12px;font-weight:700;color:var(--yellow)}
+.sptags{display:flex;flex-wrap:wrap;gap:4px}
+.sptag{font-size:10px;padding:1px 7px;border-radius:2px;background:var(--bg3);border:1px solid var(--border);color:var(--dim);transition:all .13s}
+.sp:hover .sptag{border-color:var(--border2);color:var(--txt)}
+
+/* ══ SIMULATOR ══ */
+.sim{border:1px solid var(--border);border-radius:3px;overflow:hidden;background:var(--bg2)}
+.sim-tb{background:var(--bg3);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;padding:0 12px;height:34px}
+.sim-tbtitle{font-size:11.5px;color:var(--dim);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sim-tbtitle b{color:var(--txt)}
+.run-btn{padding:4px 14px;background:var(--accent);border:none;border-radius:2px;font-family:var(--font);font-size:11.5px;color:#fff;cursor:pointer;display:flex;align-items:center;gap:5px;transition:background .13s;white-space:nowrap;flex-shrink:0}
+.run-btn:hover{background:#1a8ad4}
+.run-btn:disabled{opacity:.45;cursor:not-allowed}
+.sim-body{display:grid;grid-template-columns:210px 1fr}
+@media(max-width:580px){.sim-body{grid-template-columns:1fr}}
+.sim-exp{border-right:1px solid var(--border);overflow-y:auto;max-height:360px}
+@media(max-width:580px){.sim-exp{max-height:130px;border-right:none;border-bottom:1px solid var(--border)}}
+.sim-exph{padding:5px 12px;font-size:10px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid var(--border);user-select:none}
+.stest{padding:5px 10px 5px 14px;font-size:11px;color:var(--dim);display:flex;align-items:center;gap:6px;border-bottom:1px solid rgba(255,255,255,.03);transition:background .1s;line-height:1.4}
+.stest:hover{background:rgba(255,255,255,.04)}
+.stest.pass{color:#4ec9b0}.stest.fail{color:#f44747}.stest.running{color:var(--accent)}
+.stest .si{font-size:10px;width:11px;text-align:center;flex-shrink:0}
+.sim-out{display:flex;flex-direction:column}
+.sim-prog{height:3px;background:var(--bg3)}
+.sim-pf{height:100%;width:0;background:var(--accent);transition:width .22s}
+.sim-ctr{padding:5px 12px;display:flex;gap:14px;font-size:11.5px;border-bottom:1px solid var(--border);background:var(--bg3)}
+.sim-term{background:#0d0d0d;padding:10px 14px;font-size:12px;line-height:19px;overflow-y:auto;max-height:240px;color:#abb2bf;white-space:pre-wrap;word-break:break-word}
+body.light .sim-term{background:#1e1e1e}
+.sim-ss{padding:10px 14px;border-top:1px solid var(--border);background:var(--bg2);display:none}
+.sim-ss img{max-width:100%;border:1px solid var(--red);border-radius:2px;display:block}
+.sim-ss p{font-size:11px;color:var(--red);margin-top:4px}
+
+/* ══ KPI ══ */
+.kpig{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:3px;overflow:hidden}
+@media(max-width:580px){.kpig{grid-template-columns:repeat(2,1fr)}}
+.kpip{background:var(--bg2);padding:20px 14px;text-align:center;transition:background .13s}
+.kpip:hover{background:var(--bg3)}
+.kpilbl{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
+.kpiv{font-size:1.9rem;font-weight:700;color:var(--green);line-height:1}
+@media(max-width:480px){.kpiv{font-size:1.5rem}}
+
+/* ══ TIMELINE ══ */
+.tlf{background:var(--bg2);border:1px solid var(--border);border-radius:3px;overflow:hidden;margin-bottom:1px}
+.tlh{background:var(--bg3);padding:7px 12px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.tlfn{color:var(--yellow);font-size:12px}
+.tlco{color:var(--blue2);font-size:11.5px}
+.tldate{color:var(--dim);font-size:11px;margin-left:auto;white-space:nowrap}
+@media(max-width:480px){.tldate{margin-left:0;width:100%;font-size:10px}}
+.tlb{padding:12px 15px}
+.tlcode{font-size:12px;line-height:20px}
+@media(max-width:480px){.tlcode{font-size:11px;line-height:18px}}
+
+/* ══ CONTACT ══ */
+.ctg{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:3px;overflow:hidden}
+@media(max-width:480px){.ctg{grid-template-columns:1fr}}
+.ctc{background:var(--bg2);padding:14px 15px;display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--txt);transition:background .13s}
+.ctc:hover{background:var(--bg3)}
+.cticon{width:32px;height:32px;border-radius:2px;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;color:var(--blue2)}
+.ctlbl{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px}
+.ctval{font-size:12px;color:var(--txt);word-break:break-all}
+.dispo{display:inline-flex;align-items:center;gap:8px;background:rgba(78,201,176,.08);border:1px solid rgba(78,201,176,.25);border-radius:2px;padding:7px 14px;font-size:12px;color:var(--green)}
+
+/* ══ HINT TOAST ══ */
+.hint{position:fixed;right:14px;bottom:34px;max-width:300px;background:var(--bg3);border:1px solid var(--border2);border-left:3px solid var(--accent);border-radius:3px;padding:11px 13px;font-size:11.5px;color:var(--txt);box-shadow:0 6px 22px rgba(0,0,0,.4);z-index:50;display:flex;gap:10px;align-items:flex-start;animation:hintin .35s ease;line-height:1.45}
+.hint.hide{opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s;pointer-events:none}
+.hint b{color:var(--blue2)}
+.hint .hclose{margin-left:auto;color:var(--dim);cursor:pointer;font-size:13px;line-height:1;flex-shrink:0;background:none;border:none;font-family:var(--font);padding:0 2px}
+.hint .hclose:hover{color:var(--txt)}
+@keyframes hintin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:480px){.hint{right:8px;left:8px;bottom:30px;max-width:none}}
+
+/* ══ STATUS BAR ══ */
+.statusbar{background:var(--accent);height:22px;display:flex;align-items:center;padding:0 12px;gap:16px;font-size:11px;color:rgba(255,255,255,.9);flex-shrink:0}
+body.light .statusbar{background:#005f9e}
+.sbi{white-space:nowrap}
+.sbsep{flex:1}
+</style>
+</head>
+<body>
+
+<!-- TITLEBAR -->
+<div class="titlebar">
+  <div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+  <div class="win-title">Visual Studio Code — <b id="winTitle">about.ts</b> — portfolio-qa</div>
+</div>
+
+<!-- MENUBAR -->
+<div class="menubar">
+  <div class="msep"></div>
+  <button id="themeBtn" onclick="toggleTheme()">☀ Light</button>
+</div>
+
+<!-- TABBAR -->
+<div class="tabwrap" id="tabwrap">
+<div class="tabbar" id="tabbar" role="tablist" aria-label="Sections du portfolio">
+  <div class="tab active" data-panel="about" onclick="openTab(this)">
+    <span class="tdot" style="background:#4ec9b0"></span>about.ts<span class="tcls">✕</span>
+  </div>
+  <div class="tab" data-panel="skills" onclick="openTab(this)">
+    <span class="tdot" style="background:#dcdcaa"></span>skills.json<span class="tcls">✕</span>
+  </div>
+  <div class="tab" data-panel="playwright" onclick="openTab(this)">
+    <span class="tdot" style="background:#ce9178"></span>playwright.spec.ts<span class="tcls">✕</span>
+  </div>
+  <div class="tab" data-panel="metrics" onclick="openTab(this)">
+    <span class="tdot" style="background:#569cd6"></span>metrics.json<span class="tcls">✕</span>
+  </div>
+  <div class="tab" data-panel="experience" onclick="openTab(this)">
+    <span class="tdot" style="background:#c586c0"></span>experience.yml<span class="tcls">✕</span>
+  </div>
+  <div class="tab" data-panel="contact" onclick="openTab(this)">
+    <span class="tdot" style="background:#d7ba7d"></span>contact.json<span class="tcls">✕</span>
+  </div>
+</div>
+</div><!-- /tabwrap -->
+
+<!-- WORKSPACE -->
+<div class="workspace">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sb-hdr">Explorer</div>
+    <div class="ftree">
+      <div class="fi"><span class="ficon folder">▾</span>portfolio-qa</div>
+      <div class="fi sub active" onclick="openTabById('about')">   <span class="ficon ts">TS</span> about.ts</div>
+      <div class="fi sub"        onclick="openTabById('skills')">  <span class="ficon json">{}</span> skills.json</div>
+      <div class="fi sub"        onclick="openTabById('playwright')"><span class="ficon ts">TS</span> playwright.spec.ts</div>
+      <div class="fi sub"        onclick="openTabById('metrics')"> <span class="ficon json">{}</span> metrics.json</div>
+      <div class="fi sub"        onclick="openTabById('experience')"><span class="ficon yml">Y</span> experience.yml</div>
+      <div class="fi sub"        onclick="openTabById('contact')"> <span class="ficon json">{}</span> contact.json</div>
+    </div>
+    <div class="sb-git">
+      <div class="gb">⎇ main <span class="gbadge">● clean</span></div>
+      <div style="font-size:11px;color:var(--dim)">Last commit: <span style="color:var(--txt)">2 days ago</span></div>
+    </div>
+  </div>
+
+  <!-- PANELS -->
+  <div class="panels">
+
+    <!-- ════ about.ts ════ -->
+    <div class="panel active" id="panel-about">
+      <div class="cfile">
+        <div class="carea">
+          <div class="crow"><div class="ln">1</div><div class="lc"><span class="cmt">// about.ts — Jonathan PICQUETTE · Senior QA Automation Engineer</span></div></div>
+          <div class="crow"><div class="ln">2</div><div class="lc"></div></div>
+          <div class="crow"><div class="ln">3</div><div class="lc"><span class="kw">import</span> <span class="op">{</span> <span class="cls">Engineer</span> <span class="op">}</span> <span class="kw">from</span> <span class="str">'@types/qa-automation'</span><span class="op">;</span></div></div>
+          <div class="crow"><div class="ln">4</div><div class="lc"></div></div>
+          <div class="crow"><div class="ln">5</div><div class="lc"><span class="kw">const</span> <span class="var">profile</span><span class="op">:</span> <span class="cls">Engineer</span> <span class="op">=</span> <span class="op">{</span></div></div>
+        </div>
+
+        <div class="embed">
+          <div class="hero-card">
+            <div class="hero-photo">
+              <img class="avatar" src="JonathanPicquette.jpg" alt="Jonathan Picquette"
+                   onerror="this.style.display='none';document.getElementById('avatar-fallback').style.display='flex'">
+              <div id="avatar-fallback" style="display:none;width:110px;height:110px;background:var(--bg3);border:1px solid var(--border2);border-radius:3px;align-items:center;justify-content:center;font-size:2rem;color:var(--dim)">JP</div>
+              <div class="hmeta"><strong>8+ ans XP</strong>500+ tests auto</div>
+            </div>
+            <div class="hinfo">
+              <div class="jf"><span class="jk">  name</span><span class="jco">: </span><span class="jvs">"Jonathan PICQUETTE"</span><span class="jcm">,</span></div>
+              <div class="jf"><span class="jk">  role</span><span class="jco">: </span><span class="jvs">"Senior QA Automation Engineer"</span><span class="jcm">,</span></div>
+              <div class="jf"><span class="jk">  xp</span><span class="jco">: </span><span class="jvn">8</span><span class="jcm">, </span><span class="cmt">// années</span></div>
+              <div class="jf"><span class="jk">  location</span><span class="jco">: </span><span class="jvs">"France 🇫🇷"</span><span class="jcm">,</span></div>
+              <div class="jf"><span class="jk">  stack</span><span class="jco">: </span><span class="jva">["Playwright", "Cypress", "CI/CD", "BDD"]</span><span class="jcm">,</span></div>
+              <div class="jf"><span class="jk">  available</span><span class="jco">: </span><span class="jvb">true</span></div>
+              <div class="hbadges">
+                <span class="hb ok"><span class="pulse"></span>Disponible mission</span>
+                <span class="hb">ISTQB</span><span class="hb">Playwright</span><span class="hb">CI/CD</span>
+              </div>
+              <div class="hbtns">
+                <a href="JonathanPicquetteCV.pdf" download class="btn p">↓ CV PDF</a>
+                <span class="btn" onclick="openTabById('contact')">Contact →</span>
+                <a href="https://github.com/icepjohn" target="_blank" class="btn">GitHub ↗</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carea" style="margin-top:4px">
+          <div class="crow"><div class="ln">6</div><div class="lc"><span class="op">};</span></div></div>
+          <div class="crow"><div class="ln">7</div><div class="lc"></div></div>
+          <div class="crow"><div class="ln">8</div><div class="lc"><span class="kw">export default</span> <span class="var">profile</span><span class="op">;</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════ skills.json ════ -->
+    <div class="panel" id="panel-skills">
+      <div class="cfile">
+        <div class="carea">
+          <div class="crow"><div class="ln">1</div><div class="lc"><span class="cmt">// skills.json — Stack technique</span></div></div>
+          <div class="crow"><div class="ln">2</div><div class="lc"><span class="op">{</span></div></div>
+          <div class="crow"><div class="ln">3</div><div class="lc">  <span class="prop">"competences"</span><span class="op">: [</span></div></div>
+        </div>
+
+        <div class="embed">
+          <div class="sg">
+            <div class="sp"><div class="sph"><span class="spico">⚡</span><span class="sptitle">E2E Automation</span></div><div class="sptags"><span class="sptag">Playwright</span><span class="sptag">Cypress</span><span class="sptag">Selenium</span><span class="sptag">Cerberus</span></div></div>
+            <div class="sp"><div class="sph"><span class="spico">🔁</span><span class="sptitle">CI/CD &amp; DevOps</span></div><div class="sptags"><span class="sptag">GitHub Actions</span><span class="sptag">Vault</span><span class="sptag">BDD</span><span class="sptag">Cucumber</span></div></div>
+            <div class="sp"><div class="sph"><span class="spico">🌐</span><span class="sptitle">API Testing</span></div><div class="sptags"><span class="sptag">Postman</span><span class="sptag">Bruno</span><span class="sptag">REST</span><span class="sptag">GraphQL</span></div></div>
+            <div class="sp"><div class="sph"><span class="spico">📋</span><span class="sptitle">QA Management</span></div><div class="sptags"><span class="sptag">Xray</span><span class="sptag">Jira</span><span class="sptag">ISTQB</span><span class="sptag">Shift Left</span></div></div>
+            <div class="sp"><div class="sph"><span class="spico">📊</span><span class="sptitle">Performance</span></div><div class="sptags"><span class="sptag">Sonar</span><span class="sptag">Reporting</span><span class="sptag">Métriques</span></div></div>
+            <div class="sp"><div class="sph"><span class="spico">🧩</span><span class="sptitle">Frontend</span></div><div class="sptags"><span class="sptag">VueJS</span><span class="sptag">HTML</span><span class="sptag">CSS</span><span class="sptag">JS</span></div></div>
+          </div>
+        </div>
+
+        <div class="carea" style="margin-top:4px">
+          <div class="crow"><div class="ln">4</div><div class="lc">  <span class="op">]</span></div></div>
+          <div class="crow"><div class="ln">5</div><div class="lc"><span class="op">}</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════ playwright.spec.ts ════ -->
+    <div class="panel" id="panel-playwright">
+      <div class="cfile">
+        <div class="carea">
+          <div class="crow"><div class="ln">1</div><div class="lc"><span class="cmt">// playwright.spec.ts — Live QA Demo</span></div></div>
+          <div class="crow"><div class="ln">2</div><div class="lc"><span class="kw">import</span> <span class="op">{</span> <span class="fn">test</span><span class="op">,</span> <span class="fn">expect</span> <span class="op">}</span> <span class="kw">from</span> <span class="str">'@playwright/test'</span><span class="op">;</span></div></div>
+          <div class="crow"><div class="ln">3</div><div class="lc"><span class="cmt">// ▶ Cliquez sur Run All pour exécuter la suite</span></div></div>
+          <div class="crow"><div class="ln">4</div><div class="lc"></div></div>
+        </div>
+
+        <div class="embed">
+          <div class="sim">
+            <div class="sim-tb">
+              <span class="sim-tbtitle">TEST EXPLORER — <b>playwright.spec.ts</b></span>
+              <button class="run-btn" id="runBtn" onclick="runTests()">▶ Run All</button>
+            </div>
+            <div class="sim-body">
+              <div class="sim-exp">
+                <div class="sim-exph">Tests (12)</div>
+                <div id="testList"></div>
+              </div>
+              <div class="sim-out">
+                <div class="sim-prog"><div class="sim-pf" id="progressFill"></div></div>
+                <div class="sim-ctr">
+                  <span style="color:var(--dim);font-size:11px">Output</span>
+                  <span class="pass-c" id="statPass">✔ 0</span>
+                  <span class="fail-c" id="statFail">✖ 0</span>
+                </div>
+                <div class="sim-term" id="logs"><span style="color:#6a9955">// Prêt. Cliquez sur ▶ Run All pour démarrer.
+</span></div>
+                <div class="sim-ss" id="screenshotBox">
+                  <img id="screenshotImg" src="" alt="Capture test échoué">
+                  <p id="screenshotMsg"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carea" style="margin-top:4px">
+          <div class="crow"><div class="ln">5</div><div class="lc"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════ metrics.json ════ -->
+    <div class="panel" id="panel-metrics">
+      <div class="cfile">
+        <div class="carea">
+          <div class="crow"><div class="ln">1</div><div class="lc"><span class="cmt">// metrics.json — Résultats mesurables</span></div></div>
+          <div class="crow"><div class="ln">2</div><div class="lc"><span class="op">{</span></div></div>
+        </div>
+
+        <div class="embed">
+          <div class="kpig" id="kpiGrid">
+            <div class="kpip"><div class="kpilbl">tests automatisés</div><div class="kpiv" data-target="500">0</div></div>
+            <div class="kpip"><div class="kpilbl">cas de tests</div><div class="kpiv" data-target="1200">0</div></div>
+            <div class="kpip"><div class="kpilbl">bugs prod réduits</div><div class="kpiv" data-target="40" data-suffix="%">0</div></div>
+            <div class="kpip"><div class="kpilbl">années d'expérience</div><div class="kpiv" data-target="8">0</div></div>
+          </div>
+        </div>
+
+        <div class="carea" style="margin-top:4px">
+          <div class="crow"><div class="ln">3</div><div class="lc"><span class="op">}</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════ experience.yml ════ -->
+    <div class="panel" id="panel-experience">
+      <div class="cfile">
+        <div class="carea">
+          <div class="crow"><div class="ln">1</div><div class="lc"><span class="cmt"># experience.yml — Parcours professionnel</span></div></div>
+          <div class="crow"><div class="ln">2</div><div class="lc"><span class="kw">experience</span><span class="op">:</span></div></div>
+          <div class="crow"><div class="ln">3</div><div class="lc"></div></div>
+        </div>
+
+        <div class="embed">
+
+          <div class="tlf">
+            <div class="tlh"><span class="ficon ts" style="font-size:11px">TS</span><span class="tlfn">QA Engineer</span><span class="tlco">Décathlon – SPARK (PLM)</span><span class="tldate">Avr 2025 – Mar 2026</span></div>
+            <div class="tlb"><div class="tlcode">
+              <div><span class="kw">  - </span><span class="str">Analyse &amp; conception de 1 200 cas de tests</span></div>
+              <div><span class="kw">  - </span><span class="str">Rédaction de ~100 scénarios E2E</span></div>
+              <div><span class="kw">  - </span><span class="str">Analyse processus métier PLM (Centric vs SPO/PACE)</span></div>
+              <div><span class="kw">  - </span><span class="str">Campagnes de recette &amp; non-régression</span></div>
+              <div><span class="kw">  - </span><span class="str">Automatisation de ~50 tests</span></div>
+              <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px"><span class="sptag">Playwright</span><span class="sptag">Xray</span><span class="sptag">Jira</span><span class="sptag">GitHub</span><span class="sptag">Cucumber</span><span class="sptag">Bruno</span></div>
+            </div></div>
+          </div>
+
+          <div class="tlf">
+            <div class="tlh"><span class="ficon ts" style="font-size:11px">TS</span><span class="tlfn">QA Lead Automation</span><span class="tlco">ADEO</span><span class="tldate">Mar 2024 – Fév 2025</span></div>
+            <div class="tlb"><div class="tlcode">
+              <div><span class="kw">  - </span><span class="str">Mise en place du Shift Left testing</span></div>
+              <div><span class="kw">  - </span><span class="str">Automatisation TNR transverse (~500 tests)</span></div>
+              <div><span class="kw">  - </span><span class="str">Priorisation &amp; stratégie de tests</span></div>
+              <div><span class="kw">  - </span><span class="str">Préparation des jeux de données</span></div>
+              <div><span class="kw">  - </span><span class="str">Reporting qualité produit</span></div>
+              <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px"><span class="sptag">Playwright</span><span class="sptag">BDD</span><span class="sptag">Xray</span><span class="sptag">Jira</span><span class="sptag">GitHub</span><span class="sptag">Vault</span></div>
+            </div></div>
+          </div>
+
+          <div class="tlf">
+            <div class="tlh"><span class="ficon ts" style="font-size:11px">TS</span><span class="tlfn">QA Automation Engineer</span><span class="tlco">ADEO – POPS</span><span class="tldate">Juil 2021 – Mar 2024</span></div>
+            <div class="tlb"><div class="tlcode">
+              <div><span class="kw">  - </span><span class="str">Automatisation avec Cerberus &amp; Cypress</span></div>
+              <div><span class="kw">  - </span><span class="str">Tests UI / API / performance</span></div>
+              <div><span class="kw">  - </span><span class="str">Gestion anomalies &amp; non-régression</span></div>
+              <div><span class="kw">  - </span><span class="str">Tests E2E &amp; 2A2 · Méthodologie ISTQB</span></div>
+              <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px"><span class="sptag">Cypress</span><span class="sptag">Postman</span><span class="sptag">Sonar</span><span class="sptag">Xray</span></div>
+            </div></div>
+          </div>
+
+          <div class="tlf">
+            <div class="tlh"><span class="ficon yml" style="font-size:11px">Y</span><span class="tlfn">QA &amp; Support</span><span class="tlco">Proch'Orientation</span><span class="tldate">2020 – 2021</span></div>
+            <div class="tlb"><div class="tlcode">
+              <div><span class="kw">  - </span><span class="str">Gestion tickets bugs &amp; évolutions</span></div>
+              <div><span class="kw">  - </span><span class="str">Analyse fonctionnelle &amp; recette</span></div>
+              <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px"><span class="sptag">VueJS</span><span class="sptag">Java</span><span class="sptag">Selenium</span><span class="sptag">Postman</span></div>
+            </div></div>
+          </div>
+
+          <div class="tlf">
+            <div class="tlh"><span class="ficon yml" style="font-size:11px">Y</span><span class="tlfn">QA Tester</span><span class="tlco">Symbol-IT</span><span class="tldate">2019 – 2020</span></div>
+            <div class="tlb"><div class="tlcode">
+              <div><span class="kw">  - </span><span class="str">Tests manuels &amp; non-régression</span></div>
+              <div><span class="kw">  - </span><span class="str">Suivi des anomalies</span></div>
+              <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px"><span class="sptag">Selenium</span><span class="sptag">Postman</span><span class="sptag">API REST</span></div>
+            </div></div>
+          </div>
+
+        </div>
+
+        <div class="carea" style="margin-top:4px">
+          <div class="crow"><div class="ln">4</div><div class="lc"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════ contact.json ════ -->
+    <div class="panel" id="panel-contact">
+      <div class="cfile">
+        <div class="carea">
+          <div class="crow"><div class="ln">1</div><div class="lc"><span class="cmt">// contact.json — Prenons contact</span></div></div>
+          <div class="crow"><div class="ln">2</div><div class="lc"><span class="op">{</span></div></div>
+        </div>
+
+        <div class="embed">
+          <div class="ctg">
+            <a href="mailto:icepjohn@hotmail.com" class="ctc">
+              <div class="cticon">✉</div>
+              <div><div class="ctlbl">Email</div><div class="ctval">icepjohn@hotmail.com</div></div>
+            </a>
+            <a href="https://www.linkedin.com/in/jonathan-picquette-64656a148" target="_blank" class="ctc">
+              <div class="cticon" style="color:var(--blue)">in</div>
+              <div><div class="ctlbl">LinkedIn</div><div class="ctval">jonathan-picquette</div></div>
+            </a>
+            <a href="https://github.com/icepjohn" target="_blank" class="ctc">
+              <div class="cticon" style="color:var(--yellow)">⌥</div>
+              <div><div class="ctlbl">GitHub</div><div class="ctval">github.com/icepjohn</div></div>
+            </a>
+            <a href="JonathanPicquetteCV.pdf" download class="ctc">
+              <div class="cticon" style="color:var(--purple)">↓</div>
+              <div><div class="ctlbl">CV</div><div class="ctval">Télécharger PDF</div></div>
+            </a>
+          </div>
+          <div style="margin-top:8px">
+            <div class="dispo"><span class="pulse"></span>Disponible pour mission QA Automation / Lead QA</div>
+          </div>
+        </div>
+
+        <div class="carea" style="margin-top:4px">
+          <div class="crow"><div class="ln">3</div><div class="lc"><span class="op">}</span></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /panels -->
+</div><!-- /workspace -->
+
+<!-- HINT TOAST -->
+<div class="hint" id="hint" role="status">
+  <span>👋 <b>Astuce</b> — clique sur les onglets en haut (ou les fichiers de l'explorer à gauche) pour explorer mon profil.</span>
+  <button class="hclose" onclick="closeHint()" aria-label="Fermer l'astuce">✕</button>
+</div>
+
+<!-- STATUS BAR -->
+<div class="statusbar">
+  <div class="sbi">⎇ main</div>
+  <div class="sbi">✔ 0 errors</div>
+  <div class="sbi">⚠ 0 warnings</div>
+  <div class="sbsep"></div>
+  <div class="sbi" id="sbLang">TypeScript</div>
+  <div class="sbi">UTF-8</div>
+  <div class="sbi">Ln 1, Col 1</div>
+  <div class="sbi">portfolio-qa</div>
+</div>
+
+<script>
+/* ── THEME ── */
+function toggleTheme(){
+  const l=document.body.classList.toggle('light');
+  document.getElementById('themeBtn').textContent=l?'☾ Dark':'☀ Light';
+}
+
+/* ── TAB NAVIGATION ── */
+const langMap={about:'TypeScript',skills:'JSON',playwright:'TypeScript',metrics:'JSON',experience:'YAML',contact:'JSON'};
+
+function openTab(el){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.fi.sub').forEach(f=>f.classList.remove('active'));
+  el.classList.add('active');
+  const id=el.dataset.panel;
+  document.getElementById('panel-'+id).classList.add('active');
+  document.getElementById('winTitle').textContent=el.textContent.replace('✕','').trim();
+  document.getElementById('sbLang').textContent=langMap[id]||'Text';
+  // sync sidebar
+  document.querySelectorAll('.fi.sub').forEach(f=>{
+    if(f.getAttribute('onclick')&&f.getAttribute('onclick').includes("'"+id+"'"))f.classList.add('active');
+  });
+  // trigger KPI counter when metrics tab opens
+  if(id==='metrics')triggerKpi();
+}
+
+function openTabById(id){
+  const tab=document.querySelector(`.tab[data-panel="${id}"]`);
+  if(tab)openTab(tab);
+}
+
+/* ── KPI COUNTER ── */
+let kpiDone=false;
+function triggerKpi(){
+  if(kpiDone)return;
+  kpiDone=true;
+  document.querySelectorAll('.kpiv[data-target]').forEach(el=>{
+    const target=+el.dataset.target,suffix=el.dataset.suffix||'';
+    let cur=0;const step=target/(1400/16);
+    const t=setInterval(()=>{cur=Math.min(cur+step,target);el.textContent=Math.round(cur)+suffix;if(cur>=target)clearInterval(t);},16);
+  });
+}
+
+/* ── SIMULATOR ── */
+const tests=[
+  {name:'auth.spec.ts › login success',fail:.10},
+  {name:'auth.spec.ts › login failure',fail:.10},
+  {name:'cart.spec.ts › add product',fail:.15},
+  {name:'cart.spec.ts › remove product',fail:.08},
+  {name:'checkout.spec.ts › payment success',fail:.20},
+  {name:'checkout.spec.ts › payment failure',fail:.10},
+  {name:'checkout.spec.ts › validate order',fail:.12},
+  {name:'profile.spec.ts › update user',fail:.08},
+  {name:'search.spec.ts › search results',fail:.10},
+  {name:'api.spec.ts › GET /products',fail:.08},
+  {name:'api.spec.ts › POST /order',fail:.12},
+  {name:'e2e.spec.ts › full customer journey',fail:.25},
+];
+
+function renderTestList(){
+  const el=document.getElementById('testList');
+  el.innerHTML='';
+  tests.forEach((t,i)=>{
+    const d=document.createElement('div');
+    d.className='stest';d.id='st-'+i;
+    d.innerHTML=`<span class="si" id="si-${i}">○</span><span>${t.name}</span>`;
+    el.appendChild(d);
+  });
+}
+
+function setState(i,s){
+  const item=document.getElementById('st-'+i),ic=document.getElementById('si-'+i);
+  if(!item)return;
+  item.className='stest '+s;
+  ic.textContent={pass:'✔',fail:'✖',running:'◌'}[s]||'○';
+}
+
+function log(txt,c){
+  const logs=document.getElementById('logs');
+  const s=document.createElement('span');
+  s.style.color={pass:'#4ec9b0',fail:'#f44747',info:'#569cd6',warn:'#febc2e',dim:'#6a9955'}[c]||'#abb2bf';
+  s.textContent=txt+'\n';logs.appendChild(s);logs.scrollTop=logs.scrollHeight;
+}
+
+function ts(){return new Date().toLocaleTimeString('fr-FR');}
+let running=false;
+
+function runTests(){
+  if(running)return;
+  running=true;
+  document.getElementById('runBtn').disabled=true;
+  document.getElementById('screenshotBox').style.display='none';
+  document.getElementById('progressFill').style.width='0%';
+  document.getElementById('statPass').textContent='✔ 0';
+  document.getElementById('statFail').textContent='✖ 0';
+  document.getElementById('logs').innerHTML='';
+  renderTestList();
+  let passed=0,failed=0,idx=0;
+  log(`[${ts()}]  Running Playwright v1.44.0`,'info');
+  log(`[${ts()}]  Suite: ${tests.length} tests`,'info');
+  log('','');
+
+  function next(){
+    if(idx>=tests.length){
+      const pct=Math.round(passed/tests.length*100);
+      log('','');log('  ───────────────────────────────────','dim');
+      log(`  ✔ Passed    ${passed}`,'pass');
+      log(`  ✖ Failed    ${failed}`,failed>0?'fail':'pass');
+      log(`  Rate        ${pct}%  ${pct>=80?'(healthy)':'(needs attention)'}`,pct>=80?'pass':'warn');
+      log(`  Duration    ${(tests.length*.35).toFixed(1)}s`,'dim');
+      document.getElementById('runBtn').disabled=false;
+      running=false;return;
+    }
+    const t=tests[idx];
+    setState(idx,'running');
+    log(`[${ts()}]  ▶  ${t.name}`,'info');
+    setTimeout(()=>{
+      if(Math.random()<t.fail){
+        log('             ↻ retry 1/2…','warn');
+        setTimeout(()=>{
+          if(Math.random()<.5){
+            log('             ✔ passed (retry)','pass');setState(idx,'pass');passed++;
+          }else{
+            log('             ✖ FAILED — screenshot captured','fail');setState(idx,'fail');failed++;
+            document.getElementById('screenshotImg').src=`https://dummyimage.com/600x180/0d0d0d/f44747.png&text=FAIL+%7C+${encodeURIComponent(t.name.split(' › ')[1]||t.name)}`;
+            document.getElementById('screenshotMsg').textContent='✖ '+t.name;
+            document.getElementById('screenshotBox').style.display='block';
+          }
+          document.getElementById('statPass').textContent='✔ '+passed;
+          document.getElementById('statFail').textContent='✖ '+failed;
+          document.getElementById('progressFill').style.width=((idx+1)/tests.length*100)+'%';
+          idx++;setTimeout(next,280);
+        },480);
+      }else{
+        log('             ✔ passed','pass');setState(idx,'pass');passed++;
+        document.getElementById('statPass').textContent='✔ '+passed;
+        document.getElementById('progressFill').style.width=((idx+1)/tests.length*100)+'%';
+        idx++;setTimeout(next,260);
+      }
+    },380);
+  }
+  next();
+}
+
+renderTestList();
+
+/* ── INDICE DE SCROLL DES ONGLETS (mobile) ── */
+(function tabScrollHint(){
+  const wrap=document.getElementById('tabwrap'),bar=document.getElementById('tabbar');
+  if(!wrap||!bar)return;
+  const update=()=>{
+    const scrollable=bar.scrollWidth>bar.clientWidth+2;
+    const atEnd=bar.scrollLeft+bar.clientWidth>=bar.scrollWidth-2;
+    wrap.classList.toggle('scrollable',scrollable&&!atEnd);
+  };
+  bar.addEventListener('scroll',update,{passive:true});
+  window.addEventListener('resize',update);
+  update();
+})();
+
+/* ── HINT TOAST ── */
+function closeHint(){
+  const h=document.getElementById('hint');
+  if(!h)return;
+  h.classList.add('hide');
+  try{sessionStorage.setItem('hintSeen','1');}catch(e){}
+  setTimeout(()=>h.remove(),320);
+}
+(function initHint(){
+  let seen=false;
+  try{seen=sessionStorage.getItem('hintSeen')==='1';}catch(e){}
+  if(seen){const h=document.getElementById('hint');if(h)h.remove();return;}
+  setTimeout(closeHint,7000); // auto-masquage
+})();
+
+/* ── ACCESSIBILITÉ CLAVIER (onglets) ── */
+(function enhanceTabsA11y(){
+  const tabs=[...document.querySelectorAll('.tab')];
+  tabs.forEach(tab=>{
+    tab.setAttribute('role','tab');
+    tab.setAttribute('tabindex',tab.classList.contains('active')?'0':'-1');
+    tab.setAttribute('aria-selected',tab.classList.contains('active')?'true':'false');
+    const panel=document.getElementById('panel-'+tab.dataset.panel);
+    if(panel){panel.setAttribute('role','tabpanel');panel.setAttribute('aria-label',tab.textContent.replace('✕','').trim());}
+    tab.addEventListener('keydown',e=>{
+      let target=null;
+      if(e.key==='ArrowRight')target=tabs[(tabs.indexOf(tab)+1)%tabs.length];
+      else if(e.key==='ArrowLeft')target=tabs[(tabs.indexOf(tab)-1+tabs.length)%tabs.length];
+      else if(e.key==='Home')target=tabs[0];
+      else if(e.key==='End')target=tabs[tabs.length-1];
+      else if(e.key==='Enter'||e.key===' '){e.preventDefault();openTab(tab);return;}
+      if(target){e.preventDefault();openTab(target);target.focus();}
+    });
+  });
+  // garde l'état ARIA synchronisé à chaque changement d'onglet
+  const _openTab=window.openTab;
+  window.openTab=function(el){
+    _openTab(el);
+    tabs.forEach(t=>{
+      const on=t.classList.contains('active');
+      t.setAttribute('aria-selected',on?'true':'false');
+      t.setAttribute('tabindex',on?'0':'-1');
+    });
+  };
+})();
+</script>
+</body>
+</html>
