@@ -2,6 +2,13 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<!-- Le hash sha256 de script-src autorise le bloc JS inline situé en bas de page.
+     Il DOIT être régénéré à chaque modification de ce bloc, sinon le navigateur
+     le refuse (la page reste lisible, mais calculateur et démo sont inertes) :
+         python3 tools/csp-hash.py --write
+     Le hash porte sur le contenu textuel exact du bloc, saut de ligne initial inclus. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-o3tPNFwfkqnPg8Lbv8E5Iv3MFEEANNr2aQLPn62Wk3Y=' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Jonathan Picquette — Senior QA Automation Engineer. 8 ans d'expérience : Playwright, Cypress, CI/CD, BDD. Le système qui rend vos livraisons prévisibles.">
 <meta name="author" content="Jonathan Picquette">
@@ -69,6 +76,28 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .wrap{max-width:1440px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
 section{position:relative}
 
+/* ═══════════════════ ACCESSIBILITÉ ═══════════════════ */
+/* Anneau de focus lisible sur les deux tonalités : le trait acide ressort sur
+   les sections sombres, le halo encre ressort sur les sections claires. */
+:focus-visible{
+  outline:2px solid var(--acid);outline-offset:2px;
+  box-shadow:0 0 0 5px rgba(10,31,26,.85);border-radius:3px;
+}
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0;
+}
+.skip-link{
+  /* fixed et non absolute : sinon le lien défile avec le document et
+     réapparaît hors écran dès que la page n'est plus tout en haut */
+  position:fixed;top:8px;left:8px;z-index:1000;
+  transform:translateY(-160%);transition:transform .2s;
+  background:var(--acid);color:var(--ink);
+  font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+  padding:12px 18px;border-radius:8px;
+}
+.skip-link:focus{transform:none}
+
 .eyebrow{
   font-family:var(--mono);font-size:11px;font-weight:500;
   letter-spacing:.18em;text-transform:uppercase;
@@ -76,7 +105,7 @@ section{position:relative}
 }
 [data-tone="dark"] .eyebrow{color:var(--mute-d)}
 
-h1,h2,h3{font-weight:400;letter-spacing:-.035em;line-height:.98}
+h1,h2,h3,.d1{font-weight:400;letter-spacing:-.035em;line-height:.98}
 .d1{font-size:clamp(44px,9vw,132px)}
 .d2{font-size:clamp(36px,6.4vw,92px);line-height:1.02}
 .d3{font-size:clamp(26px,3.4vw,50px);line-height:1.06;letter-spacing:-.028em}
@@ -154,6 +183,18 @@ h1,h2,h3{font-weight:400;letter-spacing:-.035em;line-height:.98}
   transition:opacity .8s ease,visibility .8s;
 }
 #loader.gone{opacity:0;visibility:hidden}
+
+/* ── Filet de sécurité : tant que le script inline n'a pas posé .js sur <html>
+      (JS désactivé, script bloqué, erreur de parsing), on n'affiche jamais le
+      préloader et le contenu reste lisible et scrollable. ── */
+html:not(.js) #loader{display:none}
+html:not(.js) .rv{opacity:1;transform:none}
+html:not(.js) body.lock{overflow:visible;height:auto}
+.noscript-note{
+  background:var(--ink);color:var(--paper);text-align:center;
+  font-family:var(--mono);font-size:12px;letter-spacing:.04em;
+  padding:12px 16px;border-bottom:1px solid var(--acid);
+}
 .loader-shapes{position:absolute;inset:0;overflow:hidden}
 .ls{position:absolute;border:1px solid var(--line-l);border-radius:44px}
 .ls:nth-child(1){width:46vw;height:34vh;left:-14vw;top:-9vh}
@@ -223,10 +264,10 @@ h1,h2,h3{font-weight:400;letter-spacing:-.035em;line-height:.98}
   transition:opacity .55s ease,transform .55s cubic-bezier(.16,1,.3,1);
 }
 .hero-slide.on{opacity:1;transform:translateY(-50%)}
-.hero-slide h1{color:var(--paper)}
+.hero-slide .d1{color:var(--paper)}
 .hero-slide .lead{margin-top:22px}
 .hero-slide-2{text-align:center;left:0;right:0;padding:0 var(--pad)}
-.hero-slide-2 h1{max-width:16ch;margin:0 auto}
+.hero-slide-2 .d1{max-width:16ch;margin:0 auto}
 .hero-scroll{
   position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
   font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--mute-d);
@@ -284,7 +325,7 @@ h1,h2,h3{font-weight:400;letter-spacing:-.035em;line-height:.98}
   font-family:var(--sans);font-size:21px;padding:5px 0 8px;color:var(--ink);
   transition:border-color .3s;
 }
-.f input:focus{outline:none;border-color:var(--ink)}
+.f input:focus{border-color:var(--ink)}
 .f-full{grid-column:1/-1}
 input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:2px;background:var(--ink);border-radius:2px;margin:16px 0 6px}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:var(--ink);cursor:pointer;border:3px solid var(--paper);box-shadow:0 0 0 1px var(--ink)}
@@ -335,7 +376,7 @@ input[type=range]::-moz-range-thumb{width:13px;height:13px;border-radius:50%;bac
 .rcard:hover{transform:translateY(-5px)}
 .rcard.dark{background:var(--ink);color:var(--paper)}
 .rcard.acid{background:var(--acid);color:var(--ink)}
-.rcard h4{font-size:29px;font-weight:400;letter-spacing:-.03em;line-height:1.05;margin:14px 0 16px}
+.rcard h3{font-size:29px;font-weight:400;letter-spacing:-.03em;line-height:1.05;margin:14px 0 16px}
 .rcard p{font-size:14.5px;line-height:1.5;opacity:.75}
 .rcard ul{list-style:none;margin-top:22px;display:flex;flex-wrap:wrap;gap:6px}
 .rcard li{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px;border-radius:6px;background:rgba(10,31,26,.08)}
@@ -381,11 +422,11 @@ input[type=range]::-moz-range-thumb{width:13px;height:13px;border-radius:50%;bac
 .job-date{font-family:var(--mono);font-size:11px;letter-spacing:.09em;color:var(--mute-l);padding-top:8px}
 .job-t h3{font-size:clamp(24px,3vw,40px);letter-spacing:-.03em}
 .job-t .co{font-size:15px;color:var(--mute-l);margin-top:6px}
-.job-plus{width:34px;height:34px;border-radius:50%;border:1px solid var(--line-l);display:grid;place-items:center;font-size:17px;transition:transform .4s,background .3s;flex:none}
+.job-plus{width:34px;height:34px;padding:0;font-family:inherit;border-radius:50%;border:1px solid var(--line-l);display:grid;place-items:center;font-size:17px;transition:transform .4s,background .3s;flex:none}
 .job.open .job-plus{transform:rotate(45deg);background:var(--acid);border-color:var(--acid)}
-.job-d{grid-column:2/3;max-height:0;overflow:hidden;transition:max-height .6s cubic-bezier(.16,1,.3,1),opacity .4s;opacity:0}
+.job-d{grid-column:2/3;max-height:0;overflow:hidden;visibility:hidden;transition:max-height .6s cubic-bezier(.16,1,.3,1),opacity .4s,visibility .6s;opacity:0}
 @media(max-width:800px){.job-d{grid-column:1/-1}}
-.job.open .job-d{max-height:420px;opacity:1;margin-top:18px}
+.job.open .job-d{max-height:420px;opacity:1;visibility:visible;margin-top:18px}
 .job-d ul{list-style:none;display:flex;flex-direction:column;gap:7px}
 .job-d li{font-size:15px;color:rgba(10,31,26,.7);padding-left:18px;position:relative}
 .job-d li::before{content:"—";position:absolute;left:0;color:var(--mute-l)}
@@ -398,7 +439,7 @@ input[type=range]::-moz-range-thumb{width:13px;height:13px;border-radius:50%;bac
 @media(max-width:600px){.skills{grid-template-columns:1fr}}
 .sk{background:var(--paper);padding:34px 28px;transition:background .35s}
 .sk:hover{background:var(--paper-2)}
-.sk h4{font-size:20px;font-weight:500;letter-spacing:-.02em;margin-bottom:16px}
+.sk h3{font-size:20px;font-weight:500;letter-spacing:-.02em;line-height:1.45;margin-bottom:16px}
 .sk .n{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--mute-l);display:block;margin-bottom:14px}
 .sk ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px}
 .sk li{font-size:13px;padding:6px 11px;border-radius:7px;background:rgba(10,31,26,.06)}
@@ -416,7 +457,7 @@ footer{background:var(--ink);color:var(--paper);padding:0 0 34px}
 .f-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:40px;padding:clamp(50px,7vw,90px) 0 60px;border-top:1px solid var(--line-d)}
 @media(max-width:900px){.f-grid{grid-template-columns:1fr 1fr;gap:36px}}
 @media(max-width:520px){.f-grid{grid-template-columns:1fr}}
-.f-col h5{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute-d);margin-bottom:20px;font-weight:500}
+.f-col h3{font-family:var(--mono);font-size:10px;letter-spacing:.18em;line-height:1.45;text-transform:uppercase;color:var(--mute-d);margin-bottom:20px;font-weight:500}
 .f-col a,.f-col p{display:block;font-size:16px;padding:5px 0;transition:color .25s;color:rgba(237,237,236,.85)}
 .f-col a:hover{color:var(--acid)}
 .f-bottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--mute-d);padding-top:26px;border-top:1px solid var(--line-d)}
@@ -428,6 +469,12 @@ footer{background:var(--ink);color:var(--paper);padding:0 0 34px}
 </style>
 </head>
 <body class="lock">
+
+<a href="#hero" class="skip-link">Aller au contenu</a>
+
+<noscript>
+  <p class="noscript-note">JavaScript est désactivé : le contenu reste consultable, mais le calculateur de ROI et la démo Playwright ne fonctionneront pas.</p>
+</noscript>
 
 <!-- ══════════ PRELOADER ══════════ -->
 <div id="loader">
@@ -453,7 +500,7 @@ footer{background:var(--ink);color:var(--paper);padding:0 0 34px}
     <a href="JonathanPicquetteCV.pdf" download class="btn btn-paper">CV PDF</a>
     <a href="#cta" class="btn btn-ghost">Contact</a>
   </div>
-  <button id="burger" aria-label="Menu"><span></span><span></span></button>
+  <button id="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="drawer"><span aria-hidden="true"></span><span aria-hidden="true"></span></button>
 </nav>
 
 <div id="drawer">
@@ -468,17 +515,17 @@ footer{background:var(--ink);color:var(--paper);padding:0 0 34px}
 <!-- ══════════ HERO ══════════ -->
 <section id="hero" data-tone="dark">
   <div id="heroPin">
-    <canvas id="heroCanvas"></canvas>
+    <canvas aria-hidden="true" id="heroCanvas"></canvas>
     <div class="hero-copy">
       <div class="hero-slide on" id="hs1">
         <span class="eyebrow">Senior QA Automation Engineer · 8 ans</span>
         <h1 class="d1" style="margin-top:22px">Vos livraisons<br>ne devraient pas<br>être un pari.</h1>
       </div>
       <div class="hero-slide hero-slide-2" id="hs2">
-        <h1 class="d1">Chaque test manuel est une dette qui court.</h1>
+        <p class="d1">Chaque test manuel est une dette qui court.</p>
       </div>
       <div class="hero-slide hero-slide-2" id="hs3">
-        <h1 class="d1">Je transforme la recette<br>en <span style="color:var(--acid)">système automatisé.</span></h1>
+        <p class="d1">Je transforme la recette<br>en <span style="color:var(--acid)">système automatisé.</span></p>
         <p class="lead" style="margin:26px auto 0;text-align:center">1 200 cas de tests conçus. 500+ tests automatisés. 40 % de bugs en production en moins.</p>
       </div>
     </div>
@@ -518,19 +565,19 @@ footer{background:var(--ink);color:var(--paper);padding:0 0 34px}
       <div class="tcard rv">
         <h3>Automatiser</h3>
         <p>Les campagnes de non-régression vous coûtent des jours-homme à chaque livraison. On automatise d'abord les parcours critiques — résultat visible en quelques semaines, sans réécrire votre stack.</p>
-        <div class="viz"><canvas data-viz="grid"></canvas></div>
+        <div class="viz"><canvas aria-hidden="true" data-viz="grid"></canvas></div>
         <a href="#calc" class="btn btn-solid">Chiffrer le gain</a>
       </div>
       <div class="tcard rv">
         <h3>Fiabiliser</h3>
         <p>Des tests qui échouent au hasard ne servent à rien. Retry intelligent, données de test isolées, sélecteurs robustes : une suite en laquelle l'équipe a de nouveau confiance.</p>
-        <div class="viz"><canvas data-viz="wave"></canvas></div>
+        <div class="viz"><canvas aria-hidden="true" data-viz="wave"></canvas></div>
         <a href="#demo" class="btn btn-solid">Voir la démo</a>
       </div>
       <div class="tcard rv">
         <h3>Industrialiser</h3>
         <p>Tests branchés sur la CI, reporting Xray/Jira, métriques partagées. La qualité devient une donnée pilotable plutôt qu'un ressenti de fin de sprint.</p>
-        <div class="viz"><canvas data-viz="pipe"></canvas></div>
+        <div class="viz"><canvas aria-hidden="true" data-viz="pipe"></canvas></div>
         <a href="#systeme" class="btn btn-solid">Le système complet</a>
       </div>
     </div>
@@ -601,7 +648,7 @@ footer{background:var(--ink);color:var(--paper);padding:0 0 34px}
         <h3 class="d3 fill acid" data-fill>Automatisation E2E qui ne casse pas au premier refactor.</h3>
         <p class="lead">Playwright ou Cypress, Page Objects, sélecteurs stables, données isolées, retry maîtrisé. Sur ADEO, ~500 tests de non-régression transverses tournent sans babysitting.</p>
       </div>
-      <div class="pillar-viz rv"><canvas data-viz="nodes"></canvas></div>
+      <div class="pillar-viz rv"><canvas aria-hidden="true" data-viz="nodes"></canvas></div>
     </div>
 
     <div class="pillar">
@@ -610,7 +657,7 @@ footer{background:var(--ink);color:var(--paper);padding:0 0 34px}
         <h3 class="d3 fill acid" data-fill>Le Shift Left : tester avant que ça coûte cher.</h3>
         <p class="lead">La QA entre dès le refinement. Critères d'acceptation testables, scénarios BDD écrits avec le métier, anomalies détectées en amont plutôt qu'en recette — c'est là que les 40 % de bugs prod en moins se jouent.</p>
       </div>
-      <div class="pillar-viz rv"><canvas data-viz="shift"></canvas></div>
+      <div class="pillar-viz rv"><canvas aria-hidden="true" data-viz="shift"></canvas></div>
     </div>
 
     <div class="pillar">
@@ -619,7 +666,7 @@ footer{background:var(--ink);color:var(--paper);padding:0 0 34px}
         <h3 class="d3 fill acid" data-fill>Branché sur la CI, exécuté à chaque commit.</h3>
         <p class="lead">GitHub Actions, secrets gérés via Vault, rapports Xray remontés dans Jira. Un test qui ne tourne pas automatiquement n'existe pas.</p>
       </div>
-      <div class="pillar-viz rv"><canvas data-viz="pipeline"></canvas></div>
+      <div class="pillar-viz rv"><canvas aria-hidden="true" data-viz="pipeline"></canvas></div>
     </div>
 
     <div class="pillar">
@@ -628,7 +675,7 @@ footer{background:var(--ink);color:var(--paper);padding:0 0 34px}
         <h3 class="d3 fill acid" data-fill>Des métriques que le comité de pilotage comprend.</h3>
         <p class="lead">Couverture réelle, taux de réussite, temps de recette, anomalies par sévérité. La qualité arrête d'être une opinion et devient un chiffre qu'on peut défendre.</p>
       </div>
-      <div class="pillar-viz rv"><canvas data-viz="chart"></canvas></div>
+      <div class="pillar-viz rv"><canvas aria-hidden="true" data-viz="chart"></canvas></div>
     </div>
   </div>
 </section>
@@ -649,19 +696,19 @@ footer{background:var(--ink);color:var(--paper);padding:0 0 34px}
     </div>
     <div class="rail" id="rail">
       <article class="rcard dark">
-        <div><span class="eyebrow">E2E &amp; UI</span><h4>Les parcours critiques, testés en continu</h4><p>Scénarios end-to-end sur les tunnels qui rapportent : authentification, panier, commande, back-office. Écrits pour être lus par le métier, exécutés en parallèle, avec captures et traces sur échec.</p></div>
+        <div><span class="eyebrow">E2E &amp; UI</span><h3>Les parcours critiques, testés en continu</h3><p>Scénarios end-to-end sur les tunnels qui rapportent : authentification, panier, commande, back-office. Écrits pour être lus par le métier, exécutés en parallèle, avec captures et traces sur échec.</p></div>
         <ul><li>Playwright</li><li>Cypress</li><li>Selenium</li><li>Cerberus</li></ul>
       </article>
       <article class="rcard">
-        <div><span class="eyebrow">API &amp; Contrats</span><h4>Attraper les régressions avant l'interface</h4><p>Tests d'API REST et GraphQL, validation des contrats, jeux de données maîtrisés. Dix fois plus rapides que l'UI, et ils localisent la panne au lieu de la constater.</p></div>
+        <div><span class="eyebrow">API &amp; Contrats</span><h3>Attraper les régressions avant l'interface</h3><p>Tests d'API REST et GraphQL, validation des contrats, jeux de données maîtrisés. Dix fois plus rapides que l'UI, et ils localisent la panne au lieu de la constater.</p></div>
         <ul><li>Postman</li><li>Bruno</li><li>REST</li><li>GraphQL</li></ul>
       </article>
       <article class="rcard acid">
-        <div><span class="eyebrow">CI/CD</span><h4>La qualité dans le pipeline, pas à côté</h4><p>Intégration dans GitHub Actions, gestion des secrets, exécution sur chaque merge request, reporting automatique. Le feedback arrive en minutes, pas en fin de sprint.</p></div>
+        <div><span class="eyebrow">CI/CD</span><h3>La qualité dans le pipeline, pas à côté</h3><p>Intégration dans GitHub Actions, gestion des secrets, exécution sur chaque merge request, reporting automatique. Le feedback arrive en minutes, pas en fin de sprint.</p></div>
         <ul><li>GitHub Actions</li><li>Vault</li><li>BDD</li><li>Cucumber</li></ul>
       </article>
       <article class="rcard">
-        <div><span class="eyebrow">Pilotage QA</span><h4>Stratégie, priorisation, montée en compétence</h4><p>Plan de test, priorisation par le risque, rituels qualité, formation de l'équipe. Sur SPARK j'ai conçu 1 200 cas de tests et ~100 scénarios E2E à partir des processus métier PLM.</p></div>
+        <div><span class="eyebrow">Pilotage QA</span><h3>Stratégie, priorisation, montée en compétence</h3><p>Plan de test, priorisation par le risque, rituels qualité, formation de l'équipe. Sur SPARK j'ai conçu 1 200 cas de tests et ~100 scénarios E2E à partir des processus métier PLM.</p></div>
         <ul><li>Xray</li><li>Jira</li><li>ISTQB</li><li>Shift Left</li></ul>
       </article>
     </div>
@@ -681,7 +728,8 @@ footer{background:var(--ink);color:var(--paper);padding:0 0 34px}
       <div class="runner-bar">
         <div class="dots"><i></i><i></i><i></i></div>
         <div class="runner-title">TEST EXPLORER — <b>e2e.spec.ts</b></div>
-        <button class="btn btn-acid" id="runBtn">▶ Run all</button>
+        <button class="btn btn-acid" id="runBtn" type="button">▶ Run all</button>
+        <p class="sr-only" id="runStatus" role="status" aria-live="polite"></p>
       </div>
       <div class="runner-body">
         <div class="rlist">
@@ -729,12 +777,12 @@ footer{background:var(--ink);color:var(--paper);padding:0 0 34px}
       <h2 class="d2" style="margin-top:20px">Les outils, au service<br>de la décision</h2>
     </div>
     <div class="skills rv">
-      <div class="sk"><span class="n">01</span><h4>Automatisation E2E</h4><ul><li>Playwright</li><li>Cypress</li><li>Selenium</li><li>Cerberus</li></ul></div>
-      <div class="sk"><span class="n">02</span><h4>CI/CD &amp; DevOps</h4><ul><li>GitHub Actions</li><li>Vault</li><li>BDD</li><li>Cucumber</li></ul></div>
-      <div class="sk"><span class="n">03</span><h4>Tests d'API</h4><ul><li>Postman</li><li>Bruno</li><li>REST</li><li>GraphQL</li></ul></div>
-      <div class="sk"><span class="n">04</span><h4>Pilotage QA</h4><ul><li>Xray</li><li>Jira</li><li>ISTQB</li><li>Shift Left</li></ul></div>
-      <div class="sk"><span class="n">05</span><h4>Performance &amp; qualité de code</h4><ul><li>Sonar</li><li>Reporting</li><li>Métriques</li></ul></div>
-      <div class="sk"><span class="n">06</span><h4>Front-end</h4><ul><li>VueJS</li><li>HTML</li><li>CSS</li><li>JavaScript</li></ul></div>
+      <div class="sk"><span class="n">01</span><h3>Automatisation E2E</h3><ul><li>Playwright</li><li>Cypress</li><li>Selenium</li><li>Cerberus</li></ul></div>
+      <div class="sk"><span class="n">02</span><h3>CI/CD &amp; DevOps</h3><ul><li>GitHub Actions</li><li>Vault</li><li>BDD</li><li>Cucumber</li></ul></div>
+      <div class="sk"><span class="n">03</span><h3>Tests d'API</h3><ul><li>Postman</li><li>Bruno</li><li>REST</li><li>GraphQL</li></ul></div>
+      <div class="sk"><span class="n">04</span><h3>Pilotage QA</h3><ul><li>Xray</li><li>Jira</li><li>ISTQB</li><li>Shift Left</li></ul></div>
+      <div class="sk"><span class="n">05</span><h3>Performance &amp; qualité de code</h3><ul><li>Sonar</li><li>Reporting</li><li>Métriques</li></ul></div>
+      <div class="sk"><span class="n">06</span><h3>Front-end</h3><ul><li>VueJS</li><li>HTML</li><li>CSS</li><li>JavaScript</li></ul></div>
     </div>
   </div>
 </section>
@@ -762,21 +810,21 @@ footer{background:var(--ink);color:var(--paper);padding:0 0 34px}
         <p style="margin-top:20px;max-width:34ch;color:var(--mute-d);font-size:15px">Senior QA Automation Engineer. Hauts-de-France, missions à distance ou sur site.</p>
       </div>
       <div class="f-col">
-        <h5>Le système</h5>
+        <h3>Le système</h3>
         <a href="#systeme">Méthode</a>
         <a href="#modules">Périmètre</a>
         <a href="#demo">Démo live</a>
         <a href="#calc">Calculateur ROI</a>
       </div>
       <div class="f-col">
-        <h5>Profil</h5>
+        <h3>Profil</h3>
         <a href="#parcours">Parcours</a>
         <a href="#expertise">Stack</a>
         <a href="JonathanPicquetteCV.pdf" download>CV PDF</a>
         <a href="https://github.com/icepjohn" target="_blank" rel="noopener">GitHub ↗</a>
       </div>
       <div class="f-col">
-        <h5>Me joindre</h5>
+        <h3>Me joindre</h3>
         <p style="color:var(--mute-d)">Une livraison qui vous inquiète&nbsp;?</p>
         <a href="mailto:icepjohn@hotmail.com">icepjohn@hotmail.com</a>
         <a href="https://www.linkedin.com/in/jonathan-picquette-64656a148" target="_blank" rel="noopener">LinkedIn ↗</a>
@@ -789,12 +837,29 @@ footer{background:var(--ink);color:var(--paper);padding:0 0 34px}
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" integrity="sha384-O55L/6rhHr9CFvrxqv5luxOCcmVaBmETbZbJDP+Do8T0pztTACsFBD/IXCNkj7DV" crossorigin="anonymous"></script>
 <script>
 (function(){
 'use strict';
+
+/* ───────── DÉVERROUILLAGE : à exécuter avant tout ce qui peut planter ─────────
+   .js active les styles « JS disponible » (préloader + reveals).
+   unlock() rend la page utilisable quoi qu'il arrive ensuite : il est armé sur
+   un timer ET sur window.onerror, donc une exception plus bas ne peut plus
+   laisser le visiteur devant un écran vide. */
+document.documentElement.classList.add('js');
+let lint=null;
+function unlock(){
+  if(lint){clearInterval(lint);lint=null;}
+  const l=document.getElementById('loader');
+  if(l) l.classList.add('gone');
+  document.body.classList.remove('lock');
+}
+const failsafe=setTimeout(unlock,4200);
+window.addEventListener('error',unlock);
+
 const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const HAS_GSAP = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
 if (HAS_GSAP) gsap.registerPlugin(ScrollTrigger);
@@ -821,34 +886,67 @@ $$('a[href^="#"]').forEach(a=>{
     const t=document.querySelector(a.getAttribute('href'));
     if(!t) return;
     e.preventDefault();
-    closeDrawer();
+    closeDrawer({restoreFocus:false});
     if(lenis) lenis.scrollTo(t,{offset:-20});
     else t.scrollIntoView({behavior:'smooth'});
+    // sans ça le focus reste sur le lien : au Tab suivant on repart de la nav
+    // au lieu de continuer dans la section qu'on vient d'atteindre
+    t.setAttribute('tabindex','-1');
+    t.focus({preventScroll:true});
   });
 });
 
 /* ───────── PRELOADER ───────── */
-const loader=$('#loader'), lbar=$('#loaderBar');
-let lp=0;
-const lint=setInterval(()=>{lp=Math.min(100,lp+Math.random()*18+6);lbar.style.width=lp+'%';},110);
+const lbar=$('#loaderBar');
+let lp=0, booted=false;
+lint=setInterval(()=>{lp=Math.min(100,lp+Math.random()*18+6);lbar.style.width=lp+'%';},110);
 function bootDone(){
-  clearInterval(lint); lbar.style.width='100%';
+  if(booted) return; booted=true;
+  clearTimeout(failsafe);          // le filet n'a plus lieu d'être
+  clearInterval(lint); lint=null;
+  lbar.style.width='100%';
   setTimeout(()=>{
-    loader.classList.add('gone');
-    document.body.classList.remove('lock');
+    unlock();
     if(HAS_GSAP) ScrollTrigger.refresh();
   },420);
 }
 window.addEventListener('load',()=>setTimeout(bootDone,520));
-setTimeout(bootDone,4200); // filet de sécurité
 
 /* ───────── NAV ───────── */
 const nav=$('#nav'), drawer=$('#drawer'), burger=$('#burger');
-function closeDrawer(){drawer.classList.remove('open');document.body.classList.remove('lock');}
-burger.addEventListener('click',()=>{
-  const o=drawer.classList.toggle('open');
-  document.body.classList.toggle('lock',o);
+const FOCUSABLE='a[href],button:not([disabled]),input,select,textarea,[tabindex]:not([tabindex="-1"])';
+
+function setDrawer(open,opts){
+  drawer.classList.toggle('open',open);
+  document.body.classList.toggle('lock',open);
+  burger.setAttribute('aria-expanded',String(open));
+  burger.setAttribute('aria-label',open?'Fermer le menu':'Ouvrir le menu');
+  // fermé, le tiroir n'est que translaté hors écran : ses liens restaient dans
+  // l'ordre de tabulation sur desktop, où le tiroir n'apparaît jamais.
+  drawer.inert = !open;
+  drawer.setAttribute('aria-hidden',String(!open));
+  if(open){
+    const first=drawer.querySelector(FOCUSABLE);
+    if(first) first.focus();
+  } else if(!opts || opts.restoreFocus!==false){
+    burger.focus();
+  }
+}
+function closeDrawer(opts){ if(drawer.classList.contains('open')) setDrawer(false,opts); }
+burger.addEventListener('click',()=>setDrawer(!drawer.classList.contains('open')));
+
+document.addEventListener('keydown',e=>{
+  if(!drawer.classList.contains('open')) return;
+  if(e.key==='Escape'){e.preventDefault();setDrawer(false);return;}
+  if(e.key!=='Tab') return;
+  // piège de focus : on boucle sur les liens du tiroir tant qu'il est ouvert
+  const items=$$(FOCUSABLE,drawer).filter(el=>el.offsetParent!==null);
+  if(!items.length) return;
+  const first=items[0], last=items[items.length-1];
+  if(e.shiftKey && document.activeElement===first){e.preventDefault();last.focus();}
+  else if(!e.shiftKey && document.activeElement===last){e.preventDefault();first.focus();}
 });
+setDrawer(false,{restoreFocus:false});
 let lastY=0;
 const toneEls=$$('[data-tone]');
 function navUpdate(){
@@ -1250,9 +1348,19 @@ $$('[data-fill]').forEach(h=>{
   const el={}; ids.forEach(i=>el[i]=document.getElementById(i));
   const eur=n=>new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(n);
   const num=n=>new Intl.NumberFormat('fr-FR',{maximumFractionDigits:0}).format(n);
+  /* Les min/max du HTML ne bornent pas la saisie clavier : on relit la valeur
+     en la ramenant dans l'intervalle déclaré sur le champ, sinon un « 999999 »
+     ou un nombre négatif produit un résultat aberrant mais crédible. */
+  function val(id){
+    const e=el[id];
+    const n=parseFloat(e.value);
+    if(!isFinite(n)) return 0;
+    const min=parseFloat(e.min), max=parseFloat(e.max);
+    return clamp(n, isFinite(min)?min:0, isFinite(max)?max:Infinity);
+  }
   function run(){
-    const camp=+el.cCamp.value||0, cas=+el.cCas.value||0, dur=+el.cDur.value||0, tx=+el.cTx.value||0;
-    const auto=(+el.cAuto.value||0)/100;
+    const camp=val('cCamp'), cas=val('cCas'), dur=val('cDur'), tx=val('cTx');
+    const auto=val('cAuto')/100;
     document.getElementById('cAutoV').textContent=Math.round(auto*100)+' %';
     const hManual = camp*cas*dur/60;
     const costNow = hManual*tx;
@@ -1268,7 +1376,15 @@ $$('[data-fill]').forEach(h=>{
     document.getElementById('rHours').textContent  = num(Math.max(0,hManual-hAfter-buildH))+' h';
     document.getElementById('rDays').textContent   = num(Math.max(0,(hManual-hAfter-buildH)/7))+' j';
   }
-  ids.forEach(i=>{el[i].addEventListener('input',run);});
+  ids.forEach(i=>{
+    el[i].addEventListener('input',run);
+    // au commit (blur / Entrée), on recale le champ sur la valeur réellement
+    // utilisée pour que l'affichage et le résultat ne se contredisent pas
+    el[i].addEventListener('change',()=>{
+      if(el[i].value!=='') el[i].value=val(i);
+      run();
+    });
+  });
   run();
 })();
 
@@ -1332,16 +1448,27 @@ $$('[data-fill]').forEach(h=>{
   const box=document.getElementById('tl');
   jobs.forEach((j,i)=>{
     const d=document.createElement('div');
-    d.className='job rv'+(i===0?' open':'');
+    const open=i===0, panelId='job-panel-'+i;
+    d.className='job rv'+(open?' open':'');
+    // le "+" est un vrai <button> : c'est lui qui porte l'état et rend
+    // l'accordéon utilisable au clavier (Entrée / Espace natifs).
     d.innerHTML=`
       <div class="job-date">${j.d}</div>
       <div class="job-t"><h3>${j.t}</h3><div class="co">${j.co}</div></div>
-      <div class="job-plus">+</div>
-      <div class="job-d">
+      <button type="button" class="job-plus" aria-expanded="${open}" aria-controls="${panelId}"><span aria-hidden="true">+</span><span class="sr-only">Détails du poste ${j.t} chez ${j.co}</span></button>
+      <div class="job-d" id="${panelId}">
         <ul>${j.li.map(x=>`<li>${x}</li>`).join('')}</ul>
         <div class="stack">${j.s.map(x=>`<span>${x}</span>`).join('')}</div>
       </div>`;
-    d.addEventListener('click',()=>{d.classList.toggle('open');if(HAS_GSAP)setTimeout(()=>ScrollTrigger.refresh(),650);});
+    const btn=d.querySelector('.job-plus');
+    const toggle=()=>{
+      const now=d.classList.toggle('open');
+      btn.setAttribute('aria-expanded',String(now));
+      if(HAS_GSAP)setTimeout(()=>ScrollTrigger.refresh(),650);
+    };
+    btn.addEventListener('click',toggle);
+    // la carte entière reste cliquable à la souris, sans double bascule
+    d.addEventListener('click',e=>{ if(!e.target.closest('.job-plus')) toggle(); });
     box.appendChild(d);
   });
   if(HAS_GSAP && !RM){
@@ -1372,7 +1499,7 @@ $$('[data-fill]').forEach(h=>{
   ];
   const list=document.getElementById('testList'), term=document.getElementById('term');
   const prog=document.getElementById('prog'), sP=document.getElementById('sPass'), sF=document.getElementById('sFail'), sT=document.getElementById('sTime');
-  const btn=document.getElementById('runBtn');
+  const btn=document.getElementById('runBtn'), status=document.getElementById('runStatus');
   let busy=false;
   function paint(){
     list.innerHTML=tests.map((t,i)=>`<div class="rt" id="rt${i}"><span class="ic">○</span><span>${t.n}</span></div>`).join('');
@@ -1391,7 +1518,9 @@ $$('[data-fill]').forEach(h=>{
   const now=()=>new Date().toLocaleTimeString('fr-FR');
   paint();
   btn.addEventListener('click',()=>{
-    if(busy) return; busy=true; btn.style.opacity=.5;
+    if(busy) return; busy=true;
+    btn.disabled=true; btn.setAttribute('aria-busy','true'); btn.style.opacity=.5;
+    status.textContent='Exécution de la suite en cours, '+tests.length+' tests.';
     paint(); term.textContent=''; prog.style.width='0%';
     sP.textContent='✔ 0'; sF.textContent='✖ 0'; sT.textContent='';
     let pass=0,fail=0,i=0;
@@ -1408,7 +1537,8 @@ $$('[data-fill]').forEach(h=>{
         log('  Rate        '+pct+' %  '+(pct>=80?'(healthy)':'(needs attention)'), pct>=80?'pass':'warn');
         log('  Duration    '+((performance.now()-t0)/1000).toFixed(1)+'s','dim');
         sT.textContent=((performance.now()-t0)/1000).toFixed(1)+'s';
-        btn.style.opacity=1; busy=false; return;
+        status.textContent='Suite terminée : '+pass+' tests réussis, '+fail+' en échec sur '+tests.length+', en '+((performance.now()-t0)/1000).toFixed(1)+' secondes.';
+        btn.disabled=false; btn.removeAttribute('aria-busy'); btn.style.opacity=1; busy=false; return;
       }
       const t=tests[i];
       state(i,'running');
